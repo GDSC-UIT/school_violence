@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "299051492096",
+    "firebase_url": "https://school-violence-d8038-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "school-violence-d8038",
+    "storage_bucket": "school-violence-d8038.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299051492096:android:cb4d724b03b8b9baa289e5",
+        "android_client_info": {
+          "package_name": "com.example.school_violence_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299051492096-471dvugn7ds6jrtenu2iivf785fta4br.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.school_violence_app",
+            "certificate_hash": "9c55f0659f1624aef3828950c94a8a89c2b92f15"
+          }
+        },
+        {
+          "client_id": "299051492096-sljagcivm6pu9ktn4urbbsamvre5tjp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQtnkbhxfx-_L8TARCZ_JdfI5sm9idWPc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299051492096-m865i97em09uv1hscvk4ojq9n6kr422a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
