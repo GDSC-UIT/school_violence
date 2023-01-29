@@ -5,11 +5,16 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 class PhoneNumberField extends StatelessWidget {
   const PhoneNumberField({
     Key? key,
-  }) : super(key: key);
+    required phoneNumberController,
+  }) : _phoneNumberController = phoneNumberController,
+  super(key: key);
+
+  final TextEditingController _phoneNumberController;
 
   @override
   Widget build(BuildContext context) {
     return InternationalPhoneNumberInput(
+      textFieldController: _phoneNumberController,
       onInputChanged: (value) {},
       textStyle: TextStyle(
         fontSize: 20,

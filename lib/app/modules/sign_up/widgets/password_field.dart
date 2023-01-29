@@ -7,15 +7,20 @@ class PasswordField extends StatelessWidget {
   const PasswordField({
     Key? key,
     required this.ctrl,
-  }) : super(key: key);
+    required passwordController,
+  })  : _passwordController = passwordController,
+        super(key: key);
 
   final SignUpController ctrl;
+
+  final TextEditingController _passwordController;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Obx(
         () => TextFormField(
+          controller: _passwordController,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
             suffixIcon: IconButton(
@@ -35,9 +40,14 @@ class PasswordField extends StatelessWidget {
             ),
           ),
           obscureText: ctrl.hide.value,
-          validator: (val) => val!.isEmpty ? 'Password' : null,
+          validator: (value) {
+            if (value.toString().length < 6) {
+              return 'Password should be longer or equal to 6 characters.';
+            }
+            return null;
+          },
           onChanged: (val) {
-            ctrl.updatePassword(val);
+            // ctrl.updatePassword(val);
           },
         ),
       ),

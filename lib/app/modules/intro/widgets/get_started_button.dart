@@ -17,8 +17,8 @@ class GetStartedButton extends StatelessWidget {
         shadowColor: AppColors.primaryColorShadow,
         elevation: 5,
         minimumSize: const Size(300, 40),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),
       child: const Text(
         'GET STARTED',

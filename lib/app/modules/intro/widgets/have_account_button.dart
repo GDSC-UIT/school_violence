@@ -18,7 +18,7 @@ class HaveAccountButton extends StatelessWidget {
         elevation: 5,
         minimumSize: const Size(300, 40),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),
       child: const Text(
         'I ALREADY HAVE AN ACCOUNT',

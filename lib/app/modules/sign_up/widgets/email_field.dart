@@ -5,13 +5,18 @@ import 'package:school_violence_app/app/modules/sign_up/sign_up_controller.dart'
 class EmailField extends StatelessWidget {
   EmailField({
     Key? key,
-  }) : super(key: key);
+    required emailController,
+  })  : _emailController = emailController,
+        super(key: key);
 
   final SignUpController ctrl = SignUpController();
+
+  final TextEditingController _emailController;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: _emailController,
       style: TextStyle(fontSize: 20),
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
@@ -21,9 +26,17 @@ class EmailField extends StatelessWidget {
           borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
         ),
       ),
-      validator: (val) => val!.isEmpty ? 'Enter an Email' : null,
+      validator: (value) {
+        bool _isEmailValid = RegExp(
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(value!);
+        if (!_isEmailValid) {
+          return 'Invalid email.';
+        }
+        return null;
+      },
       onChanged: (val) {
-        ctrl.updateEmail(val);
+        // ctrl.updateEmail(val);
       },
     );
   }

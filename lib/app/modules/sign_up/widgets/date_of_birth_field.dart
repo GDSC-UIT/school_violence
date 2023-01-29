@@ -7,14 +7,16 @@ import 'package:school_violence_app/app/modules/sign_up/sign_up_controller.dart'
 class DateOfBirthField extends StatelessWidget {
   DateOfBirthField({
     Key? key,
-  }) : super(key: key);
+    required dateController,
+  }) : _dateController = dateController,
+   super(key: key);
 
-  final TextEditingController dateController = TextEditingController();
+  final TextEditingController _dateController;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: dateController,
+      controller: _dateController,
       decoration: const InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.transparent, width: 2.0),
@@ -32,7 +34,7 @@ class DateOfBirthField extends StatelessWidget {
           lastDate: DateTime.now(),
         );
         if (pickedDate != null) {
-          dateController.text = Text(
+          _dateController.text = Text(
             formatDate(
               pickedDate,
               [mm, '/', dd, '/', yyyy],

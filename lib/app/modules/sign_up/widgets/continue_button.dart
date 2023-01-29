@@ -8,7 +8,13 @@ class ContinueButton extends StatelessWidget {
     Key? key,
     required this.ctrl,
     required formKey,
+    required userNameController,
+    required emailController,
+    required passwordController,
   })  : _formKey = formKey,
+        _userNameController = userNameController,
+        _emailController = emailController,
+        _passwordController = passwordController,
         super(key: key);
 
   final AuthServices _auth = AuthServices();
@@ -17,17 +23,18 @@ class ContinueButton extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey;
 
+  final TextEditingController _userNameController;
+
+  final TextEditingController _emailController;
+
+  final TextEditingController _passwordController;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        ctrl.updateSelectedIndex(2);
         if (_formKey.currentState!.validate()) {
-          dynamic result = await _auth.registerWithEmailAndPassword(
-              ctrl.email.value, ctrl.password.value);
-          if (result == null) {
-            ctrl.updateError('Please supply a valid email');
-          }
+          //await _auth.signUp(userName, email, password);
+          ctrl.updateSelectedIndex(2);
         }
       },
       style: ElevatedButton.styleFrom(
@@ -36,7 +43,7 @@ class ContinueButton extends StatelessWidget {
         elevation: 5,
         minimumSize: const Size(300, 40),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),
       child: Text(
         'Continue',

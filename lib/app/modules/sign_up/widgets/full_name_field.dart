@@ -4,20 +4,23 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 class FullNameField extends StatelessWidget {
   const FullNameField({
     Key? key,
-  }) : super(key: key);
+    required fullNameController,
+  })  : _fullNameController = fullNameController,
+        super(key: key);
+
+  final TextEditingController _fullNameController;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: _fullNameController,
       style: TextStyle(fontSize: 20),
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: AppColors.transparent, width: 2.0),
+          borderSide: BorderSide(color: AppColors.transparent, width: 2.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: AppColors.primaryColor, width: 2.0),
+          borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
         ),
       ),
       validator: (val) => val!.isEmpty ? 'Enter an Full Name' : null,

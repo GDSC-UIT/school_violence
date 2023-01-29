@@ -169,7 +169,7 @@ class FormHelper {
 
 // data for picker
 class Picker {
-  List countries = [
+  List<Map> countries = [
     {
       'ID': 1,
       'Name': 'Vietnam',
@@ -186,7 +186,7 @@ class Picker {
 
   //
 
-  List province = [
+  List<Map> provinces = [
     {
       'ID': 1,
       'Name': 'Binh Dinh',
@@ -201,7 +201,7 @@ class Picker {
 
   //
 
-  List city = [
+  List<Map> cities = [
     {
       'ID': '1.1',
       'Name': 'Quy Nhon',
@@ -226,34 +226,34 @@ class Picker {
 
   //
 
-  List school = [
+  List<Map> schools = [
     {
-      'ID': 1,
+      'ID': '1.1',
       'Name': 'Quy Nhon College',
       'ParentId': '1.1',
     },
     {
-      'ID': 2,
+      'ID': '1.2',
       'Name': 'Trung Vuong High School',
       'ParentId': '1.1',
     },
     {
-      'ID': 3,
+      'ID': '1.3',
       'Name': 'Le Quy Don High School for the gifted',
       'ParentId': '1.1',
     },
     {
-      'ID': 1,
+      'ID': '2.1',
       'Name': 'Hoang Le Kha High School for the gifted',
       'ParentId': '2.1',
     },
     {
-      'ID': 2,
+      'ID': '2.2',
       'Name': 'Tay Ninh High School',
       'ParentId': '2.1',
     },
     {
-      'ID': 1,
+      'ID': '3.1',
       'Name': 'Ly Thuong Kiet High School',
       'ParentId': '2.2',
     },

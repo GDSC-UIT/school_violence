@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:school_violence_app/app/core/utils/utils.dart';
+import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/database.dart';
 import 'package:school_violence_app/app/modules/intro/screens/intro_screen.dart';
 import 'package:school_violence_app/app/routes/app_pages.dart';
@@ -43,24 +44,55 @@ class AuthServices {
 
   // Register
 
-  MyUser? _userFromFirebaseUser(User? user) {
-    return user != null ? MyUser(uid: user.uid) : null;
-  }
-
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future signUp(
+      String userName,
+      String email,
+      String password,
+      String fullName,
+      String dateOfBirth,
+      String phoneNumber,
+      String country,
+      String province,
+      String city,
+      String school) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+      print(user!.uid);
+      await DatabaseService(uid: user.uid).updateUserData(
+          userName,
+          email,
+          password,
+          fullName,
+          dateOfBirth,
+          phoneNumber,
+          country,
+          province,
+          city,
+          school);
+    } on FirebaseAuthException catch (e) {
+      String title = e.code.replaceAll(RegExp('-'), ' ').capitalize!;
+      String message = '';
 
-      // create a new document for the user with the uid
-      await DatabaseService(uid: user?.uid)
-          .updateUserData('0', 'new crew member', 100);
-      return _userFromFirebaseUser(user!);
+      if (e.code == 'weak-password') {
+        message = 'The password provided is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        message = ('The account already exists for that email.');
+      } else {
+        message = e.message.toString();
+      }
+      Get.snackbar(title, message,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppColors.primaryColor,
+          colorText: AppColors.white);
     } catch (e) {
-      print(e.toString());
-      return null;
+      Get.snackbar('Error occured!', e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppColors.primaryColor,
+          colorText: AppColors.white);
     }
+    //Get.offAll(() => AppRoutes.intro);
   }
 
   //Apple

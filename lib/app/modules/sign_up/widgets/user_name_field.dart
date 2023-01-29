@@ -5,13 +5,18 @@ import 'package:school_violence_app/app/modules/sign_up/sign_up_controller.dart'
 class UserNameField extends StatelessWidget {
   UserNameField({
     Key? key,
-  }) : super(key: key);
+    required userNameController,
+  })  : _userNameController = userNameController,
+        super(key: key);
 
   final SignUpController ctrl = SignUpController();
+
+  final TextEditingController _userNameController;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: _userNameController,
       style: TextStyle(fontSize: 20),
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
@@ -21,9 +26,14 @@ class UserNameField extends StatelessWidget {
           borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
         ),
       ),
-      validator: (val) => val!.isEmpty ? 'Enter an User Name' : null,
+      validator: (value) {
+        if (value.toString().length <= 2) {
+          return 'Enter valid user name.';
+        }
+        return null;
+      },
       onChanged: (val) {
-        ctrl.updateUserName(val);
+        // ctrl.updateUserName(val);
       },
     );
   }

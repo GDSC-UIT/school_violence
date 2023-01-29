@@ -13,7 +13,9 @@ SingleChildScrollView createAccount() {
   final SignUpController ctrl = Get.find<SignUpController>();
 
   final AuthServices _auth = AuthServices();
-  final _formKey = GlobalKey<FormState>();
+
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   return SingleChildScrollView(
     child: Form(
       key: _formKey,
@@ -48,7 +50,7 @@ SingleChildScrollView createAccount() {
                   fontFamily: 'Montserrat',
                 ),
               ),
-              UserNameField(),
+              UserNameField(userNameController: ctrl.userNameController,),
               SizedBox(height: 20),
               const Text(
                 'Email',
@@ -58,7 +60,7 @@ SingleChildScrollView createAccount() {
                   fontFamily: 'Montserrat',
                 ),
               ),
-              EmailField(),
+              EmailField(emailController:  ctrl.emailController,),
               SizedBox(height: 20),
               const Text(
                 'Password',
@@ -68,7 +70,7 @@ SingleChildScrollView createAccount() {
                   fontFamily: 'Montserrat',
                 ),
               ),
-              PasswordField(ctrl: ctrl),
+              PasswordField(ctrl: ctrl, passwordController: ctrl.passwordController,),
             ],
           ),
           SizedBox(height: 20),
@@ -93,7 +95,13 @@ SingleChildScrollView createAccount() {
 
           // Continue
 
-          ContinueButton(ctrl: ctrl, formKey: _formKey),
+          ContinueButton(
+            ctrl: ctrl,
+            formKey: _formKey,
+            userNameController: ctrl.userNameController,
+            emailController: ctrl.emailController,
+            passwordController: ctrl.passwordController,
+          ),
         ],
       ),
     ),

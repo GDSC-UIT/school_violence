@@ -7,10 +7,12 @@ class SignUpController extends GetxController {
   RxList province = [].obs;
   RxList city = [].obs;
   RxList school = [].obs;
-  RxString userName = ''.obs;
-  RxString email = ''.obs;
-  RxString password = ''.obs;
-  RxString error = ''.obs;
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
 
   void updateSelectedIndex(int id) => selectedIndex.value = id;
 
@@ -22,11 +24,12 @@ class SignUpController extends GetxController {
 
   void updateSchool(List data) => school.value = data;
 
-  void updateUserName(String data) => userName.value = data;
+  void updateUserNameController(TextEditingController data) =>
+      userNameController = data;
 
-  void updateEmail(String data) => email.value = data;
+  void updateEmailController(TextEditingController data) =>
+      emailController = data;
 
-  void updatePassword(String data) => password.value = data;
-
-  void updateError(String data) => error.value = data;
+  void updatePasswordController(TextEditingController data) =>
+      passwordController = data;
 }
