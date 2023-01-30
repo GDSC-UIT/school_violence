@@ -107,9 +107,8 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                   ctrl.updateCountryName(temp.first['Name']);
                   provinceId = '';
                 },
-                (onValidateVal) {
-                  onValidateVal == null ? 'Please select country' : null;
-                },
+                (onValidateVal) =>
+                    onValidateVal == null ? 'Please select country' : null,
                 borderColor: AppColors.transparent,
                 borderFocusColor: AppColors.primaryColor,
                 borderRadius: 0,
@@ -150,9 +149,8 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                     ctrl.updateProvinceName(temp.first['Name']);
                     cityId = '';
                   },
-                  (onValidateVal) {
-                    onValidateVal == null ? 'Please select province' : null;
-                  },
+                  (onValidateVal) =>
+                      onValidateVal == null ? 'Please select province' : null,
                   borderColor: AppColors.transparent,
                   borderFocusColor: AppColors.primaryColor,
                   borderRadius: 0,
@@ -193,9 +191,8 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                     ctrl.updateCityName(temp.first['Name']);
                     schoolId = '';
                   },
-                  (onValidateVal) {
-                    onValidateVal == null ? 'Please select city' : null;
-                  },
+                  (onValidateVal) =>
+                      onValidateVal == null ? 'Please select city' : null,
                   borderColor: AppColors.transparent,
                   borderFocusColor: AppColors.primaryColor,
                   borderRadius: 0,
@@ -228,9 +225,8 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                     ctrl.updateSchoolName(temp.first['Name']);
                     ;
                   },
-                  (onValidateVal) {
-                    onValidateVal == null ? 'Please select school' : null;
-                  },
+                  (onValidateVal) =>
+                      onValidateVal == null ? 'Please select school' : null,
                   borderColor: AppColors.transparent,
                   borderFocusColor: AppColors.primaryColor,
                   borderRadius: 0,

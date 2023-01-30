@@ -38,7 +38,7 @@ class AuthServices {
   }
 
   Future googleLogOut() async {
-    await _auth.signOut().then((value) => Get.offAll(IntroPage()));
+    await _auth.signOut().then((value) => Get.toNamed(AppRoutes.intro));
     await googleSignIn.signOut();
   }
 

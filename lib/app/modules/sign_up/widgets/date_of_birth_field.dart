@@ -8,8 +8,8 @@ class DateOfBirthField extends StatelessWidget {
   DateOfBirthField({
     Key? key,
     required dateController,
-  }) : _dateController = dateController,
-   super(key: key);
+  })  : _dateController = dateController,
+        super(key: key);
 
   final TextEditingController _dateController;
 
@@ -46,6 +46,7 @@ class DateOfBirthField extends StatelessWidget {
           ).data!;
         }
       },
+      validator: (val) => val!.isEmpty ? 'Enter an Date of Birth' : null,
     );
   }
 }
