@@ -61,16 +61,17 @@ class AuthServices {
       User? user = result.user;
       print(user!.uid);
       await DatabaseService(uid: user.uid).updateUserData(
-          userName,
-          email,
-          password,
-          fullName,
-          dateOfBirth,
-          phoneNumber,
-          country,
-          province,
-          city,
-          school);
+        userName,
+        email,
+        password,
+        fullName,
+        dateOfBirth,
+        phoneNumber,
+        country,
+        province,
+        city,
+        school,
+      );
     } on FirebaseAuthException catch (e) {
       String title = e.code.replaceAll(RegExp('-'), ' ').capitalize!;
       String message = '';

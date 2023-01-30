@@ -13,6 +13,10 @@ class SignUpController extends GetxController {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+  String countryName = '';
+  String provinceName = '';
+  String cityName = '';
+  String schoolName = '';
 
   void updateSelectedIndex(int id) => selectedIndex.value = id;
 
@@ -32,4 +36,12 @@ class SignUpController extends GetxController {
 
   void updatePasswordController(TextEditingController data) =>
       passwordController = data;
+
+  void updateCountryName(String data) => countryName = data;
+
+  void updateProvinceName(String data) => provinceName = data;
+
+  void updateCityName(String data) => cityName = data;
+
+  void updateSchoolName(String data) => schoolName = data;
 }

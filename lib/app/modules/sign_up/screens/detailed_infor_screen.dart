@@ -13,10 +13,6 @@ SingleChildScrollView detailedInfor(BuildContext context) {
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-  String? country;
-  String? province;
-  String? city;
-  String? school;
   String? countryId;
   String? provinceId;
   String? cityId;
@@ -108,7 +104,7 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                   Iterable<Map> temp = Picker().countries.where(
                         (element) => element['ID'].toString() == countryId,
                       );
-                  country = temp.first['Name'];
+                  ctrl.updateCountryName(temp.first['Name']);
                   provinceId = '';
                 },
                 (onValidateVal) {
@@ -151,7 +147,7 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                     Iterable<Map> temp = Picker().provinces.where(
                           (element) => element['ID'].toString() == provinceId,
                         );
-                    province = temp.first['Name'];
+                    ctrl.updateProvinceName(temp.first['Name']);
                     cityId = '';
                   },
                   (onValidateVal) {
@@ -194,7 +190,7 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                     Iterable<Map> temp = Picker().cities.where(
                           (element) => element['ID'].toString() == cityId,
                         );
-                    city = temp.first['Name'];
+                    ctrl.updateCityName(temp.first['Name']);
                     schoolId = '';
                   },
                   (onValidateVal) {
@@ -229,7 +225,8 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                     Iterable<Map> temp = Picker().schools.where(
                           (element) => element['ID'].toString() == schoolId,
                         );
-                    school = temp.first['Name'];
+                    ctrl.updateSchoolName(temp.first['Name']);
+                    ;
                   },
                   (onValidateVal) {
                     onValidateVal == null ? 'Please select school' : null;
@@ -249,10 +246,10 @@ SingleChildScrollView detailedInfor(BuildContext context) {
             fullNameController: ctrl.fullNameController,
             dateController: ctrl.dateController,
             phoneNumberController: ctrl.phoneNumberController,
-            country: country,
-            province: province,
-            city: city,
-            school: school,
+            country: ctrl.countryName,
+            province: ctrl.provinceName,
+            city: ctrl.cityName,
+            school: ctrl.schoolName,
           ),
         ],
       ),

@@ -16,26 +16,11 @@ class SignUpButton extends StatelessWidget {
     required city,
     required school,
   })  : _formKey = formKey,
-        _fullNameController = fullNameController,
-        _dateController = dateController,
-        _phoneNumberController = phoneNumberController,
-        _country = country,
-        _province = province,
-        _city = city,
-        _school = school,
         super(key: key);
 
   final SignUpController ctrl = Get.find<SignUpController>();
   final AuthServices _auth = AuthServices();
   final GlobalKey<FormState> _formKey;
-  final TextEditingController _fullNameController;
-  final TextEditingController _dateController;
-  final TextEditingController _phoneNumberController;
-  final String? _country;
-  final String? _province;
-  final String? _city;
-  final String? _school;
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -47,8 +32,12 @@ class SignUpButton extends StatelessWidget {
           String fullName = ctrl.fullNameController.text.trim();
           String dateOfBirth = ctrl.dateController.text.trim();
           String phoneNumber = ctrl.phoneNumberController.text.trim();
+          String countryName = ctrl.countryName;
+          String provinceName = ctrl.provinceName;
+          String cityName = ctrl.cityName;
+          String schoolName = ctrl.schoolName;
           await _auth.signUp(userName, email, password, fullName, dateOfBirth,
-              phoneNumber, _country!, _province!, _city!, _school!);
+              phoneNumber, countryName, provinceName, cityName, schoolName);
           Get.dialog(
             Center(
               child: Container(
