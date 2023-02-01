@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
-  RxInt selectedIndex = 2.obs;
+  RxInt selectedIndex = 1.obs;
   RxBool hide = true.obs;
   RxList province = [].obs;
   RxList city = [].obs;
