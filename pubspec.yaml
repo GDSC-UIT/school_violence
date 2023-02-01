@@ -47,6 +47,7 @@ dependencies:
   font_awesome_flutter: ^10.3.0
   google_sign_in: ^5.4.3
   sign_in_with_apple: ^4.3.0
+  flutter_otp_text_field: ^1.1.0+2
 
 dev_dependencies:
   flutter_test:
