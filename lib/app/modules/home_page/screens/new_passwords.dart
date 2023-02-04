@@ -202,7 +202,7 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                         builder: (BuildContext context) {
                           return Dialog(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0)),
+                                borderRadius: BorderRadius.circular(30.0)),
                             child: Container(
                               constraints: BoxConstraints(maxHeight: 474),
                               child: Padding(
