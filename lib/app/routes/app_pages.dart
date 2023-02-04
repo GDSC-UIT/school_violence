@@ -6,6 +6,8 @@ import 'package:school_violence_app/app/modules/home_page/screens/home_page.dart
 import 'package:school_violence_app/app/modules/intro/intro_binding.dart';
 import 'package:school_violence_app/app/modules/intro/screens/intro_screen.dart';
 import 'package:school_violence_app/app/modules/intro/screens/loading_screen.dart';
+import 'package:school_violence_app/app/modules/notifications/notifications_binding.dart';
+import 'package:school_violence_app/app/modules/notifications/screens/notifications.dart';
 import 'package:school_violence_app/app/modules/sign_up/screens/sign_up_screen.dart';
 import 'package:school_violence_app/app/modules/sign_up/sign_up_bingding.dart';
 import 'app_routes.dart';
@@ -36,6 +38,11 @@ abstract class AppPages {
       name: AppRoutes.home,
       page: () => HomePage(),
       binding: HomePageBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.notifications,
+      page: () => NotificationsPage(),
+      binding: NotificationsBinding(),
     ),
   ];
 }

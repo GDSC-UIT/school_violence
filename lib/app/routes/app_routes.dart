@@ -8,4 +8,7 @@ abstract class AppRoutes {
   static const forgot_password = '/forgot_password';
   //
   static const home = '/home';
+  //
+    static const notifications = '/notifications';
+
 }
