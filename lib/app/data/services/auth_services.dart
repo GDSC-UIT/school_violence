@@ -1,15 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:school_violence_app/app/core/utils/utils.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/database.dart';
-import 'package:school_violence_app/app/modules/intro/screens/intro_screen.dart';
-import 'package:school_violence_app/app/routes/app_pages.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
