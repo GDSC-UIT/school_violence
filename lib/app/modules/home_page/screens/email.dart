@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
+import 'package:school_violence_app/app/modules/forgot_passwords/screens/new_passwords.dart';
 
-class ForgotPasswordPage extends StatefulWidget {
-  const ForgotPasswordPage({super.key});
+class EmailPage extends StatefulWidget {
+  const EmailPage({super.key});
 
   @override
-  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
+  State<EmailPage> createState() => _EmailPageState();
 }
 
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+class _EmailPageState extends State<EmailPage> {
   late TextEditingController _controller;
 
   @override
@@ -37,15 +39,20 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               //
               SizedBox(height: 35),
 
-              Image.asset(
-                'assets/images/left-small.png',
-                width: 28,
+              InkWell(
+                onTap: () {
+                  Get.to(ForgotPasswordPage());
+                },
+                child: Image.asset(
+                  'assets/images/left-small.png',
+                  width: 28,
+                ),
               ),
               SizedBox(height: 35),
               Row(
                 children: [
                   Text(
-                    'Forgot Password ',
+                    'You ‘ve got mail ',
                     style: TextStyle(
                       fontSize: 30,
                       fontFamily: 'Montserrat',
@@ -55,7 +62,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     ),
                   ),
                   Image.asset(
-                    'assets/images/key.png',
+                    'assets/images/mail.png',
                     width: 28,
                   ),
                 ],
@@ -64,7 +71,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               Row(
                 children: [
                   Text(
-                    'Enter your email address to get an code \n to reset your password.',
+                    'We have sent the OTP verification code to \n your email address. Check your mail and \n enter the code below.',
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'Montserrat',
@@ -75,49 +82,59 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 49),
-              Text(
-                'Email',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                  color: AppColors.black,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w500,
-                ),
+              SizedBox(height: 45),
+              OtpTextField(
+                numberOfFields: 4,
+                borderColor: Color(0xFF512DA8),
+                //set to true to show as box or false to show as dash
+                showFieldAsBox: true,
+                //runs when a code is typed in
+                onCodeChanged: (String code) {
+                  //handle validation or checks here
+                },
+                //runs when every textfield is filled
+                onSubmit: (String verificationCode) {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Verification Code"),
+                          content: Text('Code entered is $verificationCode'),
+                        );
+                      });
+                }, // end onSubmit
               ),
-              Container(
-                padding: EdgeInsets.all(4.0),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                        width: 0.4, color: AppColors.primaryColorShadow),
+              SizedBox(height: 45),
+              Center(
+                child: Text(
+                  'Didn’t receive email?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                    color: Color.fromRGBO(56, 56, 56, 1),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-                child: TextFormField(
-                  style: TextStyle(fontSize: 24),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: AppColors.transparent, width: 2.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: AppColors.primaryColor, width: 2.0),
-                    ),
+              ),
+              SizedBox(height: 14),
+              Center(
+                child: Text(
+                  'You can resend code in 55 s',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                    color: Color.fromRGBO(56, 56, 56, 1),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w500,
                   ),
-                  validator: (val) =>
-                      val!.isEmpty ? 'Enter an Full Name' : null,
-                  onChanged: (val) {
-                    //setState(() => userName = val);
-                  },
                 ),
               ),
-              SizedBox(height: 300),
+              SizedBox(height: 55),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.to(EmailPage());
+                    Get.to(NewPassWordPage());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
@@ -128,7 +145,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         borderRadius: BorderRadius.circular(30.0)),
                   ),
                   child: Text(
-                    'Continue',
+                    'Confirm',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: AppColors.white,
