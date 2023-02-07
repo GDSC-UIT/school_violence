@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 
 class FindFriends extends StatelessWidget {
@@ -52,18 +53,22 @@ class FindFriends extends StatelessWidget {
                                       backgroundColor: AppColors.primaryColor,
                                       elevation: 5,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0)),
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
                                     )
                                   : ElevatedButton.styleFrom(
                                       backgroundColor: AppColors.white,
                                       elevation: 5,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0)),
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
                                     ),
                               onPressed: () {
                                 ctrl.updateSent();
+                                Connect().friendRequest(
+                                    ctrl.searchResult[index]['id']);
                               },
                               child: (!ctrl.sent.value)
                                   ? Text('Add')
