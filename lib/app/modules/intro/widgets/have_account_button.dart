@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class HaveAccountButton extends StatelessWidget {
   const HaveAccountButton({
@@ -10,7 +12,7 @@ class HaveAccountButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        _test();
+        Get.toNamed(AppRoutes.sign_in);
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.secondaryColor,
@@ -26,8 +28,4 @@ class HaveAccountButton extends StatelessWidget {
       ),
     );
   }
-}
-
-void _test() {
-  print('abc');
 }
