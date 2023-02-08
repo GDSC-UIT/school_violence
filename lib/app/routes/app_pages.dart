@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:school_violence_app/app/modules/connect/connect_binding.dart';
 import 'package:school_violence_app/app/modules/connect/screens/find_friends.dart';
 import 'package:school_violence_app/app/modules/connect/screens/main_screen.dart';
+import 'package:school_violence_app/app/modules/diary/diary_binding.dart';
+import 'package:school_violence_app/app/modules/diary/screens/diary.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/forgot_passwords_binding.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
 import 'package:school_violence_app/app/modules/home_page/home_page_binding.dart';
@@ -63,6 +65,11 @@ abstract class AppPages {
       name: AppRoutes.findFriends,
       page: () => FindFriends(),
       binding: ConnectBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.diary,
+      page: () => DiaryPage(),
+      binding: DiaryBinding(),
     ),
   ];
 }

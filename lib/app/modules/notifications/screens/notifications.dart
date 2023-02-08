@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/modules/notifications/widgets/NameCard.dart';
+import 'package:school_violence_app/app/modules/notifications/widgets/acceptButton.dart';
+import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -10,120 +14,18 @@ class NotificationsPage extends StatefulWidget {
   State<NotificationsPage> createState() => _NotificationsPageState();
 }
 
-class _NotificationsPageState extends State<NotificationsPage> {
+class _NotificationsPageState extends State<NotificationsPage>
+    with TickerProviderStateMixin {
+  bool pressGeoON = false;
+  bool cmbscritta = false;
   late TextEditingController _controller;
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50.0)),
-            child: Container(
-              constraints: BoxConstraints(maxHeight: 474),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: [
-                    SizedBox(height: 69),
-                    Image.asset(
-                      'assets/images/grey-square.png',
-                      width: 160,
-                    ),
-                    SizedBox(height: 17),
-                    Text(
-                      'Emergency notification',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.primaryColor,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Your friend need your help!!!',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 59),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          // Get.to(EmailPage());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.secondaryColor,
-                          shadowColor: AppColors.secondaryColorShadow,
-                          elevation: 5,
-                          minimumSize: const Size(128, 43),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
-                        ),
-                        child: Text(
-                          'No',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 16,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Get.to(EmailPage());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
-                          shadowColor: AppColors.primaryColorShadow,
-                          elevation: 5,
-                          minimumSize: const Size(128, 43),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
-                        ),
-                        child: Text(
-                          'Yes',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 16,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],)
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    });
     _controller = TextEditingController();
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   // @override
@@ -134,99 +36,155 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_rounded),
-            label: 'Diary',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.connect_without_contact),
-            label: 'Connect',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryColor,
-        onTap: _onItemTapped,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: AppColors.primaryColor,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //
-              SizedBox(height: 35),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //
+                SizedBox(height: 35),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/images/grey-avatar.png',
-                        width: 28,
+                Row(
+                  children: [
+                    Image.asset(
+                      'assets/images/left-small.png',
+                      width: 28,
+                    ),
+                    SizedBox(width: 22.5),
+                    Text(
+                      'Notifications',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'Montserrat',
+                        color: AppColors.black,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w600,
                       ),
-                      SizedBox(width: 16),
-                      Text(
-                        'Hi, Quan',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontFamily: 'Montserrat', //bug with font family
-                          color: AppColors.black,
-                          decoration: TextDecoration.none,
-                          fontWeight: FontWeight.w600,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 29),
+                Image.asset('assets/images/grey-rectangle.png'),
+                SizedBox(height: 16),
+                Container(
+                  height: 0.1,
+                  width: 378.5,
+                  color: AppColors.black,
+                ),
+                // SizedBox(height: 30),
+                DefaultTabController(
+                  length: 2,
+                  child: Column(
+                    children: [
+                      Container(
+                        child: TabBar(
+                          unselectedLabelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                          indicator: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(50), // Creates border
+                            color: AppColors.primaryColor,
+                          ),
+                          labelStyle: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                          labelPadding: EdgeInsets.all(14),
+                          padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                          labelColor: AppColors.white,
+                          unselectedLabelColor: AppColors.secondaryColorShadow,
+                          controller: _tabController,
+                          tabs: [
+                            Text('Diary'),
+                            Stack(
+                              children: [
+                                Text('Friend'),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(60, 2, 0, 0),
+                                  width: 14,
+                                  height: 14,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors
+                                          .notificationBackgroundColor),
+                                  child: (Text(
+                                    '1',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontFamily: 'Montserrat',
+                                      color: AppColors.white,
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: double.maxFinite,
+                        height: 300,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            ListView.builder(
+                              itemCount: 2,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (_, index) {
+                                return Card(
+                                  child: ListTile(
+                                    leading: FlutterLogo(size: 56.0),
+                                    title: Text(
+                                      'Chat',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: 'Montserrat',
+                                        color: AppColors.black,
+                                        decoration: TextDecoration.none,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                      'Today',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontFamily: 'Montserrat',
+                                        color: AppColors.blur,
+                                        decoration: TextDecoration.none,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            ListView.builder(
+                              itemCount: 2,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (_, index) {
+                                return NameCard();
+                              },
+                            )
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  Stack(
-                    children: [
-                      Image.asset(
-                        'assets/images/bell.jpg',
-                        width: 28,
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(16, 16, 0, 0),
-                        width: 14,
-                        height: 14,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.notificationBackgroundColor),
-                        child: (Text(
-                          '1',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontFamily: 'Montserrat',
-                            color: AppColors.white,
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )),
-                      )
-                    ],
-                  )
-                ],
-              ),
-              SizedBox(height: 32),
-              Image.asset('assets/images/grey-rectangle.png'),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
