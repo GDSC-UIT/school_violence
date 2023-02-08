@@ -75,7 +75,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                   width: 378.5,
                   color: AppColors.black,
                 ),
-                SizedBox(height: 30),
+                // SizedBox(height: 30),
                 DefaultTabController(
                   length: 2,
                   child: Column(
@@ -99,8 +99,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                             color: Colors.white,
                           ),
                           labelPadding: EdgeInsets.all(14),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 0, vertical: 18),
+                          padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
                           unselectedLabelColor: AppColors.secondaryColorShadow,
                           controller: _tabController,

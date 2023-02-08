@@ -9,6 +9,7 @@ abstract class AppRoutes {
   //
   static const home = '/home';
   //
-    static const notifications = '/notifications';
-
+  static const notifications = '/notifications';
+  //
+  static const diary = '/diary';
 }
