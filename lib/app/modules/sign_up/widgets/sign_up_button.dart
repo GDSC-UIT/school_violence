@@ -108,7 +108,7 @@ class SignUpButton extends StatelessWidget {
           );
           if (Get.isDialogOpen == true) {
             await 2.seconds.delay();
-            Get.toNamed(AppRoutes.intro);
+            Get.toNamed(AppRoutes.sign_in);
           }
         }
       },

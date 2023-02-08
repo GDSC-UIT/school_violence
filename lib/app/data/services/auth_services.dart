@@ -29,7 +29,7 @@ class AuthServices {
 
     final User? user = (await _auth
         .signInWithCredential(credential)
-        .then((value) => Get.offAll(HomePage())));
+        .then((value) => Get.offAll(AppRoutes.home)));
   }
 
   Future googleLogOut() async {
@@ -56,6 +56,7 @@ class AuthServices {
       User? user = result.user;
       print(user!.uid);
       await DatabaseService(uid: user.uid).updateUserData(
+        user.uid,
         userName,
         email,
         password,
@@ -91,6 +92,21 @@ class AuthServices {
     //Get.offAll(() => AppRoutes.intro);
   }
 
+  //Sign in
+
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      Get.toNamed(AppRoutes.home);
+      //return user != null ? user.uid : null;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   //Apple
 
   // Future appleLogIn() async {
@@ -117,28 +133,4 @@ class AuthServices {
   //   await _auth.signOut().then((value) => Get.toNamed(AppRoutes.intro));
   //   await appleLogOut();
   // }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            AuthServices().googleLogOut();
-          },
-          child: Text('Sign Out'),
-        ),
-        // ElevatedButton(
-        //   onPressed: () {
-        //     AuthServices().googleLogOut();
-        //   },
-        //   child: Text('Sign Out'),
-        // ),
-      ],
-    );
-  }
 }
