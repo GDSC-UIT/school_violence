@@ -99,8 +99,8 @@ class AuthServices {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      Get.toNamed(AppRoutes.home);
-      //return user != null ? user.uid : null;
+      Get.toNamed(AppRoutes.findFriends);
+      return user != null ? user.uid : null;
     } catch (e) {
       print(e.toString());
       return null;

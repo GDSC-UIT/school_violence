@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/auth_services.dart';
+import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 class SignInButton extends StatelessWidget {
@@ -13,6 +15,7 @@ class SignInButton extends StatelessWidget {
 
   final AuthServices _auth = AuthServices();
   final SignInController ctrl;
+  final ConnectController connectCtrl = Get.find<ConnectController>();
   final GlobalKey<FormState> _formKey;
 
   @override
@@ -24,6 +27,9 @@ class SignInButton extends StatelessWidget {
             ctrl.emailController.text,
             ctrl.passwordController.text,
           );
+          if (result != null) {
+            connectCtrl.updateUserId(result);
+          }
         }
       },
       style: ElevatedButton.styleFrom(

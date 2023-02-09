@@ -6,11 +6,7 @@ import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart'
 import 'package:school_violence_app/app/modules/sign_in/widgets/email_field.dart';
 import 'package:school_violence_app/app/modules/sign_in/widgets/password_field.dart';
 import 'package:school_violence_app/app/modules/sign_in/widgets/sign_in_button.dart';
-import 'package:school_violence_app/app/modules/sign_up/screens/create_account_screen.dart';
-import 'package:school_violence_app/app/modules/sign_up/screens/detailed_infor_screen.dart';
-import 'package:school_violence_app/app/modules/sign_up/widgets/back_button.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});
