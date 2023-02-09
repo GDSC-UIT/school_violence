@@ -5,7 +5,7 @@ abstract class AppRoutes {
   //
   static const sign_up = '/sign_up';
   //
-    static const sign_in = '/sign_in';
+  static const sign_in = '/sign_in';
   //
   static const forgot_password = '/forgot_password';
   //
@@ -15,4 +15,6 @@ abstract class AppRoutes {
   //
   static const connect = '/connect';
   static const findFriends = '/findFriends';
+  //
+  static const diary = '/diary';
 }

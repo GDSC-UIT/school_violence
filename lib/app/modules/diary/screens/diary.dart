@@ -3,29 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
-import 'package:school_violence_app/app/modules/notifications/widgets/NameCard.dart';
-import 'package:school_violence_app/app/modules/notifications/widgets/acceptButton.dart';
-import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
 
-class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({super.key});
+class DiaryPage extends StatefulWidget {
+  const DiaryPage({super.key});
 
   @override
-  State<NotificationsPage> createState() => _NotificationsPageState();
+  State<DiaryPage> createState() => _DiaryPageState();
 }
 
-class _NotificationsPageState extends State<NotificationsPage>
-    with TickerProviderStateMixin {
+class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   bool pressGeoON = false;
   bool cmbscritta = false;
   late TextEditingController _controller;
   late TabController _tabController;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   // @override
@@ -39,6 +42,35 @@ class _NotificationsPageState extends State<NotificationsPage>
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.menu_book_rounded),
+              label: 'Diary',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.connect_without_contact),
+              label: 'Connect',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: AppColors.primaryColor,
+          onTap: _onItemTapped,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: AppColors.primaryColor,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
@@ -56,7 +88,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                     ),
                     SizedBox(width: 22.5),
                     Text(
-                      'Notifications',
+                      'Diary',
                       style: TextStyle(
                         fontSize: 24,
                         fontFamily: 'Montserrat',
@@ -106,81 +138,63 @@ class _NotificationsPageState extends State<NotificationsPage>
                           labelColor: AppColors.white,
                           unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
-                          tabs: [
-                            Text('Diary'),
-                            Stack(
-                              children: [
-                                Text('Friend'),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(60, 2, 0, 0),
-                                  width: 14,
-                                  height: 14,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors
-                                          .notificationBackgroundColor),
-                                  child: (Text(
-                                    '1',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontFamily: 'Montserrat',
-                                      color: AppColors.white,
-                                      decoration: TextDecoration.none,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  )),
-                                )
-                              ],
+                          tabs: [Text('Chat'), Text('AI')],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Container(
+                        width: double.maxFinite,
+                        height: 200,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            SizedBox(
+                              width: 240, // <-- TextField width
+                              height: 120, // <-- TextField height
+                              child: TextField(
+                                maxLines: null,
+                                expands: true,
+                                keyboardType: TextInputType.multiline,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  hintText: 'Enter a message',
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              child: TextField(
+                                maxLines: null,
+                                expands: true,
+                                keyboardType: TextInputType.multiline,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  hintText: 'Enter a message',
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        width: double.maxFinite,
-                        height: 300,
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: [
-                            ListView.builder(
-                              itemCount: 2,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (_, index) {
-                                return Card(
-                                  child: ListTile(
-                                    leading: FlutterLogo(size: 56.0),
-                                    title: Text(
-                                      'Chat',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontFamily: 'Montserrat',
-                                        color: AppColors.black,
-                                        decoration: TextDecoration.none,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    subtitle: Text(
-                                      'Today',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontFamily: 'Montserrat',
-                                        color: AppColors.blur,
-                                        decoration: TextDecoration.none,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            ListView.builder(
-                              itemCount: 2,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (_, index) {
-                                return NameCard();
-                              },
-                            )
-                          ],
+                      SizedBox(height: 50),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                          shadowColor: AppColors.primaryColorShadow,
+                          elevation: 5,
+                          minimumSize: const Size(382, 54),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0)),
+                        ),
+                        child: Text(
+                          'Start',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 16,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ],
