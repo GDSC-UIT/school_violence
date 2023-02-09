@@ -15,7 +15,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   void _onItemTapped(int index) {
     switch(index){
       case 0:{
-        Get.toNamed(AppRoutes.home);
+        Get.toNamed(AppRoutes.home,);
         break;
       }
       case 1:{

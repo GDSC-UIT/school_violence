@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.loading,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
+      
     );
   }
 }
