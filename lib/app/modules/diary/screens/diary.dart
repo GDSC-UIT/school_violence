@@ -77,6 +77,9 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                   child: Column(
                     children: [
                       Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.secondaryColor,
+                            borderRadius: BorderRadius.circular(50)),
                         child: TabBar(
                           unselectedLabelStyle: TextStyle(
                             fontFamily: 'Montserrat',
@@ -95,14 +98,14 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                             color: Colors.white,
                           ),
                           labelPadding: EdgeInsets.all(14),
-                          padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                          // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
-                          unselectedLabelColor: AppColors.secondaryColorShadow,
+                          unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
                           tabs: [Text('Chat'), Text('AI')],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(height: 10),
                       Container(
                         width: double.maxFinite,
                         height: 200,
@@ -110,6 +113,8 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                           controller: _tabController,
                           children: [
                             SizedBox(
+                              width: 240, // <-- TextField width
+                              height: 120, // <-- TextField height
                               child: TextField(
                                 maxLines: null,
                                 expands: true,
