@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/new_passwords.dart';
+import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
 
 class EmailPage extends StatefulWidget {
   const EmailPage({super.key});
@@ -132,28 +133,9 @@ class _EmailPageState extends State<EmailPage> {
               ),
               SizedBox(height: 55),
               Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(NewPassWordPage());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                    shadowColor: AppColors.primaryColorShadow,
-                    elevation: 5,
-                    minimumSize: const Size(382, 52),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
-                  ),
-                  child: Text(
-                    'Confirm',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                child: Button(
+                  text: 'Confirm',
+                  toScreen: NewPassWordPage(),
                 ),
               ),
             ],

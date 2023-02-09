@@ -81,6 +81,9 @@ class _NotificationsPageState extends State<NotificationsPage>
                   child: Column(
                     children: [
                       Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.secondaryColor,
+                            borderRadius: BorderRadius.circular(50)),
                         child: TabBar(
                           unselectedLabelStyle: TextStyle(
                             fontFamily: 'Montserrat',
@@ -99,9 +102,9 @@ class _NotificationsPageState extends State<NotificationsPage>
                             color: Colors.white,
                           ),
                           labelPadding: EdgeInsets.all(14),
-                          padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                          // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
-                          unselectedLabelColor: AppColors.secondaryColorShadow,
+                          unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
                           tabs: [
                             Text('Diary'),

@@ -16,12 +16,19 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   bool cmbscritta = false;
   late TextEditingController _controller;
   late TabController _tabController;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   // @override
@@ -35,6 +42,35 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.menu_book_rounded),
+              label: 'Diary',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.connect_without_contact),
+              label: 'Connect',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: AppColors.primaryColor,
+          onTap: _onItemTapped,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: AppColors.primaryColor,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
@@ -77,6 +113,9 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                   child: Column(
                     children: [
                       Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.secondaryColor,
+                            borderRadius: BorderRadius.circular(50)),
                         child: TabBar(
                           unselectedLabelStyle: TextStyle(
                             fontFamily: 'Montserrat',
@@ -95,14 +134,14 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                             color: Colors.white,
                           ),
                           labelPadding: EdgeInsets.all(14),
-                          padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                          // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
-                          unselectedLabelColor: AppColors.secondaryColorShadow,
+                          unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
                           tabs: [Text('Chat'), Text('AI')],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(height: 10),
                       Container(
                         width: double.maxFinite,
                         height: 200,
@@ -110,12 +149,16 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                           controller: _tabController,
                           children: [
                             SizedBox(
+                              width: 240, // <-- TextField width
+                              height: 120, // <-- TextField height
                               child: TextField(
                                 maxLines: null,
                                 expands: true,
                                 keyboardType: TextInputType.multiline,
                                 decoration: InputDecoration(
-                                    filled: true, hintText: 'Enter a message'),
+                                  filled: true,
+                                  hintText: 'Enter a message',
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -124,17 +167,17 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                 expands: true,
                                 keyboardType: TextInputType.multiline,
                                 decoration: InputDecoration(
-                                    filled: true, hintText: 'Enter a message'),
+                                  filled: true,
+                                  hintText: 'Enter a message',
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 70),
+                      SizedBox(height: 50),
                       ElevatedButton(
-                        onPressed: () {
-                          // Get.to(EmailPage());
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryColor,
                           shadowColor: AppColors.primaryColorShadow,
