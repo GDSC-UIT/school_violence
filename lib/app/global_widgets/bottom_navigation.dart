@@ -1,20 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
-class Navigation extends StatefulWidget {
-  const Navigation({super.key});
+class BottomNavigation extends StatefulWidget {
+  late int onItem;
+  BottomNavigation({super.key,required this.onItem});
 
   @override
-  State<Navigation> createState() => _NavigationState();
+  State<BottomNavigation> createState() => _BottomNavigationState();
 }
 
-class _NavigationState extends State<Navigation> {
-  int _selectedIndex = 0;
-
+class _BottomNavigationState extends State<BottomNavigation> {
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    switch(index){
+      case 0:{
+        Get.toNamed(AppRoutes.home,);
+        break;
+      }
+      case 1:{
+        Get.toNamed(AppRoutes.diary);
+        break;
+      }
+      case 2:{
+        Get.toNamed(AppRoutes.connect);
+        break;
+      }
+      case 3:{
+      
+        // Get.toNamed(AppRoutes.profile);
+      }
+
+    }
   }
 
   @override
@@ -39,7 +56,7 @@ class _NavigationState extends State<Navigation> {
           label: 'Profile',
         ),
       ],
-      currentIndex: _selectedIndex,
+      currentIndex: widget.onItem,
       selectedItemColor: AppColors.primaryColor,
       onTap: _onItemTapped,
     );
