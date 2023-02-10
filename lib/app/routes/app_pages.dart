@@ -50,6 +50,8 @@ abstract class AppPages {
       name: AppRoutes.home,
       page: () => HomePage(),
       binding: HomePageBinding(),
+      transition: Transition.noTransition
+
     ),
     GetPage(
       name: AppRoutes.notifications,
@@ -60,6 +62,7 @@ abstract class AppPages {
       name: AppRoutes.connect,
       page: () => ConnectPage(),
       binding: ConnectBinding(),
+      transition: Transition.noTransition
     ),
     GetPage(
       name: AppRoutes.findFriends,
@@ -70,6 +73,7 @@ abstract class AppPages {
       name: AppRoutes.diary,
       page: () => DiaryPage(),
       binding: DiaryBinding(),
+      transition: Transition.noTransition
     ),
   ];
 }

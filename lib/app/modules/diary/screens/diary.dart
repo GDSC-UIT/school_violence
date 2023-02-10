@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 
 class DiaryPage extends StatefulWidget {
@@ -16,19 +17,12 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   bool cmbscritta = false;
   late TextEditingController _controller;
   late TabController _tabController;
-  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   // @override
@@ -42,30 +36,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book_rounded),
-              label: 'Diary',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.connect_without_contact),
-              label: 'Connect',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: AppColors.primaryColor,
-          onTap: _onItemTapped,
-        ),
+        bottomNavigationBar: BottomNavigation(onItem: 1,),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           onPressed: () {},

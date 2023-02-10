@@ -6,6 +6,7 @@ import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.d
 import 'package:school_violence_app/app/modules/notifications/widgets/NameCard.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/acceptButton.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -50,9 +51,14 @@ class _NotificationsPageState extends State<NotificationsPage>
 
                 Row(
                   children: [
-                    Image.asset(
-                      'assets/images/left-small.png',
-                      width: 28,
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoutes.home);
+                      },
+                      child: Image.asset(
+                        'assets/images/left-small.png',
+                        width: 28,
+                      ),
                     ),
                     SizedBox(width: 22.5),
                     Text(
