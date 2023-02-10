@@ -4,4 +4,5 @@ abstract class AppRoutes {
   static const intro = '/intro';
   //
   static const sign_up = '/sign_up';
+  static const dairy = '/dairy';
 }
