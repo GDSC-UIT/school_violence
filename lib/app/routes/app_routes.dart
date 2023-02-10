@@ -17,4 +17,5 @@ abstract class AppRoutes {
   static const findFriends = '/findFriends';
   //
   static const diary = '/diary';
+  static const chatroom = '/chatroom';
 }
