@@ -49,7 +49,8 @@ class AuthServices {
       String country,
       String province,
       String city,
-      String school) async {
+      String school,
+      bool expert) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -67,6 +68,7 @@ class AuthServices {
         province,
         city,
         school,
+        expert,
       );
     } on FirebaseAuthException catch (e) {
       String title = e.code.replaceAll(RegExp('-'), ' ').capitalize!;

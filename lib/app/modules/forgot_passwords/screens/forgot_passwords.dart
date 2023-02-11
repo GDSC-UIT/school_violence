@@ -40,9 +40,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               //
               SizedBox(height: 35),
 
-              Image.asset(
-                'assets/images/left-small.png',
-                width: 28,
+              // Image.asset(
+              //   'assets/images/left-small.png',
+              //   width: 28,
+              // ),
+              IconButton(
+                onPressed: () => Get.back(),
+                icon: Icon(Icons.arrow_back),
+                iconSize: 30,
               ),
               SizedBox(height: 35),
               Row(

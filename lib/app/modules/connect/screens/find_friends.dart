@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
+import 'package:school_violence_app/app/modules/connect/widgets/add_friend_button.dart';
 
 class FindFriends extends StatelessWidget {
   FindFriends({super.key});
@@ -16,6 +16,11 @@ class FindFriends extends StatelessWidget {
         .where('userName', isEqualTo: query)
         .get();
     ctrl.updateSearchResult(result.docs.map((e) => e.data()).toList());
+    if (result != null && result.docs.length >= 1) {
+      ctrl.updateIsSent(await getData(ctrl.userId.value,
+              ctrl.searchResult.first['id'], 'sentRequest') ==
+          false);
+    }
   }
 
   Future<bool> getData(userId, friendId, type) async {
@@ -33,6 +38,11 @@ class FindFriends extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
+            IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(Icons.arrow_back),
+              iconSize: 30,
+            ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: TextField(
@@ -53,62 +63,13 @@ class FindFriends extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: ctrl.searchResult.length,
                       itemBuilder: (context, index) {
-                        // bool check = ((await getData(
-                        //         ctrl.userId.value,
-                        //         ctrl.searchResult[index]['id'],
-                        //         'sentRequest')) == false);
-                        return FutureBuilder(
-                          future: getData(ctrl.userId.value,
-                              ctrl.searchResult[index]['id'], 'sentRequest'),
-                          builder: (context, snapshot) {
-                            return Obx(
-                              () => ListTile(
-                                title:
-                                    Text(ctrl.searchResult[index]['fullName']),
-                                subtitle:
-                                    Text(ctrl.searchResult[index]['school']),
-                                trailing: ElevatedButton(
-                                  onPressed: () {
-                                    if (snapshot.data == false) {
-                                      _connect.sentRequest(
-                                        ctrl.userId.value,
-                                        ctrl.searchResult[index]['id'],
-                                      );
-                                    } else {
-                                      _connect.unSentRequest(ctrl.userId.value,
-                                          ctrl.searchResult[index]['id']);
-                                    }
-                                  },
-                                  style: (snapshot.data == false)
-                                      ? ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              AppColors.primaryColor,
-                                          elevation: 5,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                          ),
-                                        )
-                                      : ElevatedButton.styleFrom(
-                                          backgroundColor: AppColors.white,
-                                          elevation: 5,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                          ),
-                                        ),
-                                  child: (snapshot.data == false)
-                                      ? Text('Add')
-                                      : Text(
-                                          'Sent ✓',
-                                          style: TextStyle(
-                                            color: AppColors.primaryColor,
-                                          ),
-                                        ),
-                                ),
-                              ),
-                            );
-                          },
+                        return Obx(
+                          () => ListTile(
+                            title: Text(ctrl.searchResult[index]['fullName']),
+                            subtitle: Text(ctrl.searchResult[index]['school']),
+                            trailing: AddFriendButton(
+                                ctrl: ctrl, connect: _connect, index: index),
+                          ),
                         );
                       },
                     ),

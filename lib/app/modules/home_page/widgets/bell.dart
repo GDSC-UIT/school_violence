@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class Bell extends StatelessWidget {
   const Bell({super.key});
@@ -7,7 +9,9 @@ class Bell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(AppRoutes.notifications);
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(
