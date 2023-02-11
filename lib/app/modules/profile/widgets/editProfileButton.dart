@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 
-class AcceptButton extends StatelessWidget {
+class EditProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 25,
-      width: 72,
+      height: 36,
+      width: 106,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: AppColors.primaryColor,
@@ -20,7 +20,7 @@ class AcceptButton extends StatelessWidget {
           ),
         ),
         child: (Text(
-          'Accept',
+          'Edit Profile',
         )),
         onPressed: () {},
       ),

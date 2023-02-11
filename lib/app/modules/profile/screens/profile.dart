@@ -4,6 +4,10 @@ import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/editProfileButton.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/profileNameCard.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -35,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: BottomNavigation(
           onItem: 1,
@@ -55,20 +59,35 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 35),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(
-                      'assets/images/left-small.png',
-                      width: 28,
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/avatar.jpg', // Avatar
+                          width: 48,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Profile',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontFamily: 'Montserrat',
+                            color: AppColors.black,
+                            decoration: TextDecoration.none,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 22.5),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes
+                            .sign_in); // Chỗ này nên bắn ra dialog confirm
+                      },
+                      child: Image.asset(
+                        'assets/images/logout.png', // Logout
+                        width: 48,
                       ),
                     ),
                   ],
@@ -76,11 +95,8 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 29),
                 Image.asset('assets/images/grey-rectangle.png'),
                 SizedBox(height: 16),
-                Container(
-                  height: 0.1,
-                  width: 378.5,
-                  color: AppColors.black,
-                ),
+                ProfileNameCard(
+                    name: 'Cao Minh Quân', phoneNumber: '+84 123456789'),
                 // SizedBox(height: 30),
                 DefaultTabController(
                   length: 2,
