@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: AppRoutes.loading,
+      initialRoute: AppRoutes.chatroom,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
     );
