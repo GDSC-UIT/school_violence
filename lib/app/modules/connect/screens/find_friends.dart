@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
+import 'package:school_violence_app/app/modules/connect/widgets/add_friend_button.dart';
 
 class FindFriends extends StatelessWidget {
   FindFriends({super.key});
   final ConnectController ctrl = Get.find<ConnectController>();
+  final Connect _connect = Connect();
 
   void searchFromFirebase(String query) async {
     final result = await FirebaseFirestore.instance
@@ -15,6 +16,20 @@ class FindFriends extends StatelessWidget {
         .where('userName', isEqualTo: query)
         .get();
     ctrl.updateSearchResult(result.docs.map((e) => e.data()).toList());
+    if (result != null && result.docs.length >= 1) {
+      ctrl.updateIsSent(await getData(ctrl.userId.value,
+              ctrl.searchResult.first['id'], 'sentRequest') ==
+          false);
+    }
+  }
+
+  Future<bool> getData(userId, friendId, type) async {
+    DocumentSnapshot snap = await _connect.connectCollection.doc(userId).get();
+    if (snap.data() != null) {
+      List sentRequest = (snap.data()! as dynamic)[type];
+      return sentRequest.contains(friendId);
+    } else
+      return false;
   }
 
   @override
@@ -23,6 +38,11 @@ class FindFriends extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
+            IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(Icons.arrow_back),
+              iconSize: 30,
+            ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: TextField(
@@ -47,38 +67,8 @@ class FindFriends extends StatelessWidget {
                           () => ListTile(
                             title: Text(ctrl.searchResult[index]['fullName']),
                             subtitle: Text(ctrl.searchResult[index]['school']),
-                            trailing: ElevatedButton(
-                              style: (!ctrl.sent.value)
-                                  ? ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primaryColor,
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                    )
-                                  : ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.white,
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                    ),
-                              onPressed: () {
-                                ctrl.updateSent();
-                                Connect().friendRequest(
-                                    ctrl.searchResult[index]['id']);
-                              },
-                              child: (!ctrl.sent.value)
-                                  ? Text('Add')
-                                  : Text(
-                                      'Sent ✓',
-                                      style: TextStyle(
-                                        color: AppColors.primaryColor,
-                                      ),
-                                    ),
-                            ),
+                            trailing: AddFriendButton(
+                                ctrl: ctrl, connect: _connect, index: index),
                           ),
                         );
                       },

@@ -14,6 +14,8 @@ import 'package:school_violence_app/app/modules/intro/screens/intro_screen.dart'
 import 'package:school_violence_app/app/modules/intro/screens/loading_screen.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_binding.dart';
 import 'package:school_violence_app/app/modules/notifications/screens/notifications.dart';
+import 'package:school_violence_app/app/modules/profile/screens/profile.dart';
+import 'package:school_violence_app/app/modules/profile/profile_binding.dart';
 import 'package:school_violence_app/app/modules/sign_in/screens/sign_in_screen.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_binding.dart';
 import 'package:school_violence_app/app/modules/sign_up/screens/sign_up_screen.dart';
@@ -48,23 +50,20 @@ abstract class AppPages {
       binding: ForgotPasswordBinding(),
     ),
     GetPage(
-      name: AppRoutes.home,
-      page: () => HomePage(),
-      binding: HomePageBinding(),
-      transition: Transition.noTransition
-
-    ),
+        name: AppRoutes.home,
+        page: () => HomePage(),
+        binding: HomePageBinding(),
+        transition: Transition.noTransition),
     GetPage(
       name: AppRoutes.notifications,
       page: () => NotificationsPage(),
       binding: NotificationsBinding(),
     ),
     GetPage(
-      name: AppRoutes.connect,
-      page: () => ConnectPage(),
-      binding: ConnectBinding(),
-      transition: Transition.noTransition
-    ),
+        name: AppRoutes.connect,
+        page: () => ConnectPage(),
+        binding: ConnectBinding(),
+        transition: Transition.noTransition),
     GetPage(
       name: AppRoutes.findFriends,
       page: () => FindFriends(),
@@ -81,5 +80,10 @@ abstract class AppPages {
       page: () => ChatScreen(),
       binding: DiaryBinding(),
     ),
+    GetPage(
+        name: AppRoutes.profile,
+        page: () => ProfilePage(),
+        binding: ProfileBinding(),
+        transition: Transition.noTransition),
   ];
 }
