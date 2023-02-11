@@ -38,8 +38,18 @@ class SignUpButton extends StatelessWidget {
           String provinceName = ctrl.provinceName;
           String cityName = ctrl.cityName;
           String schoolName = ctrl.schoolName;
-          await _auth.signUp(userName, email, password, fullName, dateOfBirth,
-              phoneNumber, countryName, provinceName, cityName, schoolName);
+          await _auth.signUp(
+              userName,
+              email,
+              password,
+              fullName,
+              dateOfBirth,
+              phoneNumber,
+              countryName,
+              provinceName,
+              cityName,
+              schoolName,
+              false);
           Get.dialog(
             Center(
               child: Container(

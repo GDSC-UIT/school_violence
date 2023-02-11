@@ -2,10 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/NameCard.dart';
-import 'package:school_violence_app/app/modules/notifications/widgets/acceptButton.dart';
-import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -21,6 +19,8 @@ class _NotificationsPageState extends State<NotificationsPage>
   bool cmbscritta = false;
   late TextEditingController _controller;
   late TabController _tabController;
+  final NotificationsController notifycationsCtrl =
+      Get.find<NotificationsController>();
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Get.toNamed(AppRoutes.home);
                       },
                       child: Image.asset(
@@ -179,12 +179,15 @@ class _NotificationsPageState extends State<NotificationsPage>
                                 );
                               },
                             ),
-                            ListView.builder(
-                              itemCount: 2,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (_, index) {
-                                return NameCard();
-                              },
+                            Obx(
+                              () => ListView.builder(
+                                itemCount:
+                                    notifycationsCtrl.friendRequest.length,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, _index) {
+                                  return NameCard(index: _index);
+                                },
+                              ),
                             )
                           ],
                         ),

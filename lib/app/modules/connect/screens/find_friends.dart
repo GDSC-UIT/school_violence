@@ -38,6 +38,11 @@ class FindFriends extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
+            IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(Icons.arrow_back),
+              iconSize: 30,
+            ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: TextField(

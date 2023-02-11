@@ -18,6 +18,7 @@ class DatabaseService {
     String province,
     String city,
     String school,
+    bool expert,
   ) async {
     return await usersCollection.doc(uid).set(
       {
@@ -32,6 +33,7 @@ class DatabaseService {
         'province': province,
         'city': city,
         'school': school,
+        'expert': expert,
       },
     );
   }
