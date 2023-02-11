@@ -5,14 +5,15 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 
-class DiaryPage extends StatefulWidget {
-  const DiaryPage({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<DiaryPage> createState() => _DiaryPageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
+class _ProfilePageState extends State<ProfilePage>
+    with TickerProviderStateMixin {
   bool pressGeoON = false;
   bool cmbscritta = false;
   late TextEditingController _controller;
@@ -34,7 +35,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       home: Scaffold(
         bottomNavigationBar: BottomNavigation(
           onItem: 1,
@@ -61,7 +62,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                     ),
                     SizedBox(width: 22.5),
                     Text(
-                      'Diary',
+                      'Profile',
                       style: TextStyle(
                         fontSize: 24,
                         fontFamily: 'Montserrat',
@@ -117,7 +118,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                       SizedBox(height: 10),
                       Container(
                         width: double.maxFinite,
-                        height: 270,
+                        height: 200,
                         child: TabBarView(
                           controller: _tabController,
                           children: [
@@ -148,7 +149,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 50),
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(

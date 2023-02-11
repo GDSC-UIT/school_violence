@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    name: 'School Violence',
+    name: "School Violence",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
