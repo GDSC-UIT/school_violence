@@ -13,10 +13,9 @@ import '../diary_controller.dart';
 
 class ChatScreen extends StatelessWidget {
   ChatScreen({super.key});
-  
-  
+
   final DiaryController ctrl = Get.find<DiaryController>();
-  
+
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> _chatkey = GlobalKey<FormState>();
@@ -25,11 +24,16 @@ class ChatScreen extends StatelessWidget {
 
     void _scrollDown() {
       _controller.animateTo(
-            _controller.position.maxScrollExtent,
-            curve: Curves.easeOut,
-            duration: const Duration(milliseconds: 300),
-          );
+        _controller.position.maxScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 300),
+      );
     }
+    //this function will trigger 1 time when this page have done rendered, use to scroll down to bottom of listview of messages
+    SchedulerBinding.instance?.addPostFrameCallback((_) {
+      _controller.jumpTo(_controller.position.maxScrollExtent);
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Align(
@@ -69,17 +73,16 @@ class ChatScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Container(
-                child: Obx(
-                  ()  {
-                    return ListView.builder(
-                      controller: _controller,
-                      itemCount: ctrl.messages.length,
-                      itemBuilder: (context, index) => ctrl.messages[index]);}
-                )),
-              
+            child: Container(child: Obx(() {
+              return ListView.builder(
+                  controller: _controller,
+                  itemCount: ctrl.messages.length,
+                  itemBuilder: (context, index) => ctrl.messages[index]);
+            })),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Container(
             margin: EdgeInsets.only(bottom: 52),
             child: Form(
@@ -124,10 +127,13 @@ class ChatScreen extends StatelessWidget {
                       child: ElevatedButton(
                           onPressed: () {
                             if (_chatkey.currentState!.validate()) {
-                              ctrl.updateMessages(Message_User(mess: _mess.text));
+                              ctrl.updateMessages(
+                                  Message_User(mess: _mess.text));
                               _mess.clear();
-                              SchedulerBinding.instance?.addPostFrameCallback((_) {
-                              _scrollDown();
+                              //this function will trigger when finished add and render mess, use to scroll down to bottom of listview of messages
+                              SchedulerBinding.instance
+                                  ?.addPostFrameCallback((_) {
+                                _scrollDown();
                               });
                             }
                           },
