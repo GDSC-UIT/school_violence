@@ -8,5 +8,6 @@ class DiaryController extends GetxController {
       Message_Expert(mess: "How are you"),
       Message_User(mess: "Find thank you")
     ].obs;
+
   void updateMessages(Widget mess)=> messages.add(mess);
 }

@@ -5,10 +5,11 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
+import '../diary_controller.dart';
 
 class DiaryPage extends StatefulWidget {
-  const DiaryPage({super.key});
-
+  DiaryPage({super.key});
+  
   @override
   State<DiaryPage> createState() => _DiaryPageState();
 }
@@ -16,14 +17,14 @@ class DiaryPage extends StatefulWidget {
 class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   bool pressGeoON = false;
   bool cmbscritta = false;
-  late TextEditingController _controller;
   late TabController _tabController;
-
+  TextEditingController mess_controller = TextEditingController();
+  late bool have_text =false;
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+    mess_controller.addListener(() { setState(()=>have_text = mess_controller.text.isNotEmpty && mess_controller.text!=""); });
   }
 
   // @override
@@ -126,16 +127,17 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                               width: 240, // <-- TextField width
                               height: 120, // <-- TextField height
                               child: TextField(
+                                controller: mess_controller,
                                 maxLines: null,
                                 expands: true,
                                 keyboardType: TextInputType.multiline,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   filled: true,
                                   hintText: 'Enter a message',
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               child: TextField(
                                 maxLines: null,
                                 expands: true,
@@ -155,8 +157,8 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                           Get.toNamed(AppRoutes.chatroom);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
-                          shadowColor: AppColors.primaryColorShadow,
+                          backgroundColor: have_text?AppColors.primaryColor:AppColors.grey,
+                          shadowColor: have_text?AppColors.primaryColorShadow:AppColors.grey,
                           elevation: 5,
                           minimumSize: const Size(382, 54),
                           shape: RoundedRectangleBorder(
@@ -166,7 +168,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                           'Start',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: AppColors.white,
+                            color: have_text?AppColors.white:Color(0xFF898989),
                             fontSize: 16,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w600,
