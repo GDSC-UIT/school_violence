@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,10 +38,17 @@ class AddFriendButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getData();
+    Timer temp = Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        getData();
+        if (notificationsCtrl.isFriend.value) {
+          timer.cancel();
+        }
+      },
+    );
     return Obx(
       () {
-        getData();
         return ElevatedButton(
           onPressed: () {
             if (ctrl.isSent.value && !notificationsCtrl.isFriend.value) {
