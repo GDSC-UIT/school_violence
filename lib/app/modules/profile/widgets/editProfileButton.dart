@@ -9,6 +9,8 @@ class EditProfileButton extends StatelessWidget {
       width: 106,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           primary: AppColors.primaryColor,
           padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           textStyle: TextStyle(

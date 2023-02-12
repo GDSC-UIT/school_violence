@@ -5,6 +5,7 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/customItem.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/editProfileButton.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/profileNameCard.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
@@ -97,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 16),
                 ProfileNameCard(
                     name: 'Cao Minh Quân', phoneNumber: '+84 123456789'),
-                // SizedBox(height: 30),
+                SizedBox(height: 30),
                 DefaultTabController(
                   length: 2,
                   child: Column(
@@ -128,39 +129,45 @@ class _ProfilePageState extends State<ProfilePage>
                           labelColor: AppColors.white,
                           unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
-                          tabs: [Text('Chat'), Text('AI')],
+                          tabs: [Text('Report'), Text('Diary')],
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 20),
                       Container(
                         width: double.maxFinite,
-                        height: 200,
+                        height: 270,
                         child: TabBarView(
                           controller: _tabController,
                           children: [
-                            SizedBox(
-                              width: 240, // <-- TextField width
-                              height: 120, // <-- TextField height
-                              child: TextField(
-                                maxLines: null,
-                                expands: true,
-                                keyboardType: TextInputType.multiline,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  hintText: 'Enter a message',
-                                ),
-                              ),
+                            // LIST REPORT
+                            ListView.builder(
+                              itemCount: 2, // length
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (_, index) {
+                                return CustomReportItem(
+                                  title: 'Location',
+                                  subtitle: '3 days ago',
+                                  text: '36 59.35333 -84 13.888333',
+                                  thumbnail: Image.asset(
+                                      'assets/images/avatar.jpg',
+                                      height: 100),
+                                );
+                              },
                             ),
-                            SizedBox(
-                              child: TextField(
-                                maxLines: null,
-                                expands: true,
-                                keyboardType: TextInputType.multiline,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  hintText: 'Enter a message',
-                                ),
-                              ),
+                            // LIST DIARY
+                            ListView.builder(
+                              itemCount: 2, // length
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (_, index) {
+                                return CustomReportItem(
+                                  title: 'Chat',
+                                  subtitle: 'Today',
+                                  text: 'Seen',
+                                  thumbnail: Image.asset(
+                                      'assets/images/avatar.jpg',
+                                      height: 100),
+                                );
+                              },
                             ),
                           ],
                         ),

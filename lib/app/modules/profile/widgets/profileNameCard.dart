@@ -16,29 +16,31 @@ class ProfileNameCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: FlutterLogo(size: 56.0),
-        title: Text(
-          name,
-          style: TextStyle(
-            fontSize: 20,
-            fontFamily: 'Montserrat',
-            color: AppColors.black,
-            decoration: TextDecoration.none,
-            fontWeight: FontWeight.w600,
+          leading: Image.asset(
+            'assets/images/avatar.jpg', // Avatar
+            width: 48,
+          ), //
+          title: Text(
+            name,
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Montserrat',
+              color: AppColors.black,
+              decoration: TextDecoration.none,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        subtitle: Text(
-          phoneNumber,
-          style: TextStyle(
-            fontSize: 12,
-            fontFamily: 'Montserrat',
-            color: AppColors.blur,
-            decoration: TextDecoration.none,
-            fontWeight: FontWeight.w500,
+          subtitle: Text(
+            phoneNumber,
+            style: TextStyle(
+              fontSize: 12,
+              fontFamily: 'Montserrat',
+              color: AppColors.blur,
+              decoration: TextDecoration.none,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
-        trailing: EditProfileButton(), // AcceptButton() để call thằng còn lại
-      ),
+          trailing: EditProfileButton()),
     );
   }
 }
