@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 
-class EmailTextField extends StatelessWidget {
-  const EmailTextField({
+class DateOfBirthTextField extends StatelessWidget {
+  const DateOfBirthTextField({
     Key? key,
   }) : super(key: key);
 

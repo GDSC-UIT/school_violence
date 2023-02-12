@@ -1,3 +1,4 @@
+import 'package:dob_input_field/dob_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
@@ -7,9 +8,11 @@ import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/new_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
 import 'package:school_violence_app/app/modules/profile/screens/profile.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/EmailTextField.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/avatar.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/customLabel.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/fullNameTextField.dart';
+import 'package:school_violence_app/app/modules/sign_up/widgets/date_of_birth_field.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -74,10 +77,16 @@ class _InfoPageState extends State<InfoPage> {
                 imageLink: 'assets/images/avatar.jpg',
               ),
               SizedBox(height: 26),
+              // FULL NAME
               CustomLabel(text: 'Full Name'),
               FullNameTextField(),
               SizedBox(height: 24),
+              // EMAIL
               CustomLabel(text: 'Email'),
+              EmailTextField(),
+              SizedBox(height: 24),
+              // PHONE NUMBER
+              CustomLabel(text: 'Phone Number'),
               IntlPhoneField(
                 decoration: InputDecoration(
                   labelText: 'Phone Number',
@@ -90,39 +99,35 @@ class _InfoPageState extends State<InfoPage> {
                   print(phone.completeNumber);
                 },
               ),
-              SizedBox(height: 45),
-              Center(
-                child: Text(
-                  'Didn’t receive email?',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                    color: Color.fromRGBO(56, 56, 56, 1),
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+              // Date of Birth
+              CustomLabel(text: 'Date of Birth'),
+              DOBInputField(
+                firstDate: DateTime(1900),
+                lastDate: DateTime.now(),
+                showLabel: true,
+                dateFormatType: DateFormatType.DDMMYYYY,
+                autovalidateMode: AutovalidateMode.always,
               ),
-              SizedBox(height: 14),
-              Center(
-                child: Text(
-                  'You can resend code in 55 s',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                    color: Color.fromRGBO(56, 56, 56, 1),
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              SizedBox(height: 55),
+              // Đám này nhờ Tính tạo list giùm
+              CustomLabel(text: 'Country'),
+              EmailTextField(),
+              SizedBox(height: 24),
+              CustomLabel(text: 'Province'),
+              EmailTextField(),
+              SizedBox(height: 24),
+              CustomLabel(text: 'City'),
+              EmailTextField(),
+              SizedBox(height: 24),
+              CustomLabel(text: 'High School'),
+              EmailTextField(),
+              SizedBox(height: 50),
               Center(
                 child: Button(
-                  text: 'Confirm',
-                  toScreen: NewPassWordPage(),
+                  text: 'Save',
+                  toScreen: ProfilePage(),
                 ),
               ),
+              SizedBox(height: 50),
             ],
           ),
         ),

@@ -49,6 +49,7 @@ dependencies:
   sign_in_with_apple: ^4.3.0
   flutter_otp_text_field: ^1.1.0+2
   intl_phone_field: ^3.1.0
+  dob_input_field: ^2.0.0
 
 dev_dependencies:
   flutter_test:
