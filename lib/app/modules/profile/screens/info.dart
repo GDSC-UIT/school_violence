@@ -6,6 +6,8 @@ import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/new_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
 import 'package:school_violence_app/app/modules/profile/screens/profile.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/customLabel.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/customTextField.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -89,20 +91,8 @@ class _InfoPageState extends State<InfoPage> {
                 ),
               ),
               SizedBox(height: 26),
-              Row(
-                children: [
-                  Text(
-                    'We have sent the OTP verification code to \n your email address. Check your mail and \n enter the code below.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                      color: Color.fromRGBO(103, 103, 103, 1),
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
+              CustomLabel(text: 'Full Name'),
+              CustomTextField(text: 'Gà'),
               SizedBox(height: 45),
               OtpTextField(
                 numberOfFields: 4,
