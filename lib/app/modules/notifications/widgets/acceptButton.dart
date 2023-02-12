@@ -23,18 +23,6 @@ class AcceptButton extends StatelessWidget {
 
   final ConnectController ctrl = Get.find<ConnectController>();
 
-  Future<void> getData() async {
-    DocumentSnapshot snapConnect = await FirebaseFirestore.instance
-        .collection('connect')
-        .doc(ctrl.userId.value)
-        .get();
-    if (snapConnect.data() != null) {
-      List friends = (snapConnect.data()! as dynamic)['friends'];
-      String friendId = ctrl.searchResult[ctrl.id.value]['id'];
-      notificationsController.updateIsFriend(friends.contains(friendId));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -97,7 +85,6 @@ class AcceptButton extends StatelessWidget {
                   _userId,
                 );
                 notificationsController.updateIsFriend(true);
-                await getData();
               } else {}
             },
           ),

@@ -29,66 +29,69 @@ class AddFriendButton extends StatelessWidget {
         .get();
     if (snapConnect.data() != null) {
       List friends = (snapConnect.data()! as dynamic)['friends'];
-      String friendId = ctrl.searchResult[ctrl.id.value]['id'];
+      String friendId = ctrl.searchResult[_index]['id'];
       notificationsCtrl.updateIsFriend(friends.contains(friendId));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    ctrl.updateId(_index);
     getData();
     return Obx(
-      () => ElevatedButton(
-        onPressed: () {
-          if (ctrl.isSent.value && !notificationsCtrl.isFriend.value) {
-            _connect.sentRequest(
-              ctrl.userId.value,
-              ctrl.searchResult[ctrl.id.value]['id'],
-            );
-            _connect.friendRequest(
-              ctrl.userId.value,
-              ctrl.searchResult[ctrl.id.value]['id'],
-            );
-          } else if (!ctrl.isSent.value && !notificationsCtrl.isFriend.value) {
-            _connect.unSentRequest(
-              ctrl.userId.value,
-              ctrl.searchResult[ctrl.id.value]['id'],
-            );
-            _connect.unFriendRequest(
-              ctrl.userId.value,
-              ctrl.searchResult[ctrl.id.value]['id'],
-            );
-          } else {}
-          ctrl.updateIsSent(!ctrl.isSent.value);
-        },
-        style: ((ctrl.isSent.value && !notificationsCtrl.isFriend.value) ||
-                notificationsCtrl.isFriend.value)
-            ? ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primaryColor,
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+      () {
+        getData();
+        return ElevatedButton(
+          onPressed: () {
+            if (ctrl.isSent.value && !notificationsCtrl.isFriend.value) {
+              _connect.sentRequest(
+                ctrl.userId.value,
+                ctrl.searchResult[_index]['id'],
+              );
+              _connect.friendRequest(
+                ctrl.userId.value,
+                ctrl.searchResult[_index]['id'],
+              );
+            } else if (!ctrl.isSent.value &&
+                !notificationsCtrl.isFriend.value) {
+              _connect.unSentRequest(
+                ctrl.userId.value,
+                ctrl.searchResult[_index]['id'],
+              );
+              _connect.unFriendRequest(
+                ctrl.userId.value,
+                ctrl.searchResult[_index]['id'],
+              );
+            } else {}
+            ctrl.updateIsSent(!ctrl.isSent.value);
+          },
+          style: ((ctrl.isSent.value && !notificationsCtrl.isFriend.value) ||
+                  notificationsCtrl.isFriend.value)
+              ? ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primaryColor,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                )
+              : ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.white,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                 ),
-              )
-            : ElevatedButton.styleFrom(
-                backgroundColor: AppColors.white,
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-              ),
-        child: (ctrl.isSent.value && !notificationsCtrl.isFriend.value)
-            ? Text('Add')
-            : (!ctrl.isSent.value && !notificationsCtrl.isFriend.value)
-                ? Text(
-                    'Sent ✓',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                    ),
-                  )
-                : Icon(Icons.child_friendly),
-      ),
+          child: (ctrl.isSent.value && !notificationsCtrl.isFriend.value)
+              ? Text('Add')
+              : (!ctrl.isSent.value && !notificationsCtrl.isFriend.value)
+                  ? Text(
+                      'Sent ✓',
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                      ),
+                    )
+                  : Icon(Icons.child_friendly),
+        );
+      },
     );
   }
 }
