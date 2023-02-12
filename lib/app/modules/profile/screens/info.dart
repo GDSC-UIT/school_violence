@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/new_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
 import 'package:school_violence_app/app/modules/profile/screens/profile.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/avatar.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/customLabel.dart';
-import 'package:school_violence_app/app/modules/profile/widgets/customTextField.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/fullNameTextField.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -68,52 +70,25 @@ class _InfoPageState extends State<InfoPage> {
                 ],
               ),
               SizedBox(height: 20),
-              Center(
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      'assets/images/avatar.jpg',
-                      width: 100,
-                    ), // avatar
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(70, 50, 0, 0),
-                        decoration: new BoxDecoration(
-                            borderRadius: new BorderRadius.all(
-                                const Radius.circular(120.0)),
-                            color: AppColors.transparent),
-                        width: 25,
-                        child: Icon(Icons.edit),
-                      ),
-                    )
-                  ],
-                ),
+              PersonalAvatar(
+                imageLink: 'assets/images/avatar.jpg',
               ),
               SizedBox(height: 26),
               CustomLabel(text: 'Full Name'),
-              CustomTextField(text: 'Gà'),
-              SizedBox(height: 45),
-              OtpTextField(
-                numberOfFields: 4,
-                borderColor: Color(0xFF512DA8),
-                //set to true to show as box or false to show as dash
-                showFieldAsBox: true,
-                //runs when a code is typed in
-                onCodeChanged: (String code) {
-                  //handle validation or checks here
+              FullNameTextField(),
+              SizedBox(height: 24),
+              CustomLabel(text: 'Email'),
+              IntlPhoneField(
+                decoration: InputDecoration(
+                  labelText: 'Phone Number',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(),
+                  ),
+                ),
+                initialCountryCode: 'IN',
+                onChanged: (phone) {
+                  print(phone.completeNumber);
                 },
-                //runs when every textfield is filled
-                onSubmit: (String verificationCode) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Verification Code"),
-                          content: Text('Code entered is $verificationCode'),
-                        );
-                      });
-                }, // end onSubmit
               ),
               SizedBox(height: 45),
               Center(

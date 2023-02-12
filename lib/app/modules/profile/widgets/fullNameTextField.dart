@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 
-class CustomTextField extends StatelessWidget {
-  final String text;
-  const CustomTextField({
+class FullNameTextField extends StatelessWidget {
+  const FullNameTextField({
     Key? key,
-    required this.text,
   }) : super(key: key);
 
   @override
