@@ -43,7 +43,7 @@ class _ConnectPageState extends State<ConnectPage>
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: BottomNavigation(
-          onItem: 1,
+          onItem: 2,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
