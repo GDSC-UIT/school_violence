@@ -43,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage>
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: BottomNavigation(
-          onItem: 1,
+          onItem: 3,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(

@@ -14,14 +14,14 @@ import 'package:school_violence_app/app/modules/profile/widgets/customLabel.dart
 import 'package:school_violence_app/app/modules/profile/widgets/fullNameTextField.dart';
 import 'package:school_violence_app/app/modules/sign_up/widgets/date_of_birth_field.dart';
 
-class InfoPage extends StatefulWidget {
-  const InfoPage({super.key});
+class PersonalInfoPage extends StatefulWidget {
+  const PersonalInfoPage({super.key});
 
   @override
-  State<InfoPage> createState() => _InfoPageState();
+  State<PersonalInfoPage> createState() => _PersonalInfoPageState();
 }
 
-class _InfoPageState extends State<InfoPage> {
+class _PersonalInfoPageState extends State<PersonalInfoPage> {
   late TextEditingController _controller;
 
   @override

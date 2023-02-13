@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/modules/profile/screens/info.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class EditProfileButton extends StatelessWidget {
   @override
@@ -24,7 +27,9 @@ class EditProfileButton extends StatelessWidget {
         child: (Text(
           'Edit Profile',
         )),
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed(AppRoutes.info);
+        },
       ),
     );
   }

@@ -19,4 +19,6 @@ abstract class AppRoutes {
   static const diary = '/diary';
   //
   static const profile = '/profile';
+  //
+  static const info = '/info';
 }

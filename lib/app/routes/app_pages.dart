@@ -76,7 +76,12 @@ abstract class AppPages {
         transition: Transition.noTransition),
     GetPage(
         name: AppRoutes.profile,
-        page: () => InfoPage(),
+        page: () => ProfilePage(),
+        binding: ProfileBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: AppRoutes.info,
+        page: () => PersonalInfoPage(),
         binding: ProfileBinding(),
         transition: Transition.noTransition),
   ];
