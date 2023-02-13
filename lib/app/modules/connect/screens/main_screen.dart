@@ -115,7 +115,6 @@ class _ConnectPageState extends State<ConnectPage>
                   width: double.infinity,
                   height: list.listFriend.length * 80,
                 ),
-                
               ],
             ),
           ),
