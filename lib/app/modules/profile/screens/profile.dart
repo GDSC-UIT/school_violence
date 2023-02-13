@@ -4,6 +4,11 @@ import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/customItem.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/editProfileButton.dart';
+import 'package:school_violence_app/app/modules/profile/widgets/profileNameCard.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -35,10 +40,10 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: BottomNavigation(
-          onItem: 1,
+          onItem: 3,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
@@ -55,20 +60,35 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 35),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(
-                      'assets/images/left-small.png',
-                      width: 28,
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/avatar.jpg', // Avatar
+                          width: 48,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Profile',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontFamily: 'Montserrat',
+                            color: AppColors.black,
+                            decoration: TextDecoration.none,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 22.5),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes
+                            .sign_in); // Chỗ này nên bắn ra dialog confirm
+                      },
+                      child: Image.asset(
+                        'assets/images/logout.png', // Logout
+                        width: 48,
                       ),
                     ),
                   ],
@@ -76,12 +96,9 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 29),
                 Image.asset('assets/images/grey-rectangle.png'),
                 SizedBox(height: 16),
-                Container(
-                  height: 0.1,
-                  width: 378.5,
-                  color: AppColors.black,
-                ),
-                // SizedBox(height: 30),
+                ProfileNameCard(
+                    name: 'Cao Minh Quân', phoneNumber: '+84 123456789'),
+                SizedBox(height: 30),
                 DefaultTabController(
                   length: 2,
                   child: Column(
@@ -112,39 +129,45 @@ class _ProfilePageState extends State<ProfilePage>
                           labelColor: AppColors.white,
                           unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
-                          tabs: [Text('Chat'), Text('AI')],
+                          tabs: [Text('Report'), Text('Diary')],
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 20),
                       Container(
                         width: double.maxFinite,
-                        height: 200,
+                        height: 270,
                         child: TabBarView(
                           controller: _tabController,
                           children: [
-                            SizedBox(
-                              width: 240, // <-- TextField width
-                              height: 120, // <-- TextField height
-                              child: TextField(
-                                maxLines: null,
-                                expands: true,
-                                keyboardType: TextInputType.multiline,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  hintText: 'Enter a message',
-                                ),
-                              ),
+                            // LIST REPORT
+                            ListView.builder(
+                              itemCount: 2, // length
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (_, index) {
+                                return CustomReportItem(
+                                  title: 'Location',
+                                  subtitle: '3 days ago',
+                                  text: '36 59.35333 -84 13.888333',
+                                  thumbnail: Image.asset(
+                                      'assets/images/avatar.jpg',
+                                      height: 100),
+                                );
+                              },
                             ),
-                            SizedBox(
-                              child: TextField(
-                                maxLines: null,
-                                expands: true,
-                                keyboardType: TextInputType.multiline,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  hintText: 'Enter a message',
-                                ),
-                              ),
+                            // LIST DIARY
+                            ListView.builder(
+                              itemCount: 2, // length
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (_, index) {
+                                return CustomReportItem(
+                                  title: 'Chat',
+                                  subtitle: 'Today',
+                                  text: 'Seen',
+                                  thumbnail: Image.asset(
+                                      'assets/images/avatar.jpg',
+                                      height: 100),
+                                );
+                              },
                             ),
                           ],
                         ),

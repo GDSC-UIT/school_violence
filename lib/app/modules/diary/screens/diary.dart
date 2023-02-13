@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class DiaryPage extends StatefulWidget {
   const DiaryPage({super.key});
@@ -150,7 +151,9 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                       ),
                       SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(AppRoutes.chatroom);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryColor,
                           shadowColor: AppColors.primaryColorShadow,

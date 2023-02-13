@@ -33,6 +33,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
         }
       case 3:
         {
+
+          Get.toNamed(AppRoutes.profile);
+
           // Get.toNamed(AppRoutes.profile);
         }
     }
