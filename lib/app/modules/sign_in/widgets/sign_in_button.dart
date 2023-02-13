@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/auth_services.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
+import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 class SignInButton extends StatelessWidget {
@@ -16,7 +18,11 @@ class SignInButton extends StatelessWidget {
   final AuthServices _auth = AuthServices();
   final SignInController ctrl;
   final ConnectController connectCtrl = Get.find<ConnectController>();
+  final NotificationsController notifycationsCtrl =
+      Get.find<NotificationsController>();
   final GlobalKey<FormState> _formKey;
+  final CollectionReference connectCollection =
+      FirebaseFirestore.instance.collection('connect');
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +35,15 @@ class SignInButton extends StatelessWidget {
           );
           if (result != null) {
             connectCtrl.updateUserId(result);
+            DocumentSnapshot snap =
+                await connectCollection.doc(connectCtrl.userId.value).get();
+            if (snap.data() != null) {
+              notifycationsCtrl.updateFriendRequest(
+                  (snap.data()! as dynamic)['friendRequest']);
+            } else {
+              notifycationsCtrl.updateFriendRequest([]);
+            }
+            //print(notifycationsCtrl.friendRequest);
           }
         }
       },
