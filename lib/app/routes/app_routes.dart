@@ -21,5 +21,7 @@ abstract class AppRoutes {
   static const chatroom = '/chatroom';
   //
   static const profile = '/profile';
+  //
+  static const info = '/info';
 
 }
