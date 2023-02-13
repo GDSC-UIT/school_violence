@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,12 +38,20 @@ class AddFriendButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getData();
-    if (!notificationsCtrl.isFriend.value) {
-      return Obx(
-        () => ElevatedButton(
+    Timer temp = Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        getData();
+        if (notificationsCtrl.isFriend.value) {
+          timer.cancel();
+        }
+      },
+    );
+    return Obx(
+      () {
+        return ElevatedButton(
           onPressed: () {
-            if (ctrl.isSent.value) {
+            if (ctrl.isSent.value && !notificationsCtrl.isFriend.value) {
               _connect.sentRequest(
                 ctrl.userId.value,
                 ctrl.searchResult[_index]['id'],
@@ -50,7 +60,8 @@ class AddFriendButton extends StatelessWidget {
                 ctrl.userId.value,
                 ctrl.searchResult[_index]['id'],
               );
-            } else {
+            } else if (!ctrl.isSent.value &&
+                !notificationsCtrl.isFriend.value) {
               _connect.unSentRequest(
                 ctrl.userId.value,
                 ctrl.searchResult[_index]['id'],
@@ -59,10 +70,11 @@ class AddFriendButton extends StatelessWidget {
                 ctrl.userId.value,
                 ctrl.searchResult[_index]['id'],
               );
-            }
+            } else {}
             ctrl.updateIsSent(!ctrl.isSent.value);
           },
-          style: (ctrl.isSent.value)
+          style: ((ctrl.isSent.value && !notificationsCtrl.isFriend.value) ||
+                  notificationsCtrl.isFriend.value)
               ? ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryColor,
                   elevation: 5,
@@ -77,28 +89,18 @@ class AddFriendButton extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-          child: (ctrl.isSent.value)
+          child: (ctrl.isSent.value && !notificationsCtrl.isFriend.value)
               ? Text('Add')
-              : Text(
-                  'Sent ✓',
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-        ),
-      );
-    } else {
-      return ElevatedButton(
-        onPressed: () {},
-        child: Icon(Icons.child_friendly),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          elevation: 5,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-        ),
-      );
-    }
+              : (!ctrl.isSent.value && !notificationsCtrl.isFriend.value)
+                  ? Text(
+                      'Sent ✓',
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                      ),
+                    )
+                  : Icon(Icons.child_friendly),
+        );
+      },
+    );
   }
 }
