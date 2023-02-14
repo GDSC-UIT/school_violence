@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 
-class Message_Expert extends StatelessWidget {
+class Message_Orther extends StatelessWidget {
   final String mess;
-  const Message_Expert({super.key,required this.mess});
+  const Message_Orther({super.key,required this.mess});
 
   @override
   Widget build(BuildContext context) {
