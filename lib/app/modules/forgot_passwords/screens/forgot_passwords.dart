@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
+import 'package:school_violence_app/app/modules/forgot_passwords/widgets/input_label.dart';
+import 'package:school_violence_app/app/modules/forgot_passwords/widgets/text_field_email.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -37,9 +40,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               //
               SizedBox(height: 35),
 
-              Image.asset(
-                'assets/images/left-small.png',
-                width: 28,
+              // Image.asset(
+              //   'assets/images/left-small.png',
+              //   width: 28,
+              // ),
+              IconButton(
+                onPressed: () => Get.back(),
+                icon: Icon(Icons.arrow_back),
+                iconSize: 30,
               ),
               SizedBox(height: 35),
               Row(
@@ -76,68 +84,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ],
               ),
               SizedBox(height: 49),
-              Text(
-                'Email',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                  color: AppColors.black,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(4.0),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                        width: 0.4, color: AppColors.primaryColorShadow),
-                  ),
-                ),
-                child: TextFormField(
-                  style: TextStyle(fontSize: 16),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: AppColors.transparent, width: 2.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: AppColors.primaryColor, width: 2.0),
-                    ),
-                  ),
-                  validator: (val) =>
-                      val!.isEmpty ? 'Enter an Full Name' : null,
-                  onChanged: (val) {
-                    //setState(() => userName = val);
-                  },
-                ),
-              ),
+              InputLabel(text: 'Email'),
+              TextFieldEmail(),
               SizedBox(height: 300),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(EmailPage());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                    shadowColor: AppColors.primaryColorShadow,
-                    elevation: 5,
-                    minimumSize: const Size(382, 52),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
-                  ),
-                  child: Text(
-                    'Continue',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+              Button(
+                text: 'Continue',
+                toScreen: EmailPage(),
               ),
             ],
           ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/auth_services.dart';
 import 'package:school_violence_app/app/modules/sign_up/sign_up_controller.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class SignUpButton extends StatelessWidget {
   SignUpButton({
@@ -36,8 +38,18 @@ class SignUpButton extends StatelessWidget {
           String provinceName = ctrl.provinceName;
           String cityName = ctrl.cityName;
           String schoolName = ctrl.schoolName;
-          await _auth.signUp(userName, email, password, fullName, dateOfBirth,
-              phoneNumber, countryName, provinceName, cityName, schoolName);
+          await _auth.signUp(
+              userName,
+              email,
+              password,
+              fullName,
+              dateOfBirth,
+              phoneNumber,
+              countryName,
+              provinceName,
+              cityName,
+              schoolName,
+              false);
           Get.dialog(
             Center(
               child: Container(
@@ -92,9 +104,7 @@ class SignUpButton extends StatelessWidget {
 
                     //
 
-                    Icon(
-                      Icons.tiktok,
-                      size: 50,
+                    SpinKitCircle(
                       color: AppColors.primaryColor,
                     ),
                   ],
@@ -106,6 +116,10 @@ class SignUpButton extends StatelessWidget {
               ),
             ),
           );
+          if (Get.isDialogOpen == true) {
+            await 2.seconds.delay();
+            Get.toNamed(AppRoutes.sign_in);
+          }
         }
       },
       child: Text(
