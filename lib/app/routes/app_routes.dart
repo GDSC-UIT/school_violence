@@ -25,4 +25,5 @@ abstract class AppRoutes {
   static const info = '/info';
   // map
   static const map = '/map';
+  static const dairy = '/dairy';
 }
