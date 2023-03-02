@@ -23,104 +23,110 @@ class SignInPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                width: 400,
-                height: 40,
-              ),
-              IconButton(
-                onPressed: () => Get.back(),
-                icon: Icon(Icons.arrow_back),
-                iconSize: 30,
-              ),
-              SizedBox(
-                width: 300,
-                height: 30,
-              ),
-              Wrap(
-                children: [
-                  Text(
-                    'Hello there',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  Icon(Icons.waving_hand_rounded),
-                ],
-              ),
-              SizedBox(height: 40),
-              const Text(
-                'Email',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  //width: 400,
+                  height: 40,
                 ),
-              ),
-              EmailField(
-                emailController: ctrl.emailController,
-              ),
-              SizedBox(height: 20),
-              Text(
-                'Password',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
+                IconButton(
+                  onPressed: () => Get.back(),
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  icon: Icon(Icons.arrow_back),
+                  iconSize: 30,
                 ),
-              ),
-              PasswordField(
-                ctrl: ctrl,
-                passwordController: ctrl.passwordController,
-              ),
-              Row(
-                children: [
-                  Obx(
-                    () => Checkbox(
-                      value: ctrl.remember.value,
-                      onChanged: ((value) => ctrl.updateRemember()),
+                SizedBox(
+                  //width: 300,
+                  height: 30,
+                ),
+                Wrap(
+                  children: [
+                    Text(
+                      'Hello there',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
-                  ),
-                  const Text(
-                    'Remember me',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 30),
-              SizedBox(
-                width: 400,
-                child: TextButton(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.forgot_password);
-                  },
-                  child: Text(
-                    'Forgot Password?',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                      color: AppColors.primaryColor,
-                    ),
+                    SizedBox(width: 20),
+                    Icon(Icons.waving_hand_rounded),
+                  ],
+                ),
+                SizedBox(height: 40),
+                const Text(
+                  'Email',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
                   ),
                 ),
-              ),
-              SizedBox(height: 200),
-              SizedBox(
-                height: 53,
-                width: 382,
-                child: SignInButton(formKey: _formKey, ctrl: ctrl),
-              ),
-            ],
+                EmailField(
+                  emailController: ctrl.emailController,
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Password',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
+                PasswordField(
+                  ctrl: ctrl,
+                  passwordController: ctrl.passwordController,
+                ),
+                Row(
+                  children: [
+                    Obx(
+                      () => Checkbox(
+                        value: ctrl.remember.value,
+                        onChanged: ((value) => ctrl.updateRemember()),
+                      ),
+                    ),
+                    const Text(
+                      'Remember me',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                SizedBox(
+                  width: 400,
+                  child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.forgot_password);
+                    },
+                    child: Text(
+                      'Forgot Password?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Montserrat',
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 200),
+                SizedBox(
+                  height: 53,
+                  width: 382,
+                  child: SignInButton(formKey: _formKey, ctrl: ctrl),
+                ),
+              ],
+            ),
           ),
         ),
       ),
