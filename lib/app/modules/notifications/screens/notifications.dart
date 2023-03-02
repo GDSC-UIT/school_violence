@@ -62,10 +62,6 @@ class _NotificationsPageState extends State<NotificationsPage>
         getData();
         if (temp.length != friendRequest.length) {
           notifycationsCtrl.updateFriendRequest(friendRequest);
-          print('temp:');
-          print(temp);
-          print('friendRequest:');
-          print(friendRequest);
         }
       },
     );
