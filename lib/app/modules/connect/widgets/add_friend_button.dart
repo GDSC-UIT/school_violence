@@ -38,7 +38,7 @@ class AddFriendButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer temp = Timer.periodic(
+    Timer.periodic(
       new Duration(seconds: 1),
       (timer) {
         getData();

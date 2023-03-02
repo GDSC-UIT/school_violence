@@ -1,7 +1,11 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/NameCard.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
@@ -17,16 +21,30 @@ class _NotificationsPageState extends State<NotificationsPage>
     with TickerProviderStateMixin {
   bool pressGeoON = false;
   bool cmbscritta = false;
+  final CollectionReference connectCollection =
+      FirebaseFirestore.instance.collection('connect');
+  List friendRequest = [];
   late TextEditingController _controller;
   late TabController _tabController;
   final NotificationsController notifycationsCtrl =
       Get.find<NotificationsController>();
+  final ConnectController connectCtrl = Get.find<ConnectController>();
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  void getData() async {
+    DocumentSnapshot snap =
+        await connectCollection.doc(connectCtrl.userId.value).get();
+    if (snap.data() != null) {
+      friendRequest = (snap.data()! as dynamic)['friendRequest'];
+    } else {
+      friendRequest = [];
+    }
   }
 
   // @override
@@ -37,6 +55,20 @@ class _NotificationsPageState extends State<NotificationsPage>
 
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        List temp = notifycationsCtrl.friendRequest;
+        getData();
+        if (temp.length != friendRequest.length) {
+          notifycationsCtrl.updateFriendRequest(friendRequest);
+          print('temp:');
+          print(temp);
+          print('friendRequest:');
+          print(friendRequest);
+        }
+      },
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(

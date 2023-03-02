@@ -35,14 +35,14 @@ class SignInButton extends StatelessWidget {
           );
           if (result != null) {
             connectCtrl.updateUserId(result);
-            DocumentSnapshot snap =
-                await connectCollection.doc(connectCtrl.userId.value).get();
-            if (snap.data() != null) {
-              notifycationsCtrl.updateFriendRequest(
-                  (snap.data()! as dynamic)['friendRequest']);
-            } else {
-              notifycationsCtrl.updateFriendRequest([]);
-            }
+            // DocumentSnapshot snap =
+            //     await connectCollection.doc(connectCtrl.userId.value).get();
+            // if (snap.data() != null) {
+            //   notifycationsCtrl.updateFriendRequest(
+            //       (snap.data()! as dynamic)['friendRequest']);
+            // } else {
+            //   notifycationsCtrl.updateFriendRequest([]);
+            // }
             //print(notifycationsCtrl.friendRequest);
           }
         }

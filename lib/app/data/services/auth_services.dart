@@ -109,6 +109,12 @@ class AuthServices {
     }
   }
 
+  // Sign out
+
+  Future signOutWithEmailAndPassword() async {
+    _auth.signOut();
+  }
+
   //Apple
 
   // Future appleLogIn() async {

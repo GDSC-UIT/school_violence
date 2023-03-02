@@ -82,8 +82,7 @@ packages:
     dependency: "direct main"
     description:
       name: dob_input_field
-      sha256: "35e75d922d025febc7d272f81a39fcff82f9ab8fde50a44a32c74c5eb237ea3a"
-      url: "https://pub.dev"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
   equatable:
@@ -245,8 +244,7 @@ packages:
     dependency: "direct main"
     description:
       name: intl_phone_field
-      sha256: "0d2b35d148ed28a454d50797e6c2fb297f0a295feab84641b02d3dd32294b3f3"
-      url: "https://pub.dev"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
   intl_phone_number_input:
@@ -260,11 +258,9 @@ packages:
     dependency: transitive
     description:
       name: js
-
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-
   libphonenumber_platform_interface:
     dependency: transitive
     description:
@@ -297,12 +293,9 @@ packages:
     dependency: transitive
     description:
       name: matcher
-
-
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.12"
-
   material_color_utilities:
     dependency: transitive
     description:
@@ -321,10 +314,7 @@ packages:
     dependency: transitive
     description:
       name: path
-
-
       url: "https://pub.dartlang.org"
-
     source: hosted
     version: "1.8.2"
   plugin_platform_interface:
@@ -413,12 +403,9 @@ packages:
     dependency: transitive
     description:
       name: test_api
-
-
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
-
   typed_data:
     dependency: transitive
     description:

@@ -16,8 +16,8 @@ class FullNameField extends StatelessWidget {
       controller: _fullNameController,
       style: TextStyle(fontSize: 20),
       decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.transparent, width: 2.0),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.black, width: 1.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
