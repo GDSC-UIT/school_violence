@@ -6,8 +6,8 @@ class PhoneNumberField extends StatelessWidget {
   const PhoneNumberField({
     Key? key,
     required phoneNumberController,
-  }) : _phoneNumberController = phoneNumberController,
-  super(key: key);
+  })  : _phoneNumberController = phoneNumberController,
+        super(key: key);
 
   final TextEditingController _phoneNumberController;
 
@@ -27,13 +27,11 @@ class PhoneNumberField extends StatelessWidget {
       ),
       inputDecoration: const InputDecoration(
         border: InputBorder.none,
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: AppColors.transparent, width: 2.0),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.black, width: 1.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: AppColors.primaryColor, width: 2.0),
+          borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
         ),
       ),
     );

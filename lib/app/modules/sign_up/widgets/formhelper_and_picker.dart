@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_violence_app/app/core/values/app_colors.dart';
 
 // customize FormHelper package
 class FormHelper {
@@ -76,11 +77,11 @@ class FormHelper {
                 color: hintColor,
               ),
               hintText: hintText,
-              enabledBorder: OutlineInputBorder(
+              enabledBorder: UnderlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
                 borderSide: BorderSide(
-                  color: borderColor,
-                  width: enabledBorderWidth,
+                  color: AppColors.black,
+                  //width: enabledBorderWidth,
                 ),
               ),
               border: OutlineInputBorder(
