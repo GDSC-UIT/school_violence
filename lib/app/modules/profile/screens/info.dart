@@ -4,6 +4,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/new_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
@@ -62,13 +63,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   SizedBox(width: 24),
                   Text(
                     'Personal Info',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'Montserrat',
-                      color: AppColors.black,
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: CustomTextStyle.h1(AppColors.black),
                   ),
                 ],
               ),

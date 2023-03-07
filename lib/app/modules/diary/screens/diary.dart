@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 
 import 'package:school_violence_app/app/core/values/app_text_style.dart';
-
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/diary/screens/chatscreen.dart';
@@ -85,7 +84,13 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                     const SizedBox(width: 22.5),
                     const Text(
                       'Diary',
-                      style: CustomTextStyle.h1(AppColors.black),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'Ubuntu',
+                        color: AppColors.black,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ],
                 ),

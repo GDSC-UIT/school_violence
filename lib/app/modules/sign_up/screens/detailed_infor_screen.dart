@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/sign_up/widgets/date_of_birth_field.dart';
 import 'package:school_violence_app/app/modules/sign_up/widgets/full_name_field.dart';
 import 'package:school_violence_app/app/modules/sign_up/widgets/phone_number_field.dart';
@@ -25,19 +26,13 @@ SingleChildScrollView detailedInfor(BuildContext context) {
           SizedBox(height: 35),
           Text(
             'Create an account',
-            style: TextStyle(
-              fontSize: 30,
-              fontFamily: 'Montserrat',
-            ),
+            style: CustomTextStyle.h1(AppColors.black),
           ),
           SizedBox(height: 30),
           Text(
             'Please complete your profile.\nDon’t worry, your data will remain in private and\nonly you can see it.',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: 'Montserrat',
-            ),
+            style: CustomTextStyle.desc(AppColors.desc),
           ),
           SizedBox(height: 30),
           Padding(
@@ -45,33 +40,24 @@ SingleChildScrollView detailedInfor(BuildContext context) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Full Name',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 FullNameField(fullNameController: ctrl.fullNameController),
                 SizedBox(height: 20),
-                const Text(
+                Text(
                   'Date of Birth',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 DateOfBirthField(dateController: ctrl.dateController),
                 SizedBox(height: 20),
-                const Text(
+                Text(
                   'Phone Number',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 PhoneNumberField(
                   phoneNumberController: ctrl.phoneNumberController,
@@ -80,13 +66,10 @@ SingleChildScrollView detailedInfor(BuildContext context) {
 
                 // Coutry
 
-                const Text(
+                Text(
                   'Country',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 FormHelper.dropDownWidget(
                   context,
@@ -121,13 +104,10 @@ SingleChildScrollView detailedInfor(BuildContext context) {
 
                 // Province
 
-                const Text(
+                Text(
                   'Province',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 Obx(
                   () => FormHelper.dropDownWidget(
@@ -163,13 +143,10 @@ SingleChildScrollView detailedInfor(BuildContext context) {
 
                 // city
 
-                const Text(
+                Text(
                   'City',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 Obx(
                   () => FormHelper.dropDownWidget(
@@ -205,13 +182,10 @@ SingleChildScrollView detailedInfor(BuildContext context) {
 
                 // school
 
-                const Text(
+                Text(
                   'School',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 Obx(
                   () => FormHelper.dropDownWidget(

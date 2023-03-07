@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/add_friend_button.dart';
@@ -60,13 +61,7 @@ class FindFriends extends StatelessWidget {
                     SizedBox(width: 22.5),
                     Text(
                       'Connect',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                   ],
                 ),
@@ -105,13 +100,7 @@ class FindFriends extends StatelessWidget {
                               children: [
                                 Text(
                                   'Results',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontFamily: 'Montserrat',
-                                    color: AppColors.black,
-                                    decoration: TextDecoration.none,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                  style: CustomTextStyle.h2(AppColors.black),
                                 ),
                                 ListTile(
                                   leading: CircleAvatar(

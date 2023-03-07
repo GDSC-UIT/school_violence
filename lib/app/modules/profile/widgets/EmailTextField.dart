@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 
 class EmailTextField extends StatelessWidget {
   const EmailTextField({
@@ -16,13 +17,7 @@ class EmailTextField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
-        style: TextStyle(
-          fontSize: 20,
-          fontFamily: 'Montserrat',
-          color: AppColors.black,
-          decoration: TextDecoration.none,
-          fontWeight: FontWeight.w600,
-        ),
+        style: CustomTextStyle.input(AppColors.black),
         decoration: const InputDecoration(
           border: UnderlineInputBorder(),
           // labelText: 'Enter your email',

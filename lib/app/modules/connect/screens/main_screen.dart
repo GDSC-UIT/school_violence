@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/list_friend.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/name_card.dart';
@@ -71,13 +72,7 @@ class _ConnectPageState extends State<ConnectPage>
                         SizedBox(width: 22.5),
                         Text(
                           'Connect',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontFamily: 'Montserrat',
-                            color: AppColors.black,
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: CustomTextStyle.h1(AppColors.black),
                         ),
                       ],
                     ),
@@ -94,13 +89,7 @@ class _ConnectPageState extends State<ConnectPage>
                 SizedBox(height: 16),
                 Text(
                   'Your friend',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'Montserrat',
-                    color: AppColors.black,
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: CustomTextStyle.h2(AppColors.black),
                 ),
                 Container(
                   child: ListView.builder(
@@ -113,7 +102,7 @@ class _ConnectPageState extends State<ConnectPage>
                     },
                   ),
                   width: double.infinity,
-                  height: list.listFriend.length * 80,
+                  height: list.listFriend.length * 100,
                 ),
               ],
             ),

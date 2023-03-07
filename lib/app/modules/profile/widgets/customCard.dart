@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 
 class CustomReportCard extends StatelessWidget {
   const CustomReportCard({
@@ -21,44 +22,26 @@ class CustomReportCard extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontFamily: 'Montserrat',
-              color: AppColors.black,
-              decoration: TextDecoration.none,
-              fontWeight: FontWeight.w600,
-            ),
+            style: CustomTextStyle.h2(AppColors.black),
           ),
           SizedBox(height: 7),
           Row(
             children: [
               Text(
                 subtitle,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'Montserrat',
-                  color: AppColors.blur,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: CustomTextStyle.desc(AppColors.desc),
               ),
               SizedBox(width: 5),
               Icon(
                 Icons.circle,
-                size: 6,
+                size: 4,
               )
             ],
           ),
           SizedBox(height: 10),
           Text(
             text,
-            style: TextStyle(
-              fontSize: 12,
-              fontFamily: 'Montserrat',
-              color: AppColors.blur,
-              decoration: TextDecoration.none,
-              fontWeight: FontWeight.w500,
-            ),
+            style: CustomTextStyle.small_desc(AppColors.desc),
           ),
         ],
       ),

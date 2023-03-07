@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/data/services/auth_services.dart';
 import 'package:school_violence_app/app/modules/sign_up/sign_up_controller.dart';
 import 'package:get/get.dart';
@@ -26,55 +28,40 @@ SingleChildScrollView createAccount() {
             SizedBox(height: 35),
             Text(
               'Create an account',
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: 'Montserrat',
-              ),
+              style: CustomTextStyle.h1(AppColors.black),
             ),
             SizedBox(height: 30),
             Text(
               'Please enter your username, email address\nand password. If you forget it, then you have \nto do forgot password.',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: 'Montserrat',
-              ),
+              style: CustomTextStyle.desc(AppColors.desc),
             ),
             SizedBox(height: 30),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'User Name',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 UserNameField(
                   userNameController: ctrl.userNameController,
                 ),
                 SizedBox(height: 20),
-                const Text(
+                Text(
                   'Email',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 EmailField(
                   emailController: ctrl.emailController,
                 ),
                 SizedBox(height: 20),
-                const Text(
+                Text(
                   'Password',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 PasswordField(
                   ctrl: ctrl,
@@ -83,13 +70,10 @@ SingleChildScrollView createAccount() {
               ],
             ),
             SizedBox(height: 20),
-            const Text(
+            Text(
               'or',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                fontFamily: 'Montserrat',
-              ),
+              style: CustomTextStyle.small_desc(AppColors.black),
             ),
 
             // Sign In with Google

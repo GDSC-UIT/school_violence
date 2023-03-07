@@ -59,4 +59,13 @@ class CustomTextStyle extends TextStyle {
       fontWeight: FontWeight.w600,
     );
   }
+
+  static TextStyle small_desc(Color color) {
+    return TextStyle(
+      color: color,
+      fontSize: 12,
+      fontFamily: 'Ubuntu',
+      fontWeight: FontWeight.w600,
+    );
+  }
 }
