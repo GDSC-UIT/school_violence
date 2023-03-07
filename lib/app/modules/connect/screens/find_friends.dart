@@ -5,11 +5,13 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/add_friend_button.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class FindFriends extends StatelessWidget {
   FindFriends({super.key});
   final ConnectController ctrl = Get.find<ConnectController>();
+  final SignInController signInCtrl = Get.find<SignInController>();
   final Connect _connect = Connect();
 
   void searchFromFirebase(String query) async {
@@ -19,7 +21,7 @@ class FindFriends extends StatelessWidget {
         .get();
     ctrl.updateSearchResult(result.docs.map((e) => e.data()).toList());
     if (result != null && result.docs.length >= 1) {
-      ctrl.updateIsSent(await getData(ctrl.userId.value,
+      ctrl.updateIsSent(await getData(signInCtrl.userId.value,
               ctrl.searchResult.first['id'], 'sentRequest') ==
           false);
     }

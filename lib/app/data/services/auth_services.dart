@@ -40,23 +40,25 @@ class AuthServices {
   // Register
 
   Future signUp(
-      String userName,
-      String email,
-      String password,
-      String fullName,
-      String dateOfBirth,
-      String phoneNumber,
-      String country,
-      String province,
-      String city,
-      String school,
-      bool expert) async {
+    String userName,
+    String email,
+    String password,
+    String fullName,
+    String dateOfBirth,
+    String phoneNumber,
+    String country,
+    String province,
+    String city,
+    String school,
+    bool expert,
+    double latitude,
+    double longtitude,
+  ) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      print(user!.uid);
-      await DatabaseService(uid: user.uid).updateUserData(
+      await DatabaseService(uid: user!.uid).updateUserData(
         user.uid,
         userName,
         email,
@@ -69,6 +71,8 @@ class AuthServices {
         city,
         school,
         expert,
+        latitude,
+        longtitude,
       );
     } on FirebaseAuthException catch (e) {
       String title = e.code.replaceAll(RegExp('-'), ' ').capitalize!;

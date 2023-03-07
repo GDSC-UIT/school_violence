@@ -8,6 +8,7 @@ import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/diary/screens/chatscreen.dart';
 import 'package:school_violence_app/app/modules/diary/widgets/ChatList.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 import '../../connect/connect_controller.dart';
 import '../diary_controller.dart';
@@ -24,7 +25,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   bool cmbscritta = false;
   late TabController _tabController;
   TextEditingController mess_controller = TextEditingController();
-  final ConnectController ctrl = Get.find<ConnectController>();
+  final SignInController ctrl = Get.find<SignInController>();
   late bool have_text = false;
   @override
   void initState() {
@@ -92,9 +93,9 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                   ],
                 ),
                 const SizedBox(height: 29),
-                 Image.asset('assets/images/grey-rectangle.png'),
+                Image.asset('assets/images/grey-rectangle.png'),
                 const SizedBox(height: 16),
-                 Container(
+                Container(
                   height: 0.1,
                   width: 378.5,
                   color: AppColors.black,
@@ -105,12 +106,14 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                         (BuildContext context, AsyncSnapshot<bool> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Padding(
-                          padding: EdgeInsets.only(top:40),
+                          padding: EdgeInsets.only(top: 40),
                           child: Center(
                             child: SizedBox(
                               height: 40,
                               width: 40,
-                              child: CircularProgressIndicator(color: AppColors.primaryColor,),
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
                             ),
                           ),
                         );
@@ -120,160 +123,154 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                         } else {
                           return SizedBox(
                             height: 400,
-                            child: ListView(
-                                children: [
-                                  ChatList(),
-                                  DefaultTabController(
-                                    length: 2,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: AppColors.secondaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          child: TabBar(
-                                            unselectedLabelStyle: const TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 16,
-                                            ),
-                                            indicator: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(
-                                                  50), // Creates border
-                                              color: AppColors.primaryColor,
-                                            ),
-                                            labelStyle: const TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                            ),
-                                            labelPadding:
-                                                const EdgeInsets.all(14),
-                                            // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
-                                            labelColor: AppColors.white,
-                                            unselectedLabelColor:
-                                                AppColors.primaryColor,
-                                            controller: _tabController,
-                                            tabs: const [
-                                              Text('Chat'),
-                                              Text('AI')
-                                            ],
-                                          ),
+                            child: ListView(children: [
+                              ChatList(),
+                              DefaultTabController(
+                                length: 2,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: AppColors.secondaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: TabBar(
+                                        unselectedLabelStyle: const TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
                                         ),
-                                        const SizedBox(height: 10),
-                                        Container(
-                                          width: double.maxFinite,
-                                          height: 270,
-                                          child: TabBarView(
-                                            controller: _tabController,
-                                            children: [
-                                              SizedBox(
-                                                width: 240, // <-- TextField width
-                                                height:
-                                                    120, // <-- TextField height
-                                                child: TextField(
-                                                  controller: mess_controller,
-                                                  maxLines: null,
-                                                  expands: true,
-                                                  keyboardType:
-                                                      TextInputType.multiline,
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    filled: true,
-                                                    hintText: 'Enter a message',
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                child: TextField(
-                                                  maxLines: null,
-                                                  expands: true,
-                                                  keyboardType:
-                                                      TextInputType.multiline,
-                                                  decoration: InputDecoration(
-                                                    filled: true,
-                                                    hintText: 'Enter a message',
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                        indicator: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              50), // Creates border
+                                          color: AppColors.primaryColor,
                                         ),
-                                        SizedBox(height: 20),
-                                        ElevatedButton(
-                                          onPressed: () async {
-                                            if (!have_text) {
-                                              var fetchExpert =
-                                                  await FirebaseFirestore.instance
-                                                      .collection('users')
-                                                      .where('expert',
-                                                          isEqualTo: true)
-                                                      .get();
-                                              var expert = fetchExpert.docs
-                                                  .map((e) =>
-                                                      Expert.fromJson(e.data()))
-                                                  .toList();
-                                                                
-                                              var a = await FirebaseFirestore
+                                        labelStyle: const TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                        ),
+                                        labelPadding: const EdgeInsets.all(14),
+                                        // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
+                                        labelColor: AppColors.white,
+                                        unselectedLabelColor:
+                                            AppColors.primaryColor,
+                                        controller: _tabController,
+                                        tabs: const [Text('Chat'), Text('AI')],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Container(
+                                      width: double.maxFinite,
+                                      height: 270,
+                                      child: TabBarView(
+                                        controller: _tabController,
+                                        children: [
+                                          SizedBox(
+                                            width: 240, // <-- TextField width
+                                            height: 120, // <-- TextField height
+                                            child: TextField(
+                                              controller: mess_controller,
+                                              maxLines: null,
+                                              expands: true,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              decoration: const InputDecoration(
+                                                filled: true,
+                                                hintText: 'Enter a message',
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            child: TextField(
+                                              maxLines: null,
+                                              expands: true,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                hintText: 'Enter a message',
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        if (!have_text) {
+                                          var fetchExpert =
+                                              await FirebaseFirestore
                                                   .instance
-                                                  .collection("room")
-                                                  .where("roomUser", isEqualTo: [
+                                                  .collection('users')
+                                                  .where('expert',
+                                                      isEqualTo: true)
+                                                  .get();
+                                          var expert = fetchExpert.docs
+                                              .map((e) =>
+                                                  Expert.fromJson(e.data()))
+                                              .toList();
+
+                                          var a = await FirebaseFirestore
+                                              .instance
+                                              .collection("room")
+                                              .where("roomUser", isEqualTo: [
+                                            ctrl.userId.value,
+                                            expert.single.id
+                                          ]).get();
+                                          if (a.docs.isEmpty) {
+                                            await FirebaseFirestore.instance
+                                                .collection("room")
+                                                .add({
+                                              "roomUser": [
                                                 ctrl.userId.value,
                                                 expert.single.id
-                                              ]).get();
-                                              if (a.docs.isEmpty) {
-                                                await FirebaseFirestore.instance
-                                                    .collection("room")
-                                                    .add({
-                                                  "roomUser": [
+                                              ],
+                                            });
+                                            Get.to(() => ChatScreen(
+                                                  initial_text:
+                                                      mess_controller.text,
+                                                  roomUser: [
                                                     ctrl.userId.value,
                                                     expert.single.id
                                                   ],
-                                                });
-                                                Get.to(() => ChatScreen(
-                                                      initial_text:
-                                                          mess_controller.text,
-                                                      roomUser: [
-                                                        ctrl.userId.value,
-                                                        expert.single.id
-                                                      ],
-                                                      nowUser: ctrl.userId.value,
-                                                    ));
-                                              }
-                                            }
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: have_text
-                                                ? AppColors.primaryColor
-                                                : AppColors.grey,
-                                            shadowColor: have_text
-                                                ? AppColors.primaryColorShadow
-                                                : AppColors.grey,
-                                            elevation: 5,
-                                            minimumSize: const Size(382, 54),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(30.0)),
-                                          ),
-                                          child: Text(
-                                            'Start',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: have_text
-                                                  ? AppColors.white
-                                                  : Color(0xFF898989),
-                                              fontSize: 16,
-                                              fontFamily: 'Montserrat',
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
+                                                  nowUser: ctrl.userId.value,
+                                                ));
+                                          }
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: have_text
+                                            ? AppColors.primaryColor
+                                            : AppColors.grey,
+                                        shadowColor: have_text
+                                            ? AppColors.primaryColorShadow
+                                            : AppColors.grey,
+                                        elevation: 5,
+                                        minimumSize: const Size(382, 54),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0)),
+                                      ),
+                                      child: Text(
+                                        'Start',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: have_text
+                                              ? AppColors.white
+                                              : Color(0xFF898989),
+                                          fontSize: 16,
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ]),
+                                  ],
+                                ),
+                              ),
+                            ]),
                           );
                         }
                       }

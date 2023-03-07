@@ -55,8 +55,8 @@ class ChatScreen extends StatelessWidget {
         _controller.jumpTo(_controller.position.maxScrollExtent);
       }
       var fetchRef = FirebaseFirestore.instance.collection("messages");
-          fetchRef.where("roomUser", isEqualTo: roomUser);
-          fetchRef.orderBy("createdAt").snapshots().listen((event) {
+      fetchRef.where("roomUser", isEqualTo: roomUser);
+      fetchRef.orderBy("createdAt").snapshots().listen((event) {
         List data = event.docs.map((element) {
           if (element.data()["userOwn"] == nowUser) {
             return Message_User(mess: element["data"]);

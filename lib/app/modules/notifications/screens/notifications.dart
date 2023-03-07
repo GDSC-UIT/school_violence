@@ -8,6 +8,7 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/NameCard.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _NotificationsPageState extends State<NotificationsPage>
   final NotificationsController notifycationsCtrl =
       Get.find<NotificationsController>();
   final ConnectController connectCtrl = Get.find<ConnectController>();
-
+  final SignInController signInCtrl = Get.find<SignInController>();
   @override
   void initState() {
     super.initState();
@@ -39,7 +40,7 @@ class _NotificationsPageState extends State<NotificationsPage>
 
   void getData() async {
     DocumentSnapshot snap =
-        await connectCollection.doc(connectCtrl.userId.value).get();
+        await connectCollection.doc(signInCtrl.userId.value).get();
     if (snap.data() != null) {
       friendRequest = (snap.data()! as dynamic)['friendRequest'];
     } else {

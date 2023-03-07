@@ -7,6 +7,7 @@ import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/acceptButton.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 class NameCard extends StatelessWidget {
   NameCard({
@@ -18,13 +19,14 @@ class NameCard extends StatelessWidget {
   final _index;
   Connect _connect = Connect();
   final ConnectController connectCtrl = Get.find<ConnectController>();
+  final SignInController signInCtrl = Get.find<SignInController>();
   final NotificationsController notificationsController =
       NotificationsController();
 
   void getData() async {
     DocumentSnapshot snapConnect = await FirebaseFirestore.instance
         .collection('connect')
-        .doc(connectCtrl.userId.value)
+        .doc(signInCtrl.userId.value)
         .get();
     if (snapConnect.data() != null) {
       List friendRequest = (snapConnect.data()! as dynamic)['friendRequest'];
@@ -73,7 +75,7 @@ class NameCard extends StatelessWidget {
             ),
           ),
           trailing: AcceptButton(
-            userId: connectCtrl.userId.value,
+            userId: signInCtrl.userId.value,
             friendId: notificationsController.friendId.value,
           ), // AcceptButton() để call thằng còn lại
         ),
