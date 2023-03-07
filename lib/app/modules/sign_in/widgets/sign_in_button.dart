@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/data/services/auth_services.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
@@ -71,11 +72,7 @@ class SignInButton extends StatelessWidget {
       child: Text(
         'Sign In',
         textAlign: TextAlign.center,
-        style: TextStyle(
-          color: AppColors.white,
-          fontSize: 16,
-          fontFamily: 'Montserrat',
-        ),
+        style: CustomTextStyle.button(AppColors.white),
       ),
     );
   }
