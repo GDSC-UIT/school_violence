@@ -18,8 +18,8 @@ class DateOfBirthField extends StatelessWidget {
     return TextFormField(
       controller: _dateController,
       decoration: const InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.transparent, width: 2.0),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.black, width: 1.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),

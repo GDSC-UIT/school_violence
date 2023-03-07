@@ -2,12 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/data/services/auth_services.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/customItem.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/editProfileButton.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/profileNameCard.dart';
+import 'package:school_violence_app/app/modules/sign_in/screens/sign_in_screen.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -23,6 +25,7 @@ class _ProfilePageState extends State<ProfilePage>
   bool cmbscritta = false;
   late TextEditingController _controller;
   late TabController _tabController;
+  final AuthServices _auth = AuthServices();
 
   @override
   void initState() {
@@ -83,8 +86,9 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                     InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoutes
-                            .sign_in); // Chỗ này nên bắn ra dialog confirm
+                        Get.offAll(
+                            SignInPage()); // Chỗ này nên bắn ra dialog confirm
+                        _auth.signOutWithEmailAndPassword();
                       },
                       child: Image.asset(
                         'assets/images/logout.png', // Logout

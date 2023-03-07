@@ -78,11 +78,6 @@ abstract class AppPages {
         binding: DiaryBinding(),
         transition: Transition.noTransition),
     GetPage(
-      name: AppRoutes.chatroom,
-      page: () => ChatScreen(),
-      binding: DiaryBinding(),
-    ),
-    GetPage(
         name: AppRoutes.profile,
         page: () => ProfilePage(),
         binding: ProfileBinding(),
