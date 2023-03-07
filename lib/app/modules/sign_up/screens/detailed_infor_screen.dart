@@ -40,202 +40,205 @@ SingleChildScrollView detailedInfor(BuildContext context) {
             ),
           ),
           SizedBox(height: 30),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Full Name',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Full Name',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
                 ),
-              ),
-              FullNameField(fullNameController: ctrl.fullNameController),
-              SizedBox(height: 20),
-              const Text(
-                'Date of Birth',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
+                FullNameField(fullNameController: ctrl.fullNameController),
+                SizedBox(height: 20),
+                const Text(
+                  'Date of Birth',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
                 ),
-              ),
-              DateOfBirthField(dateController: ctrl.dateController),
-              SizedBox(height: 20),
-              const Text(
-                'Phone Number',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
+                DateOfBirthField(dateController: ctrl.dateController),
+                SizedBox(height: 20),
+                const Text(
+                  'Phone Number',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
                 ),
-              ),
-              PhoneNumberField(
-                phoneNumberController: ctrl.phoneNumberController,
-              ),
-              SizedBox(height: 20),
+                PhoneNumberField(
+                  phoneNumberController: ctrl.phoneNumberController,
+                ),
+                SizedBox(height: 20),
 
-              // Coutry
+                // Coutry
 
-              const Text(
-                'Country',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
+                const Text(
+                  'Country',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
                 ),
-              ),
-              FormHelper.dropDownWidget(
-                context,
-                '',
-                countryId,
-                Picker().countries,
-                (onChangedVal) {
-                  countryId = onChangedVal;
-                  ctrl.updateProvince(Picker()
-                      .provinces
-                      .where(
-                        (element) =>
-                            element['ParentId'].toString() ==
-                            onChangedVal.toString(),
-                      )
-                      .toList());
-                  Iterable<Map> temp = Picker().countries.where(
-                        (element) => element['ID'].toString() == countryId,
-                      );
-                  ctrl.updateCountryName(temp.first['Name']);
-                  provinceId = '';
-                },
-                (onValidateVal) =>
-                    onValidateVal == null ? 'Please select country' : null,
-                borderColor: AppColors.transparent,
-                borderFocusColor: AppColors.primaryColor,
-                borderRadius: 0,
-                paddingLeft: 0,
-                paddingRight: 0,
-              ),
-              SizedBox(height: 20),
-
-              // Province
-
-              const Text(
-                'Province',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              Obx(
-                () => FormHelper.dropDownWidget(
+                FormHelper.dropDownWidget(
                   context,
                   '',
-                  provinceId,
-                  ctrl.province,
+                  countryId,
+                  Picker().countries,
                   (onChangedVal) {
-                    provinceId = onChangedVal;
-                    ctrl.updateCity(Picker()
-                        .cities
+                    countryId = onChangedVal;
+                    ctrl.updateProvince(Picker()
+                        .provinces
                         .where(
                           (element) =>
                               element['ParentId'].toString() ==
                               onChangedVal.toString(),
                         )
                         .toList());
-                    Iterable<Map> temp = Picker().provinces.where(
-                          (element) => element['ID'].toString() == provinceId,
+                    Iterable<Map> temp = Picker().countries.where(
+                          (element) => element['ID'].toString() == countryId,
                         );
-                    ctrl.updateProvinceName(temp.first['Name']);
-                    cityId = '';
+                    ctrl.updateCountryName(temp.first['Name']);
+                    provinceId = '';
                   },
                   (onValidateVal) =>
-                      onValidateVal == null ? 'Please select province' : null,
+                      onValidateVal == null ? 'Please select country' : null,
                   borderColor: AppColors.transparent,
                   borderFocusColor: AppColors.primaryColor,
                   borderRadius: 0,
                   paddingLeft: 0,
                   paddingRight: 0,
                 ),
-              ),
+                SizedBox(height: 20),
 
-              // city
+                // Province
 
-              const Text(
-                'City',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
+                const Text(
+                  'Province',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
                 ),
-              ),
-              Obx(
-                () => FormHelper.dropDownWidget(
-                  context,
-                  '',
-                  cityId,
-                  ctrl.city,
-                  (onChangedVal) {
-                    cityId = onChangedVal;
-                    ctrl.updateSchool(Picker()
-                        .schools
-                        .where(
-                          (element) =>
-                              element['ParentId'].toString() ==
-                              onChangedVal.toString(),
-                        )
-                        .toList());
-                    Iterable<Map> temp = Picker().cities.where(
-                          (element) => element['ID'].toString() == cityId,
-                        );
-                    ctrl.updateCityName(temp.first['Name']);
-                    schoolId = '';
-                  },
-                  (onValidateVal) =>
-                      onValidateVal == null ? 'Please select city' : null,
-                  borderColor: AppColors.transparent,
-                  borderFocusColor: AppColors.primaryColor,
-                  borderRadius: 0,
-                  paddingLeft: 0,
-                  paddingRight: 0,
+                Obx(
+                  () => FormHelper.dropDownWidget(
+                    context,
+                    '',
+                    provinceId,
+                    ctrl.province,
+                    (onChangedVal) {
+                      provinceId = onChangedVal;
+                      ctrl.updateCity(Picker()
+                          .cities
+                          .where(
+                            (element) =>
+                                element['ParentId'].toString() ==
+                                onChangedVal.toString(),
+                          )
+                          .toList());
+                      Iterable<Map> temp = Picker().provinces.where(
+                            (element) => element['ID'].toString() == provinceId,
+                          );
+                      ctrl.updateProvinceName(temp.first['Name']);
+                      cityId = '';
+                    },
+                    (onValidateVal) =>
+                        onValidateVal == null ? 'Please select province' : null,
+                    borderColor: AppColors.transparent,
+                    borderFocusColor: AppColors.primaryColor,
+                    borderRadius: 0,
+                    paddingLeft: 0,
+                    paddingRight: 0,
+                  ),
                 ),
-              ),
 
-              // school
+                // city
 
-              const Text(
-                'School',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
+                const Text(
+                  'City',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
                 ),
-              ),
-              Obx(
-                () => FormHelper.dropDownWidget(
-                  context,
-                  '',
-                  schoolId,
-                  ctrl.school,
-                  (onChangedVal) {
-                    schoolId = onChangedVal;
-                    Iterable<Map> temp = Picker().schools.where(
-                          (element) => element['ID'].toString() == schoolId,
-                        );
-                    ctrl.updateSchoolName(temp.first['Name']);
-                    ;
-                  },
-                  (onValidateVal) =>
-                      onValidateVal == null ? 'Please select school' : null,
-                  borderColor: AppColors.transparent,
-                  borderFocusColor: AppColors.primaryColor,
-                  borderRadius: 0,
-                  paddingLeft: 0,
-                  paddingRight: 0,
+                Obx(
+                  () => FormHelper.dropDownWidget(
+                    context,
+                    '',
+                    cityId,
+                    ctrl.city,
+                    (onChangedVal) {
+                      cityId = onChangedVal;
+                      ctrl.updateSchool(Picker()
+                          .schools
+                          .where(
+                            (element) =>
+                                element['ParentId'].toString() ==
+                                onChangedVal.toString(),
+                          )
+                          .toList());
+                      Iterable<Map> temp = Picker().cities.where(
+                            (element) => element['ID'].toString() == cityId,
+                          );
+                      ctrl.updateCityName(temp.first['Name']);
+                      schoolId = '';
+                    },
+                    (onValidateVal) =>
+                        onValidateVal == null ? 'Please select city' : null,
+                    borderColor: AppColors.transparent,
+                    borderFocusColor: AppColors.primaryColor,
+                    borderRadius: 0,
+                    paddingLeft: 0,
+                    paddingRight: 0,
+                  ),
                 ),
-              ),
-              SizedBox(height: 20),
-            ],
+
+                // school
+
+                const Text(
+                  'School',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
+                Obx(
+                  () => FormHelper.dropDownWidget(
+                    context,
+                    '',
+                    schoolId,
+                    ctrl.school,
+                    (onChangedVal) {
+                      schoolId = onChangedVal;
+                      Iterable<Map> temp = Picker().schools.where(
+                            (element) => element['ID'].toString() == schoolId,
+                          );
+                      ctrl.updateSchoolName(temp.first['Name']);
+                      ;
+                    },
+                    (onValidateVal) =>
+                        onValidateVal == null ? 'Please select school' : null,
+                    borderColor: AppColors.transparent,
+                    borderFocusColor: AppColors.primaryColor,
+                    borderRadius: 0,
+                    paddingLeft: 0,
+                    paddingRight: 0,
+                  ),
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
           SignUpButton(
             formKey: _formkey,

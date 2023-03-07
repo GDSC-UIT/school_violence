@@ -11,18 +11,39 @@ class SignInButton extends StatelessWidget {
   SignInButton({
     Key? key,
     required formKey,
-    required this.ctrl,
+    required ctrl,
   })  : _formKey = formKey,
+        signInCtrl = ctrl,
         super(key: key);
 
   final AuthServices _auth = AuthServices();
-  final SignInController ctrl;
-  final ConnectController connectCtrl = Get.find<ConnectController>();
+  final SignInController signInCtrl;
   final NotificationsController notifycationsCtrl =
       Get.find<NotificationsController>();
   final GlobalKey<FormState> _formKey;
   final CollectionReference connectCollection =
       FirebaseFirestore.instance.collection('connect');
+  void getData() async {
+    DocumentSnapshot snapUsers = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(signInCtrl.userId.value)
+        .get();
+    if (snapUsers.data() != null) {
+      signInCtrl.updateUserName((snapUsers.data()! as dynamic)['userName']);
+      signInCtrl.updateEmail((snapUsers.data()! as dynamic)['email']);
+      signInCtrl.updatePassword((snapUsers.data()! as dynamic)['password']);
+      signInCtrl.updateFullName((snapUsers.data()! as dynamic)['fullName']);
+      signInCtrl
+          .updateDateOfBirth((snapUsers.data()! as dynamic)['dateOfBirth']);
+      signInCtrl
+          .updatePhoneNumber((snapUsers.data()! as dynamic)['phoneNumber']);
+      signInCtrl.updateCountry((snapUsers.data()! as dynamic)['country']);
+      signInCtrl.updateProvince((snapUsers.data()! as dynamic)['province']);
+      signInCtrl.updateCity((snapUsers.data()! as dynamic)['city']);
+      signInCtrl.updateSchool((snapUsers.data()! as dynamic)['school']);
+      signInCtrl.updateExpert((snapUsers.data()! as dynamic)['expert']);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +51,12 @@ class SignInButton extends StatelessWidget {
       onPressed: () async {
         if (_formKey.currentState!.validate()) {
           dynamic result = await _auth.signInWithEmailAndPassword(
-            ctrl.emailController.text,
-            ctrl.passwordController.text,
+            signInCtrl.emailController.text,
+            signInCtrl.passwordController.text,
           );
           if (result != null) {
-            connectCtrl.updateUserId(result);
-            DocumentSnapshot snap =
-                await connectCollection.doc(connectCtrl.userId.value).get();
-            if (snap.data() != null) {
-              notifycationsCtrl.updateFriendRequest(
-                  (snap.data()! as dynamic)['friendRequest']);
-            } else {
-              notifycationsCtrl.updateFriendRequest([]);
-            }
-            //print(notifycationsCtrl.friendRequest);
+            signInCtrl.updateUserId(result);
+            getData();
           }
         }
       },

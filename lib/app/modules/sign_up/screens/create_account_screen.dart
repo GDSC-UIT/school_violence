@@ -19,90 +19,100 @@ SingleChildScrollView createAccount() {
   return SingleChildScrollView(
     child: Form(
       key: _formKey,
-      child: Column(
-        children: [
-          SizedBox(height: 35),
-          Text(
-            'Create an account',
-            style: TextStyle(
-              fontSize: 30,
-              fontFamily: 'Montserrat',
-            ),
-          ),
-          SizedBox(height: 30),
-          Text(
-            'Please enter your username, email address\nand password. If you forget it, then you have \nto do forgot password.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: 'Montserrat',
-            ),
-          ),
-          SizedBox(height: 30),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'User Name',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: Column(
+          children: [
+            SizedBox(height: 35),
+            Text(
+              'Create an account',
+              style: TextStyle(
+                fontSize: 30,
+                fontFamily: 'Montserrat',
               ),
-              UserNameField(userNameController: ctrl.userNameController,),
-              SizedBox(height: 20),
-              const Text(
-                'Email',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              EmailField(emailController:  ctrl.emailController,),
-              SizedBox(height: 20),
-              const Text(
-                'Password',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              PasswordField(ctrl: ctrl, passwordController: ctrl.passwordController,),
-            ],
-          ),
-          SizedBox(height: 20),
-          const Text(
-            'or',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              fontFamily: 'Montserrat',
             ),
-          ),
+            SizedBox(height: 30),
+            Text(
+              'Please enter your username, email address\nand password. If you forget it, then you have \nto do forgot password.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+            SizedBox(height: 30),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'User Name',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
+                UserNameField(
+                  userNameController: ctrl.userNameController,
+                ),
+                SizedBox(height: 20),
+                const Text(
+                  'Email',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
+                EmailField(
+                  emailController: ctrl.emailController,
+                ),
+                SizedBox(height: 20),
+                const Text(
+                  'Password',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
+                PasswordField(
+                  ctrl: ctrl,
+                  passwordController: ctrl.passwordController,
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            const Text(
+              'or',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                fontFamily: 'Montserrat',
+              ),
+            ),
 
-          // Sign In with Google
+            // Sign In with Google
 
-          GoogleSignInButton(),
-          SizedBox(height: 10),
+            GoogleSignInButton(),
+            SizedBox(height: 10),
 
-          // Sign In with Apple
+            // Sign In with Apple
 
-          AppleSignInButton(),
-          SizedBox(height: 10),
+            AppleSignInButton(),
+            SizedBox(height: 10),
 
-          // Continue
+            // Continue
 
-          ContinueButton(
-            ctrl: ctrl,
-            formKey: _formKey,
-            userNameController: ctrl.userNameController,
-            emailController: ctrl.emailController,
-            passwordController: ctrl.passwordController,
-          ),
-        ],
+            ContinueButton(
+              ctrl: ctrl,
+              formKey: _formKey,
+              userNameController: ctrl.userNameController,
+              emailController: ctrl.emailController,
+              passwordController: ctrl.passwordController,
+            ),
+          ],
+        ),
       ),
     ),
   );

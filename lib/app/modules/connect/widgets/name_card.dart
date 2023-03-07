@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
-import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
 
-class NameCard extends StatelessWidget {
-  const NameCard({super.key});
+class FriendCard extends StatelessWidget {
+  final String name;
+  final String phoneNumber;
+  final String avatarLink;
+  const FriendCard(
+      {super.key,
+      required this.name,
+      required this.phoneNumber,
+      required this.avatarLink});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: FlutterLogo(size: 56.0),
+        leading: CircleAvatar(
+          backgroundImage: AssetImage(
+            avatarLink,
+          ),
+          minRadius: 30,
+          maxRadius: 30,
+        ),
         title: Text(
-          'Cao Minh Quân',
+          name,
           style: TextStyle(
             fontSize: 20,
             fontFamily: 'Montserrat',
@@ -21,16 +33,15 @@ class NameCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          'Le Quy Don High School for the Gifted',
+          phoneNumber,
           style: TextStyle(
-            fontSize: 10,
+            fontSize: 12,
             fontFamily: 'Montserrat',
             color: AppColors.blur,
             decoration: TextDecoration.none,
             fontWeight: FontWeight.w500,
           ),
         ),
-        trailing: AcceptedButton(), // AcceptButton() để call thằng còn lại
       ),
     );
   }
