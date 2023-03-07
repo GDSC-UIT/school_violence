@@ -82,15 +82,9 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                       width: 28,
                     ),
                     const SizedBox(width: 22.5),
-                    const Text(
+                    Text(
                       'Diary',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Ubuntu',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                   ],
                 ),
@@ -138,22 +132,16 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                           borderRadius:
                                               BorderRadius.circular(50)),
                                       child: TabBar(
-                                        unselectedLabelStyle: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                        ),
+                                        unselectedLabelStyle:
+                                            CustomTextStyle.button(
+                                                AppColors.primaryColor),
                                         indicator: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               50), // Creates border
                                           color: AppColors.primaryColor,
                                         ),
-                                        labelStyle: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                          color: Colors.white,
-                                        ),
+                                        labelStyle: CustomTextStyle.button(
+                                            AppColors.white),
                                         labelPadding: const EdgeInsets.all(14),
                                         // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                                         labelColor: AppColors.white,
@@ -265,7 +253,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                               ? AppColors.white
                                               : Color(0xFF898989),
                                           fontSize: 16,
-                                          fontFamily: 'Montserrat',
+                                          fontFamily: 'Ubuntu',
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
