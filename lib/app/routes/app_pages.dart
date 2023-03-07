@@ -22,7 +22,7 @@ import 'package:school_violence_app/app/modules/sign_in/sign_in_binding.dart';
 import 'package:school_violence_app/app/modules/sign_up/screens/sign_up_screen.dart';
 import 'package:school_violence_app/app/modules/sign_up/sign_up_bingding.dart';
 import '../modules/map/map_binding.dart';
-import '../modules/map/screens/order_tracking.dart';
+import '../modules/map/main_map.dart';
 import 'app_routes.dart';
 
 abstract class AppPages {
@@ -89,7 +89,7 @@ abstract class AppPages {
         transition: Transition.noTransition),
     GetPage(
         name: AppRoutes.map,
-        page: () => MapScreen(),
+        page: () => MyMap(),
         binding: MapBinding(),
         transition: Transition.noTransition),
   ];
