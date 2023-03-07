@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/new_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
@@ -40,31 +41,22 @@ class _EmailPageState extends State<EmailPage> {
               //
               SizedBox(height: 35),
 
-              InkWell(
-                onTap: () {
-                  Get.to(ForgotPasswordPage());
-                },
-                child: Image.asset(
-                  'assets/images/left-small.png',
-                  width: 28,
-                ),
+              IconButton(
+                onPressed: () => Get.to(ForgotPasswordPage()),
+                icon: Icon(Icons.arrow_back),
+                iconSize: 30,
+                padding: EdgeInsets.only(right: double.infinity),
               ),
               SizedBox(height: 35),
               Row(
                 children: [
                   Text(
                     'You ‘ve got mail ',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'Montserrat',
-                      color: AppColors.black,
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: CustomTextStyle.h1(AppColors.black),
                   ),
                   Image.asset(
                     'assets/images/mail.png',
-                    width: 28,
+                    width: 24,
                   ),
                 ],
               ),
@@ -72,14 +64,8 @@ class _EmailPageState extends State<EmailPage> {
               Row(
                 children: [
                   Text(
-                    'We have sent the OTP verification code to \n your email address. Check your mail and \n enter the code below.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                      color: Color.fromRGBO(103, 103, 103, 1),
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    'We have sent the OTP verification code to \nyour email address. Check your mail and \nenter the code below.',
+                    style: CustomTextStyle.desc(AppColors.desc),
                   ),
                 ],
               ),
@@ -109,26 +95,14 @@ class _EmailPageState extends State<EmailPage> {
               Center(
                 child: Text(
                   'Didn’t receive email?',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                    color: Color.fromRGBO(56, 56, 56, 1),
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: CustomTextStyle.desc(AppColors.desc),
                 ),
               ),
               SizedBox(height: 14),
               Center(
                 child: Text(
                   'You can resend code in 55 s',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                    color: Color.fromRGBO(56, 56, 56, 1),
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: CustomTextStyle.desc(AppColors.desc),
                 ),
               ),
               SizedBox(height: 55),

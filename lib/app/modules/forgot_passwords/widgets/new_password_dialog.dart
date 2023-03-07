@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
+import 'package:school_violence_app/app/modules/home_page/screens/home_page.dart';
 
 class NewPassWordDialog extends StatelessWidget {
   const NewPassWordDialog({super.key});
@@ -24,31 +27,19 @@ class NewPassWordDialog extends StatelessWidget {
               SizedBox(height: 17),
               Text(
                 'Welcome Back!',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'Montserrat',
-                  color: AppColors.primaryColor,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: CustomTextStyle.h1(AppColors.primaryColor),
               ),
               SizedBox(height: 16),
               Text(
                 'You have successfully reset and \ncreate a new password.',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                  color: AppColors.black,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: CustomTextStyle.desc(AppColors.desc),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 59),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Get.to(EmailPage());
+                    Get.to(HomePage());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
@@ -61,12 +52,7 @@ class NewPassWordDialog extends StatelessWidget {
                   child: Text(
                     'Go to Home',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: CustomTextStyle.button(AppColors.white),
                   ),
                 ),
               ),

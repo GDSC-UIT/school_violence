@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/home_page/widgets/bell.dart';
 
 class Name extends StatelessWidget {
@@ -19,13 +20,7 @@ class Name extends StatelessWidget {
             SizedBox(width: 16),
             Text(
               'Hi, Quan',
-              style: TextStyle(
-                fontSize: 24,
-                fontFamily: 'Montserrat', //bug with font family
-                color: AppColors.black,
-                decoration: TextDecoration.none,
-                fontWeight: FontWeight.w600,
-              ),
+              style: CustomTextStyle.h1(AppColors.black),
             ),
           ],
         ),

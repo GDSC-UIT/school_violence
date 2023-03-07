@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/input_label.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/new_password_dialog.dart';
@@ -44,27 +45,18 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                 //
                 SizedBox(height: 35),
 
-                InkWell(
-                  onTap: () {
-                    Get.to(EmailPage());
-                  },
-                  child: Image.asset(
-                    'assets/images/left-small.png',
-                    width: 28,
-                  ),
+                IconButton(
+                  onPressed: () => Get.back(),
+                  icon: Icon(Icons.arrow_back),
+                  iconSize: 30,
+                  padding: EdgeInsets.only(right: double.infinity),
                 ),
                 SizedBox(height: 35),
                 Row(
                   children: [
                     Text(
                       'Create new password ',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                     Image.asset(
                       'assets/images/lock.png',
@@ -76,14 +68,8 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                 Row(
                   children: [
                     Text(
-                      'Save the new password in a safe place, if you \n forget it then you have to do a forgot \n password again.',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        color: Color.fromRGBO(103, 103, 103, 1),
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      'Save the new password in a safe place, if you \nforget it then you have to do a forgot \n password again.',
+                      style: CustomTextStyle.desc(AppColors.desc),
                     ),
                   ],
                 ),
@@ -116,13 +102,7 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                       padding: const EdgeInsets.all(4),
                       child: Text(
                         'Remember me',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Montserrat',
-                          color: AppColors.black,
-                          decoration: TextDecoration.none,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: CustomTextStyle.desc(AppColors.black),
                       ),
                     ),
                   ],
@@ -149,12 +129,7 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                     child: Text(
                       'Continue',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.button(AppColors.white),
                     ),
                   ),
                 ),

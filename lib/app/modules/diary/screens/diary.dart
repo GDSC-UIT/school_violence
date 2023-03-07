@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 
@@ -62,13 +63,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                     SizedBox(width: 22.5),
                     Text(
                       'Diary',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                   ],
                 ),
@@ -90,22 +85,14 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                             color: AppColors.secondaryColor,
                             borderRadius: BorderRadius.circular(50)),
                         child: TabBar(
-                          unselectedLabelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                          unselectedLabelStyle:
+                              CustomTextStyle.button(AppColors.primaryColor),
                           indicator: BoxDecoration(
                             borderRadius:
                                 BorderRadius.circular(50), // Creates border
                             color: AppColors.primaryColor,
                           ),
-                          labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
+                          labelStyle: CustomTextStyle.desc(AppColors.white),
                           labelPadding: EdgeInsets.all(14),
                           // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
@@ -162,12 +149,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                         child: Text(
                           'Start',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 16,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: CustomTextStyle.button(AppColors.white),
                         ),
                       ),
                     ],
