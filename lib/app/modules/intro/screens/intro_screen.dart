@@ -20,12 +20,12 @@ class IntroPage extends StatelessWidget {
           children: [
             const SizedBox(
               width: 320,
-              height: 130,
+              height: 100,
             ),
             picturesAndText(ctrl: ctrl),
             const SizedBox(
               width: 320,
-              height: 50,
+              height: 0,
             ),
             OnboardingIndicator(ctrl: ctrl),
             const SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/input_label.dart';
@@ -39,32 +40,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             children: [
               //
               SizedBox(height: 35),
-
-              // Image.asset(
-              //   'assets/images/left-small.png',
-              //   width: 28,
-              // ),
+              
               IconButton(
                 onPressed: () => Get.back(),
                 icon: Icon(Icons.arrow_back),
                 iconSize: 30,
+                padding: EdgeInsets.only(right: double.infinity),
               ),
               SizedBox(height: 35),
               Row(
                 children: [
                   Text(
                     'Forgot Password ',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'Montserrat',
-                      color: AppColors.black,
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: CustomTextStyle.h1(AppColors.black),
                   ),
                   Image.asset(
                     'assets/images/key.png',
-                    width: 28,
+                    width: 24,
                   ),
                 ],
               ),
@@ -72,14 +64,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               Row(
                 children: [
                   Text(
-                    'Enter your email address to get an code \n to reset your password.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                      color: Color.fromRGBO(103, 103, 103, 1),
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    'Enter your email address to get an code \nto reset your password.',
+                    style: CustomTextStyle.desc(AppColors.desc),
                   ),
                 ],
               ),

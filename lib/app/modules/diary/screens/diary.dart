@@ -3,6 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
+
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/diary/screens/chatscreen.dart';
@@ -82,13 +85,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                     const SizedBox(width: 22.5),
                     const Text(
                       'Diary',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                   ],
                 ),
@@ -100,6 +97,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                   width: 378.5,
                   color: AppColors.black,
                 ),
+
                 FutureBuilder<bool>(
                     future: isExpert(), // a Future<String> or null
                     builder:
