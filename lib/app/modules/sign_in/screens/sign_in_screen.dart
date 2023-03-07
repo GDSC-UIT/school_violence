@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/data/services/auth_services.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/modules/sign_in/widgets/email_field.dart';
@@ -49,23 +50,17 @@ class SignInPage extends StatelessWidget {
                     Text(
                       'Hello there',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: 'Montserrat',
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                     SizedBox(width: 20),
                     Icon(Icons.waving_hand_rounded),
                   ],
                 ),
                 SizedBox(height: 40),
-                const Text(
+                Text(
                   'Email',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 EmailField(
                   emailController: ctrl.emailController,
@@ -74,10 +69,7 @@ class SignInPage extends StatelessWidget {
                 Text(
                   'Password',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
-                  ),
+                  style: CustomTextStyle.label(AppColors.black),
                 ),
                 PasswordField(
                   ctrl: ctrl,
@@ -91,13 +83,10 @@ class SignInPage extends StatelessWidget {
                         onChanged: ((value) => ctrl.updateRemember()),
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Remember me',
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Montserrat',
-                      ),
+                      style: CustomTextStyle.label(AppColors.black),
                     ),
                   ],
                 ),
@@ -111,11 +100,7 @@ class SignInPage extends StatelessWidget {
                     child: Text(
                       'Forgot Password?',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.primaryColor,
-                      ),
+                      style: CustomTextStyle.label(AppColors.primaryColor),
                     ),
                   ),
                 ),
