@@ -1,19 +1,17 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 
-import 'package:school_violence_app/app/core/values/app_text_style.dart';
-import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/diary/screens/chatscreen.dart';
 import 'package:school_violence_app/app/modules/diary/widgets/ChatList.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
-import 'package:school_violence_app/app/routes/app_routes.dart';
-import '../../connect/connect_controller.dart';
+import '../../../core/values/app_text_style.dart';
 import '../diary_controller.dart';
+import 'dart:math';
 
 class DiaryPage extends StatefulWidget {
   DiaryPage({super.key});
@@ -27,15 +25,17 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   bool cmbscritta = false;
   late TabController _tabController;
   TextEditingController mess_controller = TextEditingController();
+
   final SignInController ctrl = Get.find<SignInController>();
-  late bool have_text = false;
+  final DiaryController ctrlDiary = Get.find<DiaryController>();
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     mess_controller.addListener(() {
-      // setState(() => have_text =
-      //     mess_controller.text.isNotEmpty && mess_controller.text != "");
+      ctrlDiary.haveText.value =
+          mess_controller.text.isNotEmpty && mess_controller.text != "";
     });
   }
 
@@ -52,7 +52,6 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   //   _controller.dispose();
   //   super.dispose();
   // }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -132,16 +131,22 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                           borderRadius:
                                               BorderRadius.circular(50)),
                                       child: TabBar(
-                                        unselectedLabelStyle:
-                                            CustomTextStyle.button(
-                                                AppColors.primaryColor),
+                                        unselectedLabelStyle: const TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                        ),
                                         indicator: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               50), // Creates border
                                           color: AppColors.primaryColor,
                                         ),
-                                        labelStyle: CustomTextStyle.button(
-                                            AppColors.white),
+                                        labelStyle: const TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                        ),
                                         labelPadding: const EdgeInsets.all(14),
                                         // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                                         labelColor: AppColors.white,
@@ -189,75 +194,143 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                       ),
                                     ),
                                     SizedBox(height: 20),
-                                    ElevatedButton(
-                                      onPressed: () async {
-                                        if (!have_text) {
-                                          var fetchExpert =
-                                              await FirebaseFirestore
-                                                  .instance
-                                                  .collection('users')
-                                                  .where('expert',
-                                                      isEqualTo: true)
-                                                  .get();
-                                          var expert = fetchExpert.docs
-                                              .map((e) =>
-                                                  Expert.fromJson(e.data()))
-                                              .toList();
-
-                                          var a = await FirebaseFirestore
-                                              .instance
-                                              .collection("room")
-                                              .where("roomUser", isEqualTo: [
-                                            ctrl.userId.value,
-                                            expert.single.id
-                                          ]).get();
-                                          if (a.docs.isEmpty) {
-                                            await FirebaseFirestore.instance
-                                                .collection("room")
-                                                .add({
-                                              "roomUser": [
-                                                ctrl.userId.value,
-                                                expert.single.id
-                                              ],
-                                            });
-                                            Get.to(() => ChatScreen(
-                                                  initial_text:
-                                                      mess_controller.text,
-                                                  roomUser: [
-                                                    ctrl.userId.value,
-                                                    expert.single.id
-                                                  ],
-                                                  nowUser: ctrl.userId.value,
-                                                ));
-                                          }
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: have_text
-                                            ? AppColors.primaryColor
-                                            : AppColors.grey,
-                                        shadowColor: have_text
-                                            ? AppColors.primaryColorShadow
-                                            : AppColors.grey,
-                                        elevation: 5,
-                                        minimumSize: const Size(382, 54),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0)),
-                                      ),
-                                      child: Text(
-                                        'Start',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: have_text
-                                              ? AppColors.white
-                                              : Color(0xFF898989),
-                                          fontSize: 16,
-                                          fontFamily: 'Ubuntu',
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
+                                    Obx(() => (ElevatedButton(
+                                          onPressed: () async {
+                                            if (ctrlDiary.haveText.value) {
+                                              var fetchExpert =
+                                                  await FirebaseFirestore
+                                                      .instance
+                                                      .collection('users')
+                                                      .where('expert',
+                                                          isEqualTo: true)
+                                                      .get();
+                                              var expert = fetchExpert.docs
+                                                  .map((e) =>
+                                                      Expert.fromJson(e.data()))
+                                                  .toList();
+                                              if (expert.isNotEmpty) {
+                                                ctrlDiary.isFetchingExpert
+                                                    .value = true;
+                                                Random rng = Random();
+                                                Timer _timer = Timer(
+                                                    Duration(seconds: 5),
+                                                    () => {
+                                                          if(ctrlDiary.isFetchingExpert.value){
+                                                          ctrlDiary
+                                                              .isFetchingExpert
+                                                              .value = false,
+                                                          Get.defaultDialog(
+                                                            title:
+                                                                "Please try again later ...",
+                                                            content: const Text(
+                                                                'There is no more expert online now',
+                                                              ),
+                                                            actions: [
+                                                              TextButton(
+                                                                child:
+                                                                    const Text(
+                                                                        "Close",
+                                                                        style: TextStyle(
+                                                                          color: AppColors.primaryColor
+                                                                        ),
+                                                                        ),
+                                                                onPressed: () =>
+                                                                    Get.back(),
+                                                              ),
+                                                            ],
+                                                          )
+                                                          }
+                                                        });
+                                                while (ctrlDiary
+                                                    .isFetchingExpert.value) {
+                                                  var randomExpert = rng
+                                                      .nextInt(expert.length);
+                                                  var oldExpert =
+                                                      await FirebaseFirestore
+                                                          .instance
+                                                          .collection("room")
+                                                          .where("roomUser",
+                                                              isEqualTo: [
+                                                        ctrl.userId.value,
+                                                        expert[randomExpert].id
+                                                      ]).get();
+                                                  if (oldExpert.docs.isEmpty) {
+                                                    ctrlDiary.isFetchingExpert
+                                                        .value = false;
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection("room")
+                                                        .add({
+                                                      "roomUser": [
+                                                        ctrl.userId.value,
+                                                        expert[randomExpert].id
+                                                      ],
+                                                    });
+                                                    Get.to(() => ChatScreen(
+                                                          initial_text:
+                                                              mess_controller
+                                                                  .text,
+                                                          roomUser: [
+                                                            ctrl.userId.value,
+                                                            expert[randomExpert].id
+                                                          ],
+                                                          nowUser:
+                                                              ctrl.userId.value,
+                                                        ));
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                ctrlDiary.haveText.value
+                                                    ? AppColors.primaryColor
+                                                    : AppColors.grey,
+                                            shadowColor: ctrlDiary
+                                                    .haveText.value
+                                                ? AppColors.primaryColorShadow
+                                                : AppColors.grey,
+                                            elevation: 5,
+                                            minimumSize: const Size(382, 54),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        30.0)),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              !ctrlDiary.isFetchingExpert.value
+                                                  ? Text(
+                                                      'Start',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: ctrlDiary
+                                                                .haveText.value
+                                                            ? AppColors.white
+                                                            : Color(0xFF898989),
+                                                        fontSize: 16,
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    )
+                                                  : const SizedBox(
+                                                      height: 20,
+                                                      width: 20,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: AppColors.grey,
+                                                      ),
+                                                    ),
+                                            ],
+                                          ),
+                                        ))),
+                                    SizedBox(height: 20),
                                   ],
                                 ),
                               ),

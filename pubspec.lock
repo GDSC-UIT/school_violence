@@ -349,11 +349,9 @@ packages:
     dependency: transitive
     description:
       name: js
-
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-
   libphonenumber_platform_interface:
     dependency: transitive
     description:
@@ -407,7 +405,6 @@ packages:
     dependency: transitive
     description:
       name: matcher
-
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.12"
@@ -429,7 +426,6 @@ packages:
     dependency: transitive
     description:
       name: path
-
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
@@ -526,11 +522,9 @@ packages:
     dependency: transitive
     description:
       name: test_api
-
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
-
   typed_data:
     dependency: transitive
     description:
@@ -547,5 +541,4 @@ packages:
     version: "2.1.2"
 sdks:
   dart: ">=2.18.6 <3.0.0"
-
   flutter: ">=3.3.0"

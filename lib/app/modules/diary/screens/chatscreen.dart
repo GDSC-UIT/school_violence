@@ -47,7 +47,6 @@ class ChatScreen extends StatelessWidget {
         "createdAt": DateTime.now().microsecondsSinceEpoch
       });
     }
-
     //this function will trigger 1 time when this page have done rendered, use to scroll down to bottom of listview of messages
     //AND fetch mess
     SchedulerBinding.instance?.addPostFrameCallback((_) async {
@@ -55,8 +54,8 @@ class ChatScreen extends StatelessWidget {
         _controller.jumpTo(_controller.position.maxScrollExtent);
       }
       var fetchRef = FirebaseFirestore.instance.collection("messages");
-      fetchRef.where("roomUser", isEqualTo: roomUser);
-      fetchRef.orderBy("createdAt").snapshots().listen((event) {
+          fetchRef.where("roomUser", isEqualTo: roomUser)
+                  .orderBy("createdAt").snapshots().listen((event) {
         List data = event.docs.map((element) {
           if (element.data()["userOwn"] == nowUser) {
             return Message_User(mess: element["data"]);
@@ -72,9 +71,8 @@ class ChatScreen extends StatelessWidget {
             _scrollDown();
           });
         }
-      });
+      }, onError: (error) => print("Listen failed: $error"),);
     });
-
     return Scaffold(
       appBar: AppBar(
         title: const Align(
@@ -93,7 +91,9 @@ class ChatScreen extends StatelessWidget {
                 color: Colors.black,
               ),
               onPressed: () {
+                ctrl.updateMessages([]);
                 Get.toNamed(AppRoutes.diary);
+
               },
             );
           },
@@ -120,7 +120,7 @@ class ChatScreen extends StatelessWidget {
             } else {
               return ListView(
                 controller: _controller,
-                children: ctrl.messages
+                children: ctrl.messages.value
                     .map((element) => Container(
                           child: element,
                         ))

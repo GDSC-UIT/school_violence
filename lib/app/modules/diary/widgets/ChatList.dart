@@ -45,20 +45,22 @@ class _ChatListState extends State<ChatList> {
             padding: const EdgeInsets.all(8),
             itemCount: messages.length,
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                color: AppColors.primaryColor,
-                height: 50,
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.to(() => ChatScreen(
-                            initial_text: "",
-                            roomUser: messages[index].roomUser,
-                            nowUser: ctrl.userId.value,
-                          ));
-                    },
+
+              return GestureDetector(
+                onTap: () {
+                  Get.to(() => ChatScreen(
+                        initial_text: "",
+                        roomUser: messages[index].roomUser,
+                        nowUser: ctrl.userId.value,
+                      ));
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10.0),
+                  color: AppColors.primaryColor,
+                  height: 50,
+                  child: Center(
                     child: Text(
-                      'Chat room',
+                      'Chat room ${index}',
                       style: TextStyle(color: AppColors.white, fontSize: 18),
                     ),
                   ),
