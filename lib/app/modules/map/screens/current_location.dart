@@ -70,7 +70,7 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           Position position = await _determinePositon();
-          googleMapController.animateCamera(
+          await googleMapController.animateCamera(
             CameraUpdate.newCameraPosition(
               CameraPosition(
                   target: LatLng(position.latitude, position.longitude),
