@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:school_violence_app/app/data/services/database.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 class CurrentLocationScreen extends StatefulWidget {
   const CurrentLocationScreen({super.key});
@@ -14,6 +17,8 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
 
   static const CameraPosition initialCameraPosition =
       CameraPosition(target: LatLng(10.875407, 106.807905), zoom: 14.0);
+
+  final SignInController signInCtrl = Get.find<SignInController>();
 
   Set<Marker> markers = {};
 
@@ -71,6 +76,22 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
                   target: LatLng(position.latitude, position.longitude),
                   zoom: 14),
             ),
+          );
+          await DatabaseService(uid: signInCtrl.userId.value).updateUserData(
+            signInCtrl.userId.value,
+            signInCtrl.userName.value,
+            signInCtrl.email.value,
+            signInCtrl.password.value,
+            signInCtrl.fullName.value,
+            signInCtrl.dateOfBirth.value,
+            signInCtrl.phoneNumber.value,
+            signInCtrl.country.value,
+            signInCtrl.province.value,
+            signInCtrl.city.value,
+            signInCtrl.school.value,
+            signInCtrl.expert.value,
+            position.latitude,
+            position.longitude,
           );
           markers.clear();
           markers.add(
