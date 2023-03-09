@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 
 // customize FormHelper package
 class FormHelper {
@@ -156,7 +157,7 @@ class FormHelper {
                   value: data[optionValue].toString(),
                   child: new Text(
                     data[optionLabel],
-                    style: new TextStyle(color: Colors.black, fontSize: 20),
+                    style: CustomTextStyle.input(AppColors.black),
                   ),
                 );
               },

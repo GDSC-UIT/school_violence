@@ -18,6 +18,7 @@ class SignInController extends GetxController {
   RxString city = ''.obs;
   RxString school = ''.obs;
   RxBool expert = false.obs;
+  RxList friendId = [].obs;
 
   void updateUserId(String data) => userId.value = data;
 
@@ -52,4 +53,6 @@ class SignInController extends GetxController {
   void updateHidePassword() => hide.value = !hide.value;
 
   void updateRemember() => remember.value = !remember.value;
+
+  void updateFriendId(List data) => friendId.value = data;
 }
