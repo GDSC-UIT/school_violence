@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
+import 'package:school_violence_app/app/modules/map/screens/live_tracking_location.dart';
 import 'package:school_violence_app/app/modules/map/screens/simple_map_screen.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'current_location.dart';
@@ -49,6 +50,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 }));
               },
               child: const Text('User current location'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return const LiveTrackingScreen();
+                }));
+              },
+              child: const Text('Live tracking'),
             )
           ],
         ),
