@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 class SimpleMapScreen extends StatefulWidget {
   const SimpleMapScreen({super.key});
@@ -29,8 +31,16 @@ class _SimpleMapScreenState extends State<SimpleMapScreen> {
     controller.animateCamera(CameraUpdate.newCameraPosition(targetPosition));
   }
 
+  SignInController signInCtrl = SignInController();
+
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        helpDialog(signInCtrl.userId.value);
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text('Simple Google Map'),

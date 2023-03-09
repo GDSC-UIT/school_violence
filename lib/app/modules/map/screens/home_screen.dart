@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/map/screens/live_tracking_location.dart';
 import 'package:school_violence_app/app/modules/map/screens/simple_map_screen.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'current_location.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,8 +15,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  SignInController signInCtrl = SignInController();
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        helpDialog(signInCtrl.userId.value);
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Google Map'),

@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:school_violence_app/app/data/services/database.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 class CurrentLocationScreen extends StatefulWidget {
@@ -53,6 +57,12 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        helpDialog(signInCtrl.userId.value);
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('User current location'),

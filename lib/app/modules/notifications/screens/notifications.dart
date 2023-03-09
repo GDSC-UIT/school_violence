@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/NameCard.dart';
@@ -64,6 +65,12 @@ class _NotificationsPageState extends State<NotificationsPage>
         if (temp.length != friendRequest.length) {
           notifycationsCtrl.updateFriendRequest(friendRequest);
         }
+      },
+    );
+    Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        helpDialog(signInCtrl.userId.value);
       },
     );
     return MaterialApp(

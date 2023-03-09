@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,6 +48,17 @@ class SignInButton extends StatelessWidget {
     }
   }
 
+  void checkHelp() async {
+    DocumentSnapshot snapEmergency = await FirebaseFirestore.instance
+        .collection('emergency')
+        .doc(signInCtrl.userId.value)
+        .get();
+    if (snapEmergency.data() != null) {
+      signInCtrl.updateFriendId((snapEmergency.data()! as dynamic)['friendId']);
+    } else
+      signInCtrl.updateFriendId([]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -58,6 +71,12 @@ class SignInButton extends StatelessWidget {
           if (result != null) {
             signInCtrl.updateUserId(result);
             getData();
+            Timer.periodic(
+              new Duration(seconds: 1),
+              (timer) {
+                checkHelp();
+              },
+            );
           }
         }
       },

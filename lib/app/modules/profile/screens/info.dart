@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dob_input_field/dob_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -5,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/core/values/app_text_style.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/new_passwords.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/button.dart';
@@ -13,6 +16,7 @@ import 'package:school_violence_app/app/modules/profile/widgets/EmailTextField.d
 import 'package:school_violence_app/app/modules/profile/widgets/avatar.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/customLabel.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/fullNameTextField.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/modules/sign_up/widgets/date_of_birth_field.dart';
 
 class PersonalInfoPage extends StatefulWidget {
@@ -36,9 +40,15 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   //   _controller.dispose();
   //   super.dispose();
   // }
-
+  final SignInController signInCtrl = Get.find<SignInController>();
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        helpDialog(signInCtrl.userId.value);
+      },
+    );
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
