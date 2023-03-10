@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/data/services/emergency.dart';
+import 'package:school_violence_app/app/modules/home_page/widgets/emergency_dialog.dart';
 
 void helpDialog(String userId) async {
   final CollectionReference emergencyCollection =
@@ -15,7 +16,7 @@ void helpDialog(String userId) async {
     _friendId = [];
   if (_friendId.length > 0) {
     //EmergencyDialog();
-    Get.dialog(Text('abc'));
+    Get.dialog(EmergencyDialog());
     _emergency.resetData(userId);
   }
 }
