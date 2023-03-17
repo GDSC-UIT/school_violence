@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class HaveAccountButton extends StatelessWidget {
@@ -18,13 +19,13 @@ class HaveAccountButton extends StatelessWidget {
         backgroundColor: AppColors.secondaryColor,
         shadowColor: AppColors.secondaryColorShadow,
         elevation: 5,
-        minimumSize: const Size(300, 40),
+        minimumSize: const Size(300, 50),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),
-      child: const Text(
+      child: Text(
         'I ALREADY HAVE AN ACCOUNT',
-        style: TextStyle(color: AppColors.primaryColor, fontSize: 15),
+        style: CustomTextStyle.button(AppColors.primaryColor),
       ),
     );
   }

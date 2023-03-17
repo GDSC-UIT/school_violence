@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/intro/intro_controller.dart';
 
 class picturesAndText extends StatelessWidget {
@@ -22,22 +24,14 @@ class picturesAndText extends StatelessWidget {
         itemCount: 3,
         itemBuilder: (context, index) {
           return Column(
-            children: const [
+            children: [
               // need to replace this Text -> Pictures
-              Text(
-                'A',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 175),
-              ),
-              SizedBox(
-                height: 80,
-              ),
+              Image.asset('assets/images/signup_img.png',
+                  width: 300, height: 280, fit: BoxFit.fill),
+              SizedBox(height: 10),
               Text(
                 'Connect & share with\nexpert whenever and\nwherever you want',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 25,
-                ),
+                style: CustomTextStyle.h1(AppColors.black),
                 textAlign: TextAlign.center,
               ),
             ],

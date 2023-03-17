@@ -91,7 +91,8 @@ class _HomePageState extends State<HomePage> {
 
               Name(),
               SizedBox(height: 32),
-              Image.asset('assets/images/grey-rectangle.png'),
+              Image.asset('assets/images/home_img.png',
+                  width: 400, height: 170, fit: BoxFit.fill),
             ],
           ),
         ),

@@ -96,7 +96,12 @@ class _ConnectPageState extends State<ConnectPage>
                   ],
                 ),
                 SizedBox(height: 29),
-                Image.asset('assets/images/grey-rectangle.png'),
+                Container(
+                  child: Image.asset('assets/images/connect_img.png',
+                  fit: BoxFit.contain),
+                  width: 380,
+                  height: 120,
+                ),
                 SizedBox(height: 16),
                 Text(
                   'Your friend',
