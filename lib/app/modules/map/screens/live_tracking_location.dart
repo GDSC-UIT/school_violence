@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:location/location.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 const String googleApiKey = 'AIzaSyCoXGfVTIF9Kv6xFuJ85tB3ZwZdFevU2V8';
 
@@ -21,6 +24,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
 
   static const LatLng sourceLocation = LatLng(10.875407, 106.807905);
   static const LatLng destination = LatLng(10.8799879, 106.8108467);
+  final SignInController signInCtrl = Get.find<SignInController>();
 
   List<LatLng> polylineCoordinates = [];
 
@@ -134,6 +138,12 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      new Duration(seconds: 1),
+      (timer) {
+        helpDialog(signInCtrl.userId.value);
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('User current location'),

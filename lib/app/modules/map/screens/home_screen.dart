@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/map/screens/live_tracking_location.dart';
 import 'package:school_violence_app/app/modules/map/screens/simple_map_screen.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  SignInController signInCtrl = SignInController();
+  final SignInController signInCtrl = Get.find<SignInController>();
   @override
   Widget build(BuildContext context) {
     Timer.periodic(

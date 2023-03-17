@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
@@ -31,7 +32,7 @@ class _SimpleMapScreenState extends State<SimpleMapScreen> {
     controller.animateCamera(CameraUpdate.newCameraPosition(targetPosition));
   }
 
-  SignInController signInCtrl = SignInController();
+  final SignInController signInCtrl = Get.find<SignInController>();
 
   @override
   Widget build(BuildContext context) {
