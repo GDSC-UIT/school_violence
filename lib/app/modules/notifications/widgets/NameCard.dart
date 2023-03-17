@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
@@ -56,23 +57,11 @@ class NameCard extends StatelessWidget {
           leading: FlutterLogo(size: 56.0),
           title: Text(
             notificationsController.name.value,
-            style: TextStyle(
-              fontSize: 20,
-              fontFamily: 'Montserrat',
-              color: AppColors.black,
-              decoration: TextDecoration.none,
-              fontWeight: FontWeight.w600,
-            ),
+            style: CustomTextStyle.h2(AppColors.black),
           ),
           subtitle: Text(
             notificationsController.school.value,
-            style: TextStyle(
-              fontSize: 10,
-              fontFamily: 'Montserrat',
-              color: AppColors.blur,
-              decoration: TextDecoration.none,
-              fontWeight: FontWeight.w500,
-            ),
+            style: CustomTextStyle.small_desc(AppColors.blur),
           ),
           trailing: AcceptButton(
             userId: signInCtrl.userId.value,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/core/values/app_text_style.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class EmergencyDialog extends StatelessWidget {
   const EmergencyDialog({super.key});
@@ -58,6 +60,7 @@ class EmergencyDialog extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      Get.toNamed(AppRoutes.map);
                       // Get.to(EmailPage());
                     },
                     style: ElevatedButton.styleFrom(

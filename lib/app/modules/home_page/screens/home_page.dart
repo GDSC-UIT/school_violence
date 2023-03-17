@@ -44,7 +44,10 @@ class _HomePageState extends State<HomePage> {
   void getData() async {
     DocumentSnapshot snap =
         await _connect.connectCollection.doc(signInCtrl.userId.value).get();
-    _friends = (snap.data()! as dynamic)['friends'];
+    if (snap.data() != null)
+      _friends = (snap.data()! as dynamic)['friends'];
+    else
+      _friends = [];
   }
 
   void sendHelp() {
