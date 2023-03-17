@@ -26,7 +26,7 @@ class _ConnectPageState extends State<ConnectPage>
   bool cmbscritta = false;
   late TextEditingController _controller;
   late TabController _tabController;
-  final SignInController signInCtrl = SignInController();
+  final SignInController signInCtrl = Get.find<SignInController>();
   List<String> products = ["BED", "SOFA", "CHAIR"];
   ListFriend list = ListFriend();
 
