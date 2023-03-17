@@ -104,7 +104,12 @@ class _ProfilePageState extends State<ProfilePage>
                   ],
                 ),
                 SizedBox(height: 29),
-                Image.asset('assets/images/grey-rectangle.png'),
+                Container(
+                  child: Image.asset('assets/images/profile_img.png',
+                  fit: BoxFit.contain),
+                  width: 400,
+                  height: 126,
+                ),
                 SizedBox(height: 16),
                 ProfileNameCard(
                     name: 'Cao Minh Quân', phoneNumber: '+84 123456789'),

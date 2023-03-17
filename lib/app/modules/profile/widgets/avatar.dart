@@ -15,12 +15,12 @@ class PersonalAvatar extends StatelessWidget {
         children: [
           Image.asset(
             '$imageLink',
-            width: 100,
+            width: 90,
           ), // avatar
           InkWell(
             onTap: () {},
             child: Container(
-              margin: EdgeInsets.fromLTRB(70, 50, 0, 0),
+              margin: EdgeInsets.fromLTRB(60, 45, 0, 0),
               decoration: new BoxDecoration(
                   borderRadius:
                       new BorderRadius.all(const Radius.circular(120.0)),

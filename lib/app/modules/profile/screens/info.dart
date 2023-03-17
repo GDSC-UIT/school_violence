@@ -79,7 +79,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
               ),
               SizedBox(height: 20),
               PersonalAvatar(
-                imageLink: 'assets/images/avatar.jpg',
+                imageLink: 'assets/images/personal_img.png',
               ),
               SizedBox(height: 26),
               // FULL NAME

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
@@ -99,18 +100,17 @@ class _NotificationsPageState extends State<NotificationsPage>
                     SizedBox(width: 22.5),
                     Text(
                       'Notifications',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                   ],
                 ),
                 SizedBox(height: 29),
-                Image.asset('assets/images/grey-rectangle.png'),
+                Container(
+                  child: Image.asset('assets/images/notification_img.png',
+                  fit: BoxFit.contain),
+                  width: 400,
+                  height: 126,
+                ),
                 SizedBox(height: 16),
                 Container(
                   height: 0.1,
@@ -127,22 +127,13 @@ class _NotificationsPageState extends State<NotificationsPage>
                             color: AppColors.secondaryColor,
                             borderRadius: BorderRadius.circular(50)),
                         child: TabBar(
-                          unselectedLabelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                          unselectedLabelStyle: CustomTextStyle.button(AppColors.primaryColor),
                           indicator: BoxDecoration(
                             borderRadius:
                                 BorderRadius.circular(50), // Creates border
                             color: AppColors.primaryColor,
                           ),
-                          labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
+                          labelStyle: CustomTextStyle.button(AppColors.white),
                           labelPadding: EdgeInsets.all(14),
                           // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
@@ -193,23 +184,11 @@ class _NotificationsPageState extends State<NotificationsPage>
                                     leading: FlutterLogo(size: 56.0),
                                     title: Text(
                                       'Chat',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontFamily: 'Montserrat',
-                                        color: AppColors.black,
-                                        decoration: TextDecoration.none,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                      style: CustomTextStyle.h2(AppColors.black),
                                     ),
                                     subtitle: Text(
                                       'Today',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontFamily: 'Montserrat',
-                                        color: AppColors.blur,
-                                        decoration: TextDecoration.none,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                      style: CustomTextStyle.small_desc(AppColors.blur),
                                     ),
                                   ),
                                 );

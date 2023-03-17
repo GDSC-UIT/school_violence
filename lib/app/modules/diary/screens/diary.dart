@@ -88,7 +88,12 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                   ],
                 ),
                 const SizedBox(height: 29),
-                Image.asset('assets/images/grey-rectangle.png'),
+                Container(
+                  child: Image.asset('assets/images/diary_img.png',
+                  fit: BoxFit.contain),
+                  width: 400,
+                  height: 120,
+                ),
                 const SizedBox(height: 16),
                 Container(
                   height: 0.1,
@@ -131,22 +136,13 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                           borderRadius:
                                               BorderRadius.circular(50)),
                                       child: TabBar(
-                                        unselectedLabelStyle: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                        ),
+                                        unselectedLabelStyle: CustomTextStyle.button(AppColors.primaryColor),
                                         indicator: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               50), // Creates border
                                           color: AppColors.primaryColor,
                                         ),
-                                        labelStyle: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                          color: Colors.white,
-                                        ),
+                                        labelStyle: CustomTextStyle.button(AppColors.white),
                                         labelPadding: const EdgeInsets.all(14),
                                         // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                                         labelColor: AppColors.white,
@@ -215,31 +211,36 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                 Timer _timer = Timer(
                                                     Duration(seconds: 5),
                                                     () => {
-                                                          if(ctrlDiary.isFetchingExpert.value){
-                                                          ctrlDiary
+                                                          if (ctrlDiary
                                                               .isFetchingExpert
-                                                              .value = false,
-                                                          Get.defaultDialog(
-                                                            title:
-                                                                "Please try again later ...",
-                                                            content: const Text(
-                                                                'There is no more expert online now',
-                                                              ),
-                                                            actions: [
-                                                              TextButton(
-                                                                child:
+                                                              .value)
+                                                            {
+                                                              ctrlDiary
+                                                                  .isFetchingExpert
+                                                                  .value = false,
+                                                              Get.defaultDialog(
+                                                                title:
+                                                                    "Please try again later ...",
+                                                                content:
                                                                     const Text(
-                                                                        "Close",
-                                                                        style: TextStyle(
-                                                                          color: AppColors.primaryColor
-                                                                        ),
-                                                                        ),
-                                                                onPressed: () =>
-                                                                    Get.back(),
-                                                              ),
-                                                            ],
-                                                          )
-                                                          }
+                                                                  'There is no more expert online now',
+                                                                ),
+                                                                actions: [
+                                                                  TextButton(
+                                                                    child:
+                                                                        const Text(
+                                                                      "Close",
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              AppColors.primaryColor),
+                                                                    ),
+                                                                    onPressed:
+                                                                        () => Get
+                                                                            .back(),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            }
                                                         });
                                                 while (ctrlDiary
                                                     .isFetchingExpert.value) {
@@ -272,7 +273,8 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                                   .text,
                                                           roomUser: [
                                                             ctrl.userId.value,
-                                                            expert[randomExpert].id
+                                                            expert[randomExpert]
+                                                                .id
                                                           ],
                                                           nowUser:
                                                               ctrl.userId.value,
