@@ -46,9 +46,11 @@ class _ConnectPageState extends State<ConnectPage>
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(seconds: 1),
+      new Duration(milliseconds: 100),
       (timer) {
-        helpDialog(signInCtrl.userId.value);
+        if (Get.isDialogOpen == false) {
+          helpDialog(signInCtrl.userId.value);
+        }
       },
     );
     return MaterialApp(
@@ -98,7 +100,7 @@ class _ConnectPageState extends State<ConnectPage>
                 SizedBox(height: 29),
                 Container(
                   child: Image.asset('assets/images/connect_img.png',
-                  fit: BoxFit.contain),
+                      fit: BoxFit.contain),
                   width: 380,
                   height: 120,
                 ),

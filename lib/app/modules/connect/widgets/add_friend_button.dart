@@ -41,7 +41,7 @@ class AddFriendButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(seconds: 1),
+      new Duration(milliseconds: 100),
       (timer) {
         getData();
         if (notificationsCtrl.isFriend.value) {
@@ -100,7 +100,7 @@ class AddFriendButton extends StatelessWidget {
                         color: AppColors.primaryColor,
                       ),
                     )
-                  : Icon(Icons.child_friendly),
+                  : Icon(Icons.person),
         );
       },
     );

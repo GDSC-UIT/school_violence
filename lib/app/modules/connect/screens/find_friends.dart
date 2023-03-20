@@ -43,9 +43,11 @@ class FindFriends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(seconds: 1),
+      new Duration(milliseconds: 100),
       (timer) {
-        helpDialog(signInCtrl.userId.value);
+        if (Get.isDialogOpen == false) {
+          helpDialog(signInCtrl.userId.value);
+        }
       },
     );
     return Scaffold(

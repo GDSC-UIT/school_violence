@@ -49,9 +49,11 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(seconds: 1),
+      new Duration(milliseconds: 100),
       (timer) {
-        helpDialog(signInCtrl.userId.value);
+        if (Get.isDialogOpen == false) {
+          helpDialog(signInCtrl.userId.value);
+        }
       },
     );
     return MaterialApp(
@@ -106,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 29),
                 Container(
                   child: Image.asset('assets/images/profile_img.png',
-                  fit: BoxFit.contain),
+                      fit: BoxFit.contain),
                   width: 400,
                   height: 126,
                 ),

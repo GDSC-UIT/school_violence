@@ -59,7 +59,7 @@ class _NotificationsPageState extends State<NotificationsPage>
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(seconds: 1),
+      new Duration(milliseconds: 100),
       (timer) {
         List temp = notifycationsCtrl.friendRequest;
         getData();
@@ -69,9 +69,11 @@ class _NotificationsPageState extends State<NotificationsPage>
       },
     );
     Timer.periodic(
-      new Duration(seconds: 1),
+      new Duration(milliseconds: 100),
       (timer) {
-        helpDialog(signInCtrl.userId.value);
+        if (Get.isDialogOpen == false) {
+          helpDialog(signInCtrl.userId.value);
+        }
       },
     );
     return MaterialApp(
@@ -107,7 +109,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                 SizedBox(height: 29),
                 Container(
                   child: Image.asset('assets/images/notification_img.png',
-                  fit: BoxFit.contain),
+                      fit: BoxFit.contain),
                   width: 400,
                   height: 126,
                 ),
@@ -127,7 +129,8 @@ class _NotificationsPageState extends State<NotificationsPage>
                             color: AppColors.secondaryColor,
                             borderRadius: BorderRadius.circular(50)),
                         child: TabBar(
-                          unselectedLabelStyle: CustomTextStyle.button(AppColors.primaryColor),
+                          unselectedLabelStyle:
+                              CustomTextStyle.button(AppColors.primaryColor),
                           indicator: BoxDecoration(
                             borderRadius:
                                 BorderRadius.circular(50), // Creates border
@@ -184,11 +187,13 @@ class _NotificationsPageState extends State<NotificationsPage>
                                     leading: FlutterLogo(size: 56.0),
                                     title: Text(
                                       'Chat',
-                                      style: CustomTextStyle.h2(AppColors.black),
+                                      style:
+                                          CustomTextStyle.h2(AppColors.black),
                                     ),
                                     subtitle: Text(
                                       'Today',
-                                      style: CustomTextStyle.small_desc(AppColors.blur),
+                                      style: CustomTextStyle.small_desc(
+                                          AppColors.blur),
                                     ),
                                   ),
                                 );

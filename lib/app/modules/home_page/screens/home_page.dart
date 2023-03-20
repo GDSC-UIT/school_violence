@@ -66,9 +66,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     getData();
     Timer.periodic(
-      new Duration(seconds: 1),
+      new Duration(milliseconds: 100),
       (timer) {
-        helpDialog(signInCtrl.userId.value);
+        if (Get.isDialogOpen == false) {
+          helpDialog(signInCtrl.userId.value);
+        }
       },
     );
     return Scaffold(

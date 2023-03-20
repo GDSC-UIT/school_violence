@@ -90,7 +90,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                 const SizedBox(height: 29),
                 Container(
                   child: Image.asset('assets/images/diary_img.png',
-                  fit: BoxFit.contain),
+                      fit: BoxFit.contain),
                   width: 400,
                   height: 120,
                 ),
@@ -136,13 +136,16 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                           borderRadius:
                                               BorderRadius.circular(50)),
                                       child: TabBar(
-                                        unselectedLabelStyle: CustomTextStyle.button(AppColors.primaryColor),
+                                        unselectedLabelStyle:
+                                            CustomTextStyle.button(
+                                                AppColors.primaryColor),
                                         indicator: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                               50), // Creates border
                                           color: AppColors.primaryColor,
                                         ),
-                                        labelStyle: CustomTextStyle.button(AppColors.white),
+                                        labelStyle: CustomTextStyle.button(
+                                            AppColors.white),
                                         labelPadding: const EdgeInsets.all(14),
                                         // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                                         labelColor: AppColors.white,
