@@ -72,7 +72,7 @@ class SignInButton extends StatelessWidget {
             signInCtrl.updateUserId(result);
             getData();
             Timer.periodic(
-              new Duration(seconds: 1),
+              new Duration(milliseconds: 100),
               (timer) {
                 checkHelp();
               },
