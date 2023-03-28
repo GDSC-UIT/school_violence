@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/intro/intro_controller.dart';
 import 'package:school_violence_app/app/modules/intro/widgets/get_started_button.dart';
 import 'package:school_violence_app/app/modules/intro/widgets/have_account_button.dart';
@@ -20,17 +21,25 @@ class IntroPage extends StatelessWidget {
           children: [
             const SizedBox(
               width: 320,
-              height: 100,
+              height: 180,
             ),
             picturesAndText(ctrl: ctrl),
             const SizedBox(
               width: 320,
-              height: 0,
+              height: 30,
             ),
             OnboardingIndicator(ctrl: ctrl),
             const SizedBox(
               width: 320,
-              height: 50,
+              height: 30,
+            ),
+            Divider(
+              color: AppColors.grey,
+              thickness: 1.5,
+            ),
+            const SizedBox(
+              width: 320,
+              height: 20,
             ),
             GetStartedButton(),
             const SizedBox(

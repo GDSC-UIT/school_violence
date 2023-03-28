@@ -82,14 +82,14 @@ class SignInButton extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryColor,
-        shadowColor: AppColors.primaryColorShadow,
-        elevation: 5,
-        minimumSize: const Size(300, 40),
+        // shadowColor: AppColors.primaryColorShadow,
+        // elevation: 5,
+        minimumSize: const Size(360, 50),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),
       child: Text(
-        'Sign In',
+        'SIGN IN',
         textAlign: TextAlign.center,
         style: CustomTextStyle.button(AppColors.white),
       ),

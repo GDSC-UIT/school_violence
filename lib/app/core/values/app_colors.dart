@@ -13,4 +13,5 @@ class AppColors {
   static const Color blur = Color(0xFF3D3D3D);
   static const Color desc = Color(0xFF676767);
   static const Color notificationBackgroundColor = Color(0xFFFF3A28);
+  static const Color dontHaveAccount = Color.fromRGBO(137, 137, 137, 1);
 }

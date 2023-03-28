@@ -14,8 +14,8 @@ class picturesAndText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
-      width: 300,
+      height: 450,
+      width: 330,
       child: PageView.builder(
         onPageChanged: (index) {
           ctrl.updateSelectedIndex(index);
@@ -27,8 +27,8 @@ class picturesAndText extends StatelessWidget {
             children: [
               // need to replace this Text -> Pictures
               Image.asset('assets/images/signup_img.png',
-                  width: 300, height: 280, fit: BoxFit.fill),
-              SizedBox(height: 10),
+                  width: 292, height: 270, fit: BoxFit.fill),
+              SizedBox(height: 40),
               Text(
                 'Connect & share with\nexpert whenever and\nwherever you want',
                 style: CustomTextStyle.h1(AppColors.black),

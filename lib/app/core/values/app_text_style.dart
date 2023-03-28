@@ -3,11 +3,12 @@ import 'package:flutter/cupertino.dart';
 class CustomTextStyle extends TextStyle {
   static TextStyle h1(Color color) {
     return TextStyle(
-      fontSize: 24,
+      fontSize: 26,
       fontFamily: 'Ubuntu',
       color: color,
       decoration: TextDecoration.none,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
     );
   }
 
@@ -17,13 +18,13 @@ class CustomTextStyle extends TextStyle {
       fontFamily: 'Ubuntu',
       color: color,
       decoration: TextDecoration.none,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
     );
   }
 
   static TextStyle label(Color color) {
     return TextStyle(
-      fontSize: 18,
+      fontSize: 14,
       fontFamily: 'Ubuntu',
       color: color,
       decoration: TextDecoration.none,
@@ -54,9 +55,9 @@ class CustomTextStyle extends TextStyle {
   static TextStyle button(Color color) {
     return TextStyle(
       color: color,
-      fontSize: 16,
+      fontSize: 14,
       fontFamily: 'Ubuntu',
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
     );
   }
 

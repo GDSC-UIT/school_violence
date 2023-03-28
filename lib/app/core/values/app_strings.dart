@@ -1,3 +1,3 @@
 class AppStrings {
-  String appName = 'School Violence';
+  String appName = 'ProtectED';
 }

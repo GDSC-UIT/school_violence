@@ -14,8 +14,8 @@ class Name extends StatelessWidget {
         Row(
           children: [
             Image.asset(
-              'assets/images/grey-avatar.png',
-              width: 28,
+              'assets/images/logo-protected.png',
+              width: 50,
             ),
             SizedBox(width: 16),
             Text(

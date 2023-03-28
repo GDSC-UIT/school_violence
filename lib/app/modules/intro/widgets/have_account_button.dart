@@ -25,9 +25,9 @@ class HaveAccountButton extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.secondaryColor,
-        shadowColor: AppColors.secondaryColorShadow,
-        elevation: 5,
-        minimumSize: const Size(300, 50),
+        // shadowColor: AppColors.secondaryColorShadow,
+        // elevation: 5,
+        minimumSize: const Size(360, 50),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),

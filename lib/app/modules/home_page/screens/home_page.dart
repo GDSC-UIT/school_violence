@@ -84,6 +84,7 @@ class _HomePageState extends State<HomePage> {
           Get.toNamed(AppRoutes.map);
         },
         backgroundColor: AppColors.primaryColor,
+        child: Image.asset('assets/icons/map_icon.png'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

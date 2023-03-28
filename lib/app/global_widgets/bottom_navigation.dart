@@ -54,12 +54,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home_rounded),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.menu_book_rounded),
-          label: 'Diary',
+          icon: Icon(Icons.message),
+          label: 'Chat',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.connect_without_contact),

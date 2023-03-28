@@ -26,8 +26,8 @@ class GetStartedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryColor,
         shadowColor: AppColors.primaryColorShadow,
-        elevation: 5,
-        minimumSize: const Size(300, 50),
+        // elevation: 5,
+        minimumSize: const Size(360, 50),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),
