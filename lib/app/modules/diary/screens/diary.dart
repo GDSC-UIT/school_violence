@@ -77,12 +77,12 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/images/left-small.png',
-                      width: 28,
+                      'assets/images/logo-protected.png',
+                      width: 50,
                     ),
                     const SizedBox(width: 22.5),
                     Text(
-                      'Diary',
+                      'Chat with Expert',
                       style: CustomTextStyle.h1(AppColors.black),
                     ),
                   ],
@@ -95,11 +95,6 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                   height: 120,
                 ),
                 const SizedBox(height: 16),
-                Container(
-                  height: 0.1,
-                  width: 378.5,
-                  color: AppColors.black,
-                ),
 
                 FutureBuilder<bool>(
                     future: isExpert(), // a Future<String> or null
@@ -171,8 +166,18 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                               expands: true,
                                               keyboardType:
                                                   TextInputType.multiline,
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 filled: true,
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color:
+                                                        AppColors.primaryColor,
+                                                    width: 1.5,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                ),
                                                 hintText: 'Enter a message',
                                               ),
                                             ),

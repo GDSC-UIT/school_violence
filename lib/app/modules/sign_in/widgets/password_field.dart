@@ -30,13 +30,30 @@ class PasswordField extends StatelessWidget {
               icon: Icon(
                 Icons.remove_red_eye,
                 size: 20,
+                color: AppColors.primaryColor,
               ),
             ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.black, width: 1.0),
+            contentPadding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+            prefixIcon: Icon(
+              Icons.key,
+              color: AppColors.primaryColor,
+            ),
+            filled: true,
+            hintText: "Password",
+            hintStyle: TextStyle(
+              color: AppColors.dontHaveAccount,
+              fontSize: 16,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.transparent,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.circular(30),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
+              borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
+              borderRadius: BorderRadius.circular(30),
             ),
           ),
           obscureText: ctrl.hide.value,
