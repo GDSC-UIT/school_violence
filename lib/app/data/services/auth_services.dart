@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -99,7 +101,8 @@ class AuthServices {
 
   //Sign in
 
-  Future signInWithEmailAndPassword(String email, String password) async {
+  Future<String?> signInWithEmailAndPassword(
+      String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -107,7 +110,7 @@ class AuthServices {
       Get.toNamed(AppRoutes.home);
       return user?.uid;
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
       return null;
     }
   }

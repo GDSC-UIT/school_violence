@@ -65,11 +65,14 @@ class SignInButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () async {
         if (_formKey.currentState!.validate()) {
-          dynamic result = await _auth.signInWithEmailAndPassword(
+          String? result = await _auth.signInWithEmailAndPassword(
             signInCtrl.emailController.text,
             signInCtrl.passwordController.text,
           );
           if (result != null) {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString('email', signInCtrl.emailController.text);
+            prefs.setString('password', signInCtrl.passwordController.text);
             signInCtrl.updateUserId(result);
             getData();
             Timer.periodic(
