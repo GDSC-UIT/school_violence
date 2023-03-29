@@ -17,36 +17,36 @@ class EmailField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _emailController,
-      style: TextStyle(fontSize: 20),
+      style: const TextStyle(fontSize: 20),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-        prefixIcon: Icon(
+        contentPadding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+        prefixIcon: const Icon(
           Icons.email,
           color: AppColors.primaryColor,
         ),
         filled: true,
         hintText: "Email",
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: AppColors.dontHaveAccount,
           fontSize: 16,
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: AppColors.transparent,
             width: 0.5,
           ),
           borderRadius: BorderRadius.circular(30),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
+          borderSide: const BorderSide(color: AppColors.primaryColor, width: 1.5),
           borderRadius: BorderRadius.circular(30),
         ),
       ),
       validator: (value) {
-        bool _isEmailValid = RegExp(
+        bool isEmailValid = RegExp(
                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
             .hasMatch(value!);
-        if (!_isEmailValid) {
+        if (!isEmailValid) {
           return 'Invalid email.';
         }
         return null;

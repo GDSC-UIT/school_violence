@@ -22,7 +22,7 @@ class CustomReportItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(width: .5),
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
               Radius.circular(12.0) //                 <--- border radius here
               ),
         ),

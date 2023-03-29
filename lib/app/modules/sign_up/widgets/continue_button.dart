@@ -45,7 +45,7 @@ class ContinueButton extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       ),
-      child: Text(
+      child: const Text(
         'Continue',
         textAlign: TextAlign.center,
         style: TextStyle(

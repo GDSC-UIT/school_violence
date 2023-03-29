@@ -11,8 +11,9 @@ class Emergency {
     DocumentSnapshot snap = await emergencyCollection.doc(friendId).get();
     if (snap.data() != null) {
       _friendId = (snap.data()! as dynamic)['friendId'];
-    } else
+    } else {
       _friendId = [];
+    }
     _friendId.add(userId);
     return await emergencyCollection.doc(friendId).set(
       {

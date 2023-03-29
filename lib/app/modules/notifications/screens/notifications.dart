@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
@@ -59,7 +58,7 @@ class _NotificationsPageState extends State<NotificationsPage>
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         List temp = notifycationsCtrl.friendRequest;
         getData();
@@ -69,7 +68,7 @@ class _NotificationsPageState extends State<NotificationsPage>
       },
     );
     Timer.periodic(
-      new Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         if (Get.isDialogOpen == false) {
           helpDialog(signInCtrl.userId.value);
@@ -86,7 +85,7 @@ class _NotificationsPageState extends State<NotificationsPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
                 Row(
                   children: [
@@ -99,21 +98,21 @@ class _NotificationsPageState extends State<NotificationsPage>
                         width: 28,
                       ),
                     ),
-                    SizedBox(width: 22.5),
+                    const SizedBox(width: 22.5),
                     Text(
                       'Notifications',
                       style: CustomTextStyle.h1(AppColors.black),
                     ),
                   ],
                 ),
-                SizedBox(height: 29),
-                Container(
-                  child: Image.asset('assets/images/notification_img.png',
-                      fit: BoxFit.contain),
+                const SizedBox(height: 29),
+                SizedBox(
                   width: 400,
                   height: 126,
+                  child: Image.asset('assets/images/notification_img.png',
+                      fit: BoxFit.contain),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Container(
                   height: 0.1,
                   width: 378.5,
@@ -137,25 +136,25 @@ class _NotificationsPageState extends State<NotificationsPage>
                             color: AppColors.primaryColor,
                           ),
                           labelStyle: CustomTextStyle.button(AppColors.white),
-                          labelPadding: EdgeInsets.all(14),
+                          labelPadding: const EdgeInsets.all(14),
                           // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
                           unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
                           tabs: [
-                            Text('Diary'),
+                            const Text('Diary'),
                             Stack(
                               children: [
-                                Text('Friend'),
+                                const Text('Friend'),
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(60, 2, 0, 0),
+                                  margin: const EdgeInsets.fromLTRB(60, 2, 0, 0),
                                   width: 14,
                                   height: 14,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: AppColors
                                           .notificationBackgroundColor),
-                                  child: (Text(
+                                  child: (const Text(
                                     '1',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -172,7 +171,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                           ],
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         width: double.maxFinite,
                         height: 300,
                         child: TabBarView(
@@ -184,7 +183,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                               itemBuilder: (_, index) {
                                 return Card(
                                   child: ListTile(
-                                    leading: FlutterLogo(size: 56.0),
+                                    leading: const FlutterLogo(size: 56.0),
                                     title: Text(
                                       'Chat',
                                       style:
@@ -204,8 +203,8 @@ class _NotificationsPageState extends State<NotificationsPage>
                                 itemCount:
                                     notifycationsCtrl.friendRequest.length,
                                 scrollDirection: Axis.vertical,
-                                itemBuilder: (context, _index) {
-                                  return NameCard(index: _index);
+                                itemBuilder: (context, index) {
+                                  return NameCard(index: index);
                                 },
                               ),
                             )

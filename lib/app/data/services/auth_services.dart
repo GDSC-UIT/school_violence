@@ -105,7 +105,7 @@ class AuthServices {
           email: email, password: password);
       User? user = result.user;
       Get.toNamed(AppRoutes.home);
-      return user != null ? user.uid : null;
+      return user?.uid;
     } catch (e) {
       print(e.toString());
       return null;

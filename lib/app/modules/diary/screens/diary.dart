@@ -14,7 +14,7 @@ import '../diary_controller.dart';
 import 'dart:math';
 
 class DiaryPage extends StatefulWidget {
-  DiaryPage({super.key});
+  const DiaryPage({super.key});
 
   @override
   State<DiaryPage> createState() => _DiaryPageState();
@@ -88,11 +88,11 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                   ],
                 ),
                 const SizedBox(height: 29),
-                Container(
-                  child: Image.asset('assets/images/diary_img.png',
-                      fit: BoxFit.contain),
+                SizedBox(
                   width: 400,
                   height: 120,
+                  child: Image.asset('assets/images/diary_img.png',
+                      fit: BoxFit.contain),
                 ),
                 const SizedBox(height: 16),
 
@@ -115,12 +115,12 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                         );
                       } else {
                         if (snapshot.data == true) {
-                          return ChatList();
+                          return const ChatList();
                         } else {
                           return SizedBox(
                             height: 400,
                             child: ListView(children: [
-                              ChatList(),
+                              const ChatList(),
                               DefaultTabController(
                                 length: 2,
                                 child: Column(
@@ -151,7 +151,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                       ),
                                     ),
                                     const SizedBox(height: 10),
-                                    Container(
+                                    SizedBox(
                                       width: double.maxFinite,
                                       height: 270,
                                       child: TabBarView(
@@ -170,7 +170,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                 filled: true,
                                                 focusedBorder:
                                                     OutlineInputBorder(
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color:
                                                         AppColors.primaryColor,
                                                     width: 1.5,
@@ -197,7 +197,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                     Obx(() => (ElevatedButton(
                                           onPressed: () async {
                                             if (ctrlDiary.haveText.value) {
@@ -216,8 +216,8 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                 ctrlDiary.isFetchingExpert
                                                     .value = true;
                                                 Random rng = Random();
-                                                Timer _timer = Timer(
-                                                    Duration(seconds: 5),
+                                                Timer timer = Timer(
+                                                    const Duration(seconds: 5),
                                                     () => {
                                                           if (ctrlDiary
                                                               .isFetchingExpert
@@ -321,7 +321,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                         color: ctrlDiary
                                                                 .haveText.value
                                                             ? AppColors.white
-                                                            : Color(0xFF898989),
+                                                            : const Color(0xFF898989),
                                                         fontSize: 16,
                                                         fontFamily:
                                                             'Montserrat',
@@ -340,7 +340,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                             ],
                                           ),
                                         ))),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                   ],
                                 ),
                               ),

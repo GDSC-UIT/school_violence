@@ -41,7 +41,7 @@ class FormHelper {
       var findValue = listData
           .where((item) => item[optionValue].toString() == value.toString());
 
-      if (findValue.length > 0) {
+      if (findValue.isNotEmpty) {
         value = findValue.first[optionValue].toString();
       } else {
         value = null;
@@ -80,7 +80,7 @@ class FormHelper {
               hintText: hintText,
               enabledBorder: UnderlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: AppColors.black,
                   //width: enabledBorderWidth,
                 ),
@@ -102,15 +102,15 @@ class FormHelper {
               suffixIcon: suffixIcon,
               prefixIcon: showPrefixIcon
                   ? Padding(
-                      child: IconTheme(
-                        data: IconThemeData(color: prefixIconColor),
-                        child: prefixIcon!,
-                      ),
                       padding: EdgeInsets.only(
                         left: prefixIconPaddingLeft,
                         right: prefixIconPaddingRight,
                         top: prefixIconPaddingTop,
                         bottom: prefixIconPaddingBottom,
+                      ),
+                      child: IconTheme(
+                        data: IconThemeData(color: prefixIconColor),
+                        child: prefixIcon!,
                       ),
                     )
                   : null,
@@ -155,7 +155,7 @@ class FormHelper {
               (dynamic data) {
                 return DropdownMenuItem<String>(
                   value: data[optionValue].toString(),
-                  child: new Text(
+                  child: Text(
                     data[optionLabel],
                     style: CustomTextStyle.input(AppColors.black),
                   ),

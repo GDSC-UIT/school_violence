@@ -95,11 +95,11 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
     );
 
     if (result.points.isNotEmpty) {
-      result.points.forEach(
-        (PointLatLng point) => polylineCoordinates.add(
+      for (var point in result.points) {
+        polylineCoordinates.add(
           LatLng(point.latitude, point.longitude),
-        ),
-      );
+        );
+      }
     }
     setState(() {});
   }
@@ -139,7 +139,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         if (Get.isDialogOpen == false) {
           helpDialog(signInCtrl.userId.value);
@@ -164,7 +164,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
               ),
               polylines: {
                 Polyline(
-                  polylineId: PolylineId("route"),
+                  polylineId: const PolylineId("route"),
                   points: polylineCoordinates,
                   color: AppColors.primaryColor,
                   width: 6,
@@ -194,15 +194,15 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
               },
             );
           }
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           getPolyPoints();
         },
-        label: Text("test "),
-        icon: Icon(Icons.location_history),
+        label: const Text("test "),
+        icon: const Icon(Icons.location_history),
       ),
     );
   }

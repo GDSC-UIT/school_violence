@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
-import 'package:school_violence_app/app/data/services/auth_services.dart';
 
 class AppleSignInButton extends StatelessWidget {
   const AppleSignInButton({
@@ -22,7 +21,7 @@ class AppleSignInButton extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       ),
-      label: Text(
+      label: const Text(
         'Continue with Apple',
         style: TextStyle(
           color: AppColors.black,

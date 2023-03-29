@@ -41,7 +41,7 @@ class AddFriendButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         getData();
         if (notificationsCtrl.isFriend.value) {
@@ -92,15 +92,15 @@ class AddFriendButton extends StatelessWidget {
                   ),
                 ),
           child: (ctrl.isSent.value && !notificationsCtrl.isFriend.value)
-              ? Text('Add')
+              ? const Text('Add')
               : (!ctrl.isSent.value && !notificationsCtrl.isFriend.value)
-                  ? Text(
+                  ? const Text(
                       'Sent ✓',
                       style: TextStyle(
                         color: AppColors.primaryColor,
                       ),
                     )
-                  : Icon(Icons.person),
+                  : const Icon(Icons.person),
         );
       },
     );

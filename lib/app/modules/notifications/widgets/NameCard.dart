@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
@@ -18,7 +17,7 @@ class NameCard extends StatelessWidget {
         super(key: key);
 
   final _index;
-  Connect _connect = Connect();
+  final Connect _connect = Connect();
   final ConnectController connectCtrl = Get.find<ConnectController>();
   final SignInController signInCtrl = Get.find<SignInController>();
   final NotificationsController notificationsController =
@@ -54,7 +53,7 @@ class NameCard extends StatelessWidget {
     return Obx(
       () => Card(
         child: ListTile(
-          leading: FlutterLogo(size: 56.0),
+          leading: const FlutterLogo(size: 56.0),
           title: Text(
             notificationsController.name.value,
             style: CustomTextStyle.h2(AppColors.black),

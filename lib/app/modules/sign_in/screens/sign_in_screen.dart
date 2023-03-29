@@ -24,7 +24,7 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           reverse: true,
           child: Column(
             children: [
@@ -45,7 +45,7 @@ class SignInPage extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              CircleAvatar(
+                              const CircleAvatar(
                                 backgroundColor: AppColors.primaryColor,
                                 radius: 5,
                               ),
@@ -54,7 +54,7 @@ class SignInPage extends StatelessWidget {
                               ),
                               Text(
                                 AppStrings().appName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.w600,
                                     color: AppColors.primaryColor),
@@ -62,7 +62,7 @@ class SignInPage extends StatelessWidget {
                               const SizedBox(
                                 width: 5,
                               ),
-                              CircleAvatar(
+                              const CircleAvatar(
                                 backgroundColor: AppColors.primaryColor,
                                 radius: 5,
                               ),
@@ -73,7 +73,7 @@ class SignInPage extends StatelessWidget {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Text(
                                 'Hello there',
                                 style: TextStyle(
@@ -82,7 +82,7 @@ class SignInPage extends StatelessWidget {
                                   fontSize: 18,
                                 ),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 width: 5,
                               ),
                               Icon(
@@ -122,7 +122,7 @@ class SignInPage extends StatelessWidget {
                       EmailField(
                         emailController: ctrl.emailController,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       PasswordField(
                         ctrl: ctrl,
                         passwordController: ctrl.passwordController,
@@ -164,7 +164,7 @@ class SignInPage extends StatelessWidget {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(height: 130),
+                          const SizedBox(height: 130),
                           SizedBox(
                             height: 53,
                             width: 382,

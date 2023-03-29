@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/data/services/auth_services.dart';
-import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInButton extends StatelessWidget {
   SignInButton({
@@ -55,8 +55,9 @@ class SignInButton extends StatelessWidget {
         .get();
     if (snapEmergency.data() != null) {
       signInCtrl.updateFriendId((snapEmergency.data()! as dynamic)['friendId']);
-    } else
+    } else {
       signInCtrl.updateFriendId([]);
+    }
   }
 
   @override
@@ -72,7 +73,7 @@ class SignInButton extends StatelessWidget {
             signInCtrl.updateUserId(result);
             getData();
             Timer.periodic(
-              new Duration(milliseconds: 100),
+              const Duration(milliseconds: 100),
               (timer) {
                 checkHelp();
               },

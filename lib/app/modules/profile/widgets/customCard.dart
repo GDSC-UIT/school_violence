@@ -3,7 +3,7 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/core/values/app_text_style.dart';
 
 class CustomReportCard extends StatelessWidget {
-  const CustomReportCard({
+  const CustomReportCard({super.key, 
     required this.title,
     required this.subtitle,
     required this.text,
@@ -24,21 +24,21 @@ class CustomReportCard extends StatelessWidget {
             title,
             style: CustomTextStyle.h2(AppColors.black),
           ),
-          SizedBox(height: 7),
+          const SizedBox(height: 7),
           Row(
             children: [
               Text(
                 subtitle,
                 style: CustomTextStyle.desc(AppColors.desc),
               ),
-              SizedBox(width: 5),
-              Icon(
+              const SizedBox(width: 5),
+              const Icon(
                 Icons.circle,
                 size: 4,
               )
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             text,
             style: CustomTextStyle.small_desc(AppColors.desc),

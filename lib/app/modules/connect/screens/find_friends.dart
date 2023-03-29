@@ -10,7 +10,6 @@ import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/add_friend_button.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
-import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class FindFriends extends StatelessWidget {
   FindFriends({super.key});
@@ -24,7 +23,7 @@ class FindFriends extends StatelessWidget {
         .where('userName', isEqualTo: query)
         .get();
     ctrl.updateSearchResult(result.docs.map((e) => e.data()).toList());
-    if (result != null && result.docs.length >= 1) {
+    if (result.docs.isNotEmpty) {
       ctrl.updateIsSent(await getData(signInCtrl.userId.value,
               ctrl.searchResult.first['id'], 'sentRequest') ==
           false);
@@ -36,14 +35,15 @@ class FindFriends extends StatelessWidget {
     if (snap.data() != null) {
       List sentRequest = (snap.data()! as dynamic)[type];
       return sentRequest.contains(friendId);
-    } else
+    } else {
       return false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         if (Get.isDialogOpen == false) {
           helpDialog(signInCtrl.userId.value);
@@ -56,7 +56,7 @@ class FindFriends extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 35),
+            const SizedBox(height: 35),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -69,7 +69,7 @@ class FindFriends extends StatelessWidget {
                         width: 28,
                       ),
                     ),
-                    SizedBox(width: 22.5),
+                    const SizedBox(width: 22.5),
                     Text(
                       'Connect',
                       style: CustomTextStyle.h1(AppColors.black),
@@ -87,7 +87,7 @@ class FindFriends extends StatelessWidget {
                     ),
                     hintText: "Search Here",
                     suffixIcon: InkWell(
-                      child: Icon(Icons.search),
+                      child: const Icon(Icons.search),
                       onTap: () {},
                     )),
                 onChanged: (query) {
@@ -114,7 +114,7 @@ class FindFriends extends StatelessWidget {
                                   style: CustomTextStyle.h2(AppColors.black),
                                 ),
                                 ListTile(
-                                  leading: CircleAvatar(
+                                  leading: const CircleAvatar(
                                     backgroundImage: AssetImage(
                                         'assets/images/grey-rectangle.png'),
                                     minRadius: 30,

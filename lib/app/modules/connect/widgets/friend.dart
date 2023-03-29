@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 
 class Friend {
   String name;
@@ -8,5 +7,5 @@ class Friend {
   Friend(
       {required this.name,
       required this.phoneNumber,
-      required this.avatarLink}) {}
+      required this.avatarLink});
 }

@@ -9,10 +9,10 @@ class notificationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
+    return const Align(
       alignment: Alignment.bottomLeft,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 30, left: 8),
+        padding: EdgeInsets.only(bottom: 30, left: 8),
         child: CircleAvatar(
           radius: 20,
           backgroundColor: AppColors.white,

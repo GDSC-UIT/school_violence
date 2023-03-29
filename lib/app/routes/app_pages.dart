@@ -3,7 +3,6 @@ import 'package:school_violence_app/app/modules/connect/connect_binding.dart';
 import 'package:school_violence_app/app/modules/connect/screens/find_friends.dart';
 import 'package:school_violence_app/app/modules/connect/screens/main_screen.dart';
 import 'package:school_violence_app/app/modules/diary/diary_binding.dart';
-import 'package:school_violence_app/app/modules/diary/screens/chatscreen.dart';
 import 'package:school_violence_app/app/modules/diary/screens/diary.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/forgot_passwords_binding.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
@@ -49,22 +48,22 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.forgot_password,
-      page: () => ForgotPasswordPage(),
+      page: () => const ForgotPasswordPage(),
       binding: ForgotPasswordBinding(),
     ),
     GetPage(
         name: AppRoutes.home,
-        page: () => HomePage(),
+        page: () => const HomePage(),
         binding: HomePageBinding(),
         transition: Transition.noTransition),
     GetPage(
       name: AppRoutes.notifications,
-      page: () => NotificationsPage(),
+      page: () => const NotificationsPage(),
       binding: NotificationsBinding(),
     ),
     GetPage(
         name: AppRoutes.connect,
-        page: () => ConnectPage(),
+        page: () => const ConnectPage(),
         binding: ConnectBinding(),
         transition: Transition.noTransition),
     GetPage(
@@ -74,22 +73,22 @@ abstract class AppPages {
     ),
     GetPage(
         name: AppRoutes.diary,
-        page: () => DiaryPage(),
+        page: () => const DiaryPage(),
         binding: DiaryBinding(),
         transition: Transition.noTransition),
     GetPage(
         name: AppRoutes.profile,
-        page: () => ProfilePage(),
+        page: () => const ProfilePage(),
         binding: ProfileBinding(),
         transition: Transition.noTransition),
     GetPage(
         name: AppRoutes.info,
-        page: () => PersonalInfoPage(),
+        page: () => const PersonalInfoPage(),
         binding: ProfileBinding(),
         transition: Transition.noTransition),
     GetPage(
         name: AppRoutes.map,
-        page: () => MyMap(),
+        page: () => const MyMap(),
         binding: MapBinding(),
         transition: Transition.noTransition),
   ];
