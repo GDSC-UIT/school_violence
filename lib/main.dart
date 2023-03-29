@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       initialRoute: isLogged
           ? AppRoutes.home
-          : (isViewed != 0 ? AppRoutes.intro : AppRoutes.sign_in),
+          : (isViewed != 0 ? AppRoutes.sign_in : AppRoutes.sign_in),
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
     );
