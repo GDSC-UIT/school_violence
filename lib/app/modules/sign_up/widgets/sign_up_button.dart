@@ -59,24 +59,28 @@ class SignUpButton extends StatelessWidget {
                 alignment: Alignment.center,
                 width: 341,
                 height: 474,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(50),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       width: 168,
                       height: 159,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: AppColors.grey,
                       ),
                     ),
 
                     //
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     //
 
-                    Text(
+                    const Text(
                       'Successful!',
                       style: TextStyle(
                         color: AppColors.primaryColor,
@@ -87,11 +91,11 @@ class SignUpButton extends StatelessWidget {
 
                     //
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     //
 
-                    Text(
+                    const Text(
                       'Please wait  a moment, we are\npreparing for you...',
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -103,18 +107,14 @@ class SignUpButton extends StatelessWidget {
 
                     //
 
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
 
                     //
 
-                    SpinKitCircle(
+                    const SpinKitCircle(
                       color: AppColors.primaryColor,
                     ),
                   ],
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(50),
                 ),
               ),
             ),
@@ -125,14 +125,6 @@ class SignUpButton extends StatelessWidget {
           }
         }
       },
-      child: Text(
-        'Sign Up',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: AppColors.white,
-          fontSize: 16,
-        ),
-      ),
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryColor,
         shadowColor: AppColors.primaryColorShadow,
@@ -140,6 +132,14 @@ class SignUpButton extends StatelessWidget {
         minimumSize: const Size(300, 40),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      ),
+      child: const Text(
+        'Sign Up',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: AppColors.white,
+          fontSize: 16,
+        ),
       ),
     );
   }

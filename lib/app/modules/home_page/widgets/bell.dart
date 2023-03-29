@@ -21,13 +21,13 @@ class Bell extends StatelessWidget {
               width: 28,
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(16, 16, 0, 0),
+              margin: const EdgeInsets.fromLTRB(16, 16, 0, 0),
               width: 14,
               height: 14,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: AppColors.notificationBackgroundColor),
-              child: (Text(
+              child: (const Text(
                 '1',
                 textAlign: TextAlign.center,
                 style: TextStyle(

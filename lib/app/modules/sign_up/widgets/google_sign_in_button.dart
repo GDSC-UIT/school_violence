@@ -22,7 +22,7 @@ class GoogleSignInButton extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       ),
-      label: Text(
+      label: const Text(
         'Continue with Google',
         style: TextStyle(
           color: AppColors.black,

@@ -23,7 +23,7 @@ class bottomSheet extends StatelessWidget {
                 spreadRadius: 4,
                 blurRadius: 10),
           ],
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topRight: Radius.circular(12),
             topLeft: Radius.circular(12),
           ),

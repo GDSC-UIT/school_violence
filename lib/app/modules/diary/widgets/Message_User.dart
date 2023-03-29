@@ -21,7 +21,7 @@ class Message_User extends StatelessWidget {
                 bottomRight: Radius.circular(7))),
         child: Text(
           mess,
-          style: TextStyle(
+          style: const TextStyle(
               color: AppColors.white,
               fontSize: 16,
               fontFamily: 'Montserrat',

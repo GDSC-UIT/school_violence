@@ -11,8 +11,8 @@ enum TypeBully { Violence, Shooting }
 class BottomSheetContent extends StatelessWidget {
   BottomSheetContent({super.key});
 
-  TextEditingController _messageController = TextEditingController();
-  TypeBully _typeValue = TypeBully.Violence;
+  final TextEditingController _messageController = TextEditingController();
+  final TypeBully _typeValue = TypeBully.Violence;
 
   _callNumber(String number) async {
     await FlutterPhoneDirectCaller.callNumber(number);
@@ -37,15 +37,15 @@ class BottomSheetContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Container(
         width: Get.width,
         height: Get.height * 0.5,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 10,
         ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(36),
             topRight: Radius.circular(36),
@@ -59,7 +59,7 @@ class BottomSheetContent extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               "Message",
               style: TextStyle(
                 color: AppColors.black,
@@ -76,18 +76,18 @@ class BottomSheetContent extends StatelessWidget {
                 filled: true,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: AppColors.transparent,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(color: AppColors.primaryColor),
+                  borderSide: const BorderSide(color: AppColors.primaryColor),
                 ),
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: AppColors.primaryColor,
                 ),
-                label: Text(
+                label: const Text(
                   "Type a message to report (optional)",
                   style: TextStyle(
                     fontSize: 14,
@@ -99,7 +99,7 @@ class BottomSheetContent extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            Text(
+            const Text(
               "Type",
               style: TextStyle(
                 color: AppColors.black,
@@ -119,10 +119,10 @@ class BottomSheetContent extends StatelessWidget {
                     onChanged: (typeBully) {},
                     activeColor: AppColors.primaryColor,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 2.0,
                   ),
-                  Text("Violence"),
+                  const Text("Violence"),
                   const SizedBox(
                     width: 80,
                   ),
@@ -132,17 +132,17 @@ class BottomSheetContent extends StatelessWidget {
                     onChanged: (typeBully) {},
                     activeColor: AppColors.primaryColor,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 2.0,
                   ),
-                  Text("School Shooting"),
+                  const Text("School Shooting"),
                 ],
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               "Safety mode",
               style: TextStyle(
                 color: AppColors.black,
@@ -162,10 +162,10 @@ class BottomSheetContent extends StatelessWidget {
                     onChanged: (value) {},
                     activeColor: AppColors.primaryColor,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 2.0,
                   ),
-                  Text("Yes"),
+                  const Text("Yes"),
                   const SizedBox(
                     width: 115,
                   ),
@@ -175,10 +175,10 @@ class BottomSheetContent extends StatelessWidget {
                     onChanged: (value) {},
                     activeColor: AppColors.primaryColor,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 2.0,
                   ),
-                  Text("No"),
+                  const Text("No"),
                 ],
               ),
             ),
@@ -200,12 +200,11 @@ class BottomSheetContent extends StatelessWidget {
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
                   ),
-                ),
-                primary: AppColors.primaryColor,
+                ), backgroundColor: AppColors.primaryColor,
                 elevation: 0,
-                minimumSize: Size(380, 50),
+                minimumSize: const Size(380, 50),
               ),
-              child: Text(
+              child: const Text(
                 "Start",
                 style: TextStyle(fontSize: 16),
               ),

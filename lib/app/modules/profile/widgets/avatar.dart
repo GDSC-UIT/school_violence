@@ -14,19 +14,19 @@ class PersonalAvatar extends StatelessWidget {
       child: Stack(
         children: [
           Image.asset(
-            '$imageLink',
+            imageLink,
             width: 90,
           ), // avatar
           InkWell(
             onTap: () {},
             child: Container(
-              margin: EdgeInsets.fromLTRB(60, 45, 0, 0),
-              decoration: new BoxDecoration(
+              margin: const EdgeInsets.fromLTRB(60, 45, 0, 0),
+              decoration: const BoxDecoration(
                   borderRadius:
-                      new BorderRadius.all(const Radius.circular(120.0)),
+                      BorderRadius.all(Radius.circular(120.0)),
                   color: AppColors.transparent),
               width: 25,
-              child: Icon(Icons.edit),
+              child: const Icon(Icons.edit),
             ),
           )
         ],

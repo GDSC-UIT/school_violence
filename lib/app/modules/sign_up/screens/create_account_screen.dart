@@ -14,29 +14,29 @@ import 'package:school_violence_app/app/modules/sign_up/widgets/user_name_field.
 SingleChildScrollView createAccount() {
   final SignUpController ctrl = Get.find<SignUpController>();
 
-  final AuthServices _auth = AuthServices();
+  final AuthServices auth = AuthServices();
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   return SingleChildScrollView(
     child: Form(
-      key: _formKey,
+      key: formKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(
           children: [
-            SizedBox(height: 35),
+            const SizedBox(height: 35),
             Text(
               'Create an account',
               style: CustomTextStyle.h1(AppColors.black),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Text(
               'Please enter your username, email address\nand password. If you forget it, then you have \nto do forgot password.',
               textAlign: TextAlign.center,
               style: CustomTextStyle.desc(AppColors.desc),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,7 +48,7 @@ SingleChildScrollView createAccount() {
                 UserNameField(
                   userNameController: ctrl.userNameController,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'Email',
                   textAlign: TextAlign.left,
@@ -57,7 +57,7 @@ SingleChildScrollView createAccount() {
                 EmailField(
                   emailController: ctrl.emailController,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'Password',
                   textAlign: TextAlign.left,
@@ -69,7 +69,7 @@ SingleChildScrollView createAccount() {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'or',
               textAlign: TextAlign.center,
@@ -78,19 +78,19 @@ SingleChildScrollView createAccount() {
 
             // Sign In with Google
 
-            GoogleSignInButton(),
-            SizedBox(height: 10),
+            const GoogleSignInButton(),
+            const SizedBox(height: 10),
 
             // Sign In with Apple
 
-            AppleSignInButton(),
-            SizedBox(height: 10),
+            const AppleSignInButton(),
+            const SizedBox(height: 10),
 
             // Continue
 
             ContinueButton(
               ctrl: ctrl,
-              formKey: _formKey,
+              formKey: formKey,
               userNameController: ctrl.userNameController,
               emailController: ctrl.emailController,
               passwordController: ctrl.passwordController,

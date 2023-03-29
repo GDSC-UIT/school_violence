@@ -12,7 +12,7 @@ import 'package:school_violence_app/app/modules/sign_up/widgets/sign_up_button.d
 SingleChildScrollView detailedInfor(BuildContext context) {
   final SignUpController ctrl = Get.find<SignUpController>();
 
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   String? countryId;
   String? provinceId;
@@ -20,21 +20,21 @@ SingleChildScrollView detailedInfor(BuildContext context) {
   String? schoolId;
   return SingleChildScrollView(
     child: Form(
-      key: _formkey,
+      key: formkey,
       child: Column(
         children: [
-          SizedBox(height: 35),
+          const SizedBox(height: 35),
           Text(
             'Create an account',
             style: CustomTextStyle.h1(AppColors.black),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             'Please complete your profile.\nDon’t worry, your data will remain in private and\nonly you can see it.',
             textAlign: TextAlign.center,
             style: CustomTextStyle.desc(AppColors.desc),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
@@ -46,14 +46,14 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                   style: CustomTextStyle.label(AppColors.black),
                 ),
                 FullNameField(fullNameController: ctrl.fullNameController),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'Date of Birth',
                   textAlign: TextAlign.left,
                   style: CustomTextStyle.label(AppColors.black),
                 ),
                 DateOfBirthField(dateController: ctrl.dateController),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'Phone Number',
                   textAlign: TextAlign.left,
@@ -62,7 +62,7 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                 PhoneNumberField(
                   phoneNumberController: ctrl.phoneNumberController,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Coutry
 
@@ -100,7 +100,7 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                   paddingLeft: 0,
                   paddingRight: 0,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Province
 
@@ -199,7 +199,6 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                             (element) => element['ID'].toString() == schoolId,
                           );
                       ctrl.updateSchoolName(temp.first['Name']);
-                      ;
                     },
                     (onValidateVal) =>
                         onValidateVal == null ? 'Please select school' : null,
@@ -210,12 +209,12 @@ SingleChildScrollView detailedInfor(BuildContext context) {
                     paddingRight: 0,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
           SignUpButton(
-            formKey: _formkey,
+            formKey: formkey,
             fullNameController: ctrl.fullNameController,
             dateController: ctrl.dateController,
             phoneNumberController: ctrl.phoneNumberController,

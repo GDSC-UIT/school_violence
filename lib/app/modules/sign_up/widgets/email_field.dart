@@ -17,8 +17,8 @@ class EmailField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _emailController,
-      style: TextStyle(fontSize: 20),
-      decoration: InputDecoration(
+      style: const TextStyle(fontSize: 20),
+      decoration: const InputDecoration(
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.black, width: 1.0),
         ),
@@ -27,10 +27,10 @@ class EmailField extends StatelessWidget {
         ),
       ),
       validator: (value) {
-        bool _isEmailValid = RegExp(
+        bool isEmailValid = RegExp(
                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
             .hasMatch(value!);
-        if (!_isEmailValid) {
+        if (!isEmailValid) {
           return 'Invalid email.';
         }
         return null;

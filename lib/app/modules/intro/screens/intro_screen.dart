@@ -33,7 +33,7 @@ class IntroPage extends StatelessWidget {
               width: 320,
               height: 30,
             ),
-            Divider(
+            const Divider(
               color: AppColors.grey,
               thickness: 1.5,
             ),
@@ -41,12 +41,12 @@ class IntroPage extends StatelessWidget {
               width: 320,
               height: 20,
             ),
-            GetStartedButton(),
+            const GetStartedButton(),
             const SizedBox(
               width: 320,
               height: 20,
             ),
-            HaveAccountButton(),
+            const HaveAccountButton(),
           ],
         ),
       ),

@@ -16,7 +16,7 @@ class PhoneNumberField extends StatelessWidget {
     return InternationalPhoneNumberInput(
       textFieldController: _phoneNumberController,
       onInputChanged: (value) {},
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 20,
         fontFamily: 'Montserrat',
       ),

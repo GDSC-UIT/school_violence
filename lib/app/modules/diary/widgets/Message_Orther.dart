@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:school_violence_app/app/core/values/app_colors.dart';
 
 class Message_Orther extends StatelessWidget {
   final String mess;
@@ -21,7 +20,7 @@ class Message_Orther extends StatelessWidget {
                 bottomRight: Radius.circular(19))),
         child: Text(
           mess,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 16,
               fontFamily: 'Montserrat',
               fontWeight: FontWeight.w600),

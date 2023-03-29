@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await Geolocator.requestPermission()
         .then((currentPosition) {})
         .onError((error, stackTrace) {
-      print("Error: " + error.toString());
+      print("Error: $error");
     });
     return await Geolocator.getCurrentPosition();
   }
@@ -40,10 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
       (currentPosition) async {
         _marker.add(
           Marker(
-            markerId: MarkerId(''),
+            markerId: const MarkerId(''),
             position:
                 LatLng(currentPosition.latitude, currentPosition.longitude),
-            infoWindow: InfoWindow(title: "Here!!!"),
+            infoWindow: const InfoWindow(title: "Here!!!"),
           ),
         );
         CameraPosition cameraPosition = CameraPosition(
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
-              initialCameraPosition: CameraPosition(
+              initialCameraPosition: const CameraPosition(
                   target: LatLng(10.870565, 106.802795), zoom: 14.5),
               mapType: MapType.normal,
               markers: Set<Marker>.of(_marker),
@@ -118,9 +118,9 @@ class _HomeScreenState extends State<HomeScreen> {
             top: 60,
             right: 20,
             left: 20,
-            child: Container(
+            child: SizedBox(
               width: Get.width,
-              child: WelcomeBanner(),
+              child: const WelcomeBanner(),
             ),
           ),
           Align(
@@ -132,11 +132,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   loadData();
                   Get.bottomSheet(BottomSheetContent());
                 },
-                child: CurrentLocationButton(),
+                child: const CurrentLocationButton(),
               ),
             ),
           ),
-          notificationButton(),
+          const notificationButton(),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     blurRadius: 10,
                   ),
                 ],
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(12),
                   topRight: Radius.circular(12),
                 ),

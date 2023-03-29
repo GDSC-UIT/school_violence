@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/core/values/app_text_style.dart';
@@ -14,28 +13,28 @@ class EmergencyDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
       child: Container(
-        constraints: BoxConstraints(maxHeight: 474),
+        constraints: const BoxConstraints(maxHeight: 474),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              SizedBox(height: 69),
+              const SizedBox(height: 69),
               Image.asset(
                 'assets/images/grey-square.png',
                 width: 160,
               ),
-              SizedBox(height: 17),
+              const SizedBox(height: 17),
               Text(
                 'Emergency notification',
                 style: CustomTextStyle.h1(AppColors.primaryColor),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Your friend need your help!!!',
                 style: CustomTextStyle.desc(AppColors.desc),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 59),
+              const SizedBox(height: 59),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

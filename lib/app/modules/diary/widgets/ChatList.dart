@@ -5,11 +5,10 @@ import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
-import '../../connect/connect_controller.dart';
 import '../screens/chatscreen.dart';
 
 class ChatList extends StatefulWidget {
-  ChatList({super.key});
+  const ChatList({super.key});
 
   @override
   State<ChatList> createState() => _ChatListState();
@@ -25,7 +24,7 @@ class _ChatListState extends State<ChatList> {
   }
 
   fetchRoom() async {
-    await FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection("room")
         .where("roomUser", arrayContains: ctrl.userId.value)
         .snapshots()
@@ -38,7 +37,7 @@ class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     return messages.isEmpty
-        ? SizedBox()
+        ? const SizedBox()
         : ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
@@ -55,13 +54,13 @@ class _ChatListState extends State<ChatList> {
                       ));
                 },
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 10.0),
+                  margin: const EdgeInsets.only(bottom: 10.0),
                   color: AppColors.primaryColor,
                   height: 50,
                   child: Center(
                     child: Text(
-                      'Chat room ${index}',
-                      style: TextStyle(color: AppColors.white, fontSize: 18),
+                      'Chat room $index',
+                      style: const TextStyle(color: AppColors.white, fontSize: 18),
                     ),
                   ),
                 ),

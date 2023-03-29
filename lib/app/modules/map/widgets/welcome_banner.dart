@@ -13,7 +13,7 @@ class WelcomeBanner extends StatelessWidget {
           Container(
             width: 40,
             height: 40,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
                 image: AssetImage('assets/images/location-pin.png'),
@@ -27,7 +27,7 @@ class WelcomeBanner extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               RichText(
-                text: TextSpan(
+                text: const TextSpan(
                   children: [
                     TextSpan(
                       text: "Hey, ",
@@ -43,7 +43,7 @@ class WelcomeBanner extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
+              const Text(
                 "Everything will be alright 🥰",
                 style: TextStyle(
                   fontSize: 18,

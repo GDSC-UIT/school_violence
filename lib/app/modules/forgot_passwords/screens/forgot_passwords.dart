@@ -39,15 +39,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //
-              SizedBox(height: 35),
+              const SizedBox(height: 35),
               
               IconButton(
                 onPressed: () => Get.back(),
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 iconSize: 30,
-                padding: EdgeInsets.only(right: double.infinity),
+                padding: const EdgeInsets.only(right: double.infinity),
               ),
-              SizedBox(height: 35),
+              const SizedBox(height: 35),
               Row(
                 children: [
                   Text(
@@ -60,7 +60,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 7),
+              const SizedBox(height: 7),
               Row(
                 children: [
                   Text(
@@ -69,11 +69,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 49),
-              InputLabel(text: 'Email'),
-              TextFieldEmail(),
-              SizedBox(height: 300),
-              Button(
+              const SizedBox(height: 49),
+              const InputLabel(text: 'Email'),
+              const TextFieldEmail(),
+              const SizedBox(height: 300),
+              const Button(
                 text: 'Continue',
                 toScreen: EmailPage(),
               ),

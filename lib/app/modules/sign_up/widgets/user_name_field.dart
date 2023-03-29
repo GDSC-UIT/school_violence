@@ -17,8 +17,8 @@ class UserNameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _userNameController,
-      style: TextStyle(fontSize: 20),
-      decoration: InputDecoration(
+      style: const TextStyle(fontSize: 20),
+      decoration: const InputDecoration(
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.black, width: 1.0),
         ),

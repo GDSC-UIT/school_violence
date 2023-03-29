@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -58,7 +57,7 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         if (Get.isDialogOpen == false) {
           helpDialog(signInCtrl.userId.value);
@@ -114,8 +113,8 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
           );
           setState(() {});
         },
-        label: Text("Current location"),
-        icon: Icon(Icons.location_history),
+        label: const Text("Current location"),
+        icon: const Icon(Icons.location_history),
       ),
     );
   }

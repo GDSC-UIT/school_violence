@@ -39,15 +39,15 @@ class _EmailPageState extends State<EmailPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //
-              SizedBox(height: 35),
+              const SizedBox(height: 35),
 
               IconButton(
-                onPressed: () => Get.to(ForgotPasswordPage()),
-                icon: Icon(Icons.arrow_back),
+                onPressed: () => Get.to(const ForgotPasswordPage()),
+                icon: const Icon(Icons.arrow_back),
                 iconSize: 30,
-                padding: EdgeInsets.only(right: double.infinity),
+                padding: const EdgeInsets.only(right: double.infinity),
               ),
-              SizedBox(height: 35),
+              const SizedBox(height: 35),
               Row(
                 children: [
                   Text(
@@ -60,7 +60,7 @@ class _EmailPageState extends State<EmailPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 7),
+              const SizedBox(height: 7),
               Row(
                 children: [
                   Text(
@@ -69,10 +69,10 @@ class _EmailPageState extends State<EmailPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 45),
+              const SizedBox(height: 45),
               OtpTextField(
                 numberOfFields: 4,
-                borderColor: Color(0xFF512DA8),
+                borderColor: const Color(0xFF512DA8),
                 //set to true to show as box or false to show as dash
                 showFieldAsBox: true,
                 //runs when a code is typed in
@@ -85,28 +85,28 @@ class _EmailPageState extends State<EmailPage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text("Verification Code"),
+                          title: const Text("Verification Code"),
                           content: Text('Code entered is $verificationCode'),
                         );
                       });
                 }, // end onSubmit
               ),
-              SizedBox(height: 45),
+              const SizedBox(height: 45),
               Center(
                 child: Text(
                   'Didn’t receive email?',
                   style: CustomTextStyle.desc(AppColors.desc),
                 ),
               ),
-              SizedBox(height: 14),
+              const SizedBox(height: 14),
               Center(
                 child: Text(
                   'You can resend code in 55 s',
                   style: CustomTextStyle.desc(AppColors.desc),
                 ),
               ),
-              SizedBox(height: 55),
-              Center(
+              const SizedBox(height: 55),
+              const Center(
                 child: Button(
                   text: 'Confirm',
                   toScreen: NewPassWordPage(),

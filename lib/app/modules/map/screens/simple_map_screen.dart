@@ -14,7 +14,7 @@ class SimpleMapScreen extends StatefulWidget {
 }
 
 class _SimpleMapScreenState extends State<SimpleMapScreen> {
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
   static const CameraPosition initialPosition = CameraPosition(
     target: LatLng(10.875407, 106.807905),
     zoom: 14.0,
@@ -37,7 +37,7 @@ class _SimpleMapScreenState extends State<SimpleMapScreen> {
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         if (Get.isDialogOpen == false) {
           helpDialog(signInCtrl.userId.value);
@@ -46,7 +46,7 @@ class _SimpleMapScreenState extends State<SimpleMapScreen> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text('Simple Google Map'),
+        title: const Text('Simple Google Map'),
         centerTitle: true,
       ),
       body: GoogleMap(
@@ -60,8 +60,8 @@ class _SimpleMapScreenState extends State<SimpleMapScreen> {
         onPressed: () {
           goToLake();
         },
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+        label: const Text('To the lake!'),
+        icon: const Icon(Icons.directions_boat),
       ),
     );
   }

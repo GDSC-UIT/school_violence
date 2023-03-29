@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
-import 'package:school_violence_app/app/modules/connect/widgets/add_friend_button.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 
 class AcceptButton extends StatelessWidget {
@@ -15,9 +13,9 @@ class AcceptButton extends StatelessWidget {
   })  : _userId = userId,
         _friendId = friendId,
         super(key: key);
-  String _userId;
-  String _friendId;
-  Connect _connect = Connect();
+  final String _userId;
+  final String _friendId;
+  final Connect _connect = Connect();
   final NotificationsController notificationsController =
       Get.find<NotificationsController>();
 
@@ -33,9 +31,9 @@ class AcceptButton extends StatelessWidget {
           () => ElevatedButton(
             style: !notificationsController.isFriend.value
                 ? ElevatedButton.styleFrom(
-                    primary: AppColors.primaryColor,
-                    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                    textStyle: TextStyle(
+                    backgroundColor: AppColors.primaryColor,
+                    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    textStyle: const TextStyle(
                       fontSize: 14,
                       fontFamily: 'Montserrat',
                       color: AppColors.white,
@@ -53,8 +51,8 @@ class AcceptButton extends StatelessWidget {
                           width: 1, color: AppColors.primaryColor),
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                    textStyle: TextStyle(
+                    padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    textStyle: const TextStyle(
                       fontSize: 14,
                       fontFamily: 'Montserrat',
                       color: AppColors.black,
@@ -63,10 +61,10 @@ class AcceptButton extends StatelessWidget {
                     ),
                   ),
             child: !notificationsController.isFriend.value
-                ? (Text(
+                ? (const Text(
                     'Accept',
                   ))
-                : (Text(
+                : (const Text(
                     'Accepted ✓',
                   )),
             onPressed: () async {

@@ -10,8 +10,8 @@ class FullNameTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(0),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(0),
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(width: 0.5, color: AppColors.primaryColorShadow),
         ),

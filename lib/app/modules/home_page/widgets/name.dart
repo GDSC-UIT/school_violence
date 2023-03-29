@@ -17,14 +17,14 @@ class Name extends StatelessWidget {
               'assets/images/logo-protected.png',
               width: 50,
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Text(
               'Hi, Quan',
               style: CustomTextStyle.h1(AppColors.black),
             ),
           ],
         ),
-        Bell(),
+        const Bell(),
       ],
     );
   }

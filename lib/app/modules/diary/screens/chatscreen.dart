@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/modules/diary/widgets/Message_User.dart';
 import 'package:school_violence_app/app/modules/diary/widgets/Message_Orther.dart';
@@ -26,13 +22,13 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> _chatkey = GlobalKey<FormState>();
-    TextEditingController _mess = TextEditingController();
-    final ScrollController _controller = ScrollController();
+    GlobalKey<FormState> chatkey = GlobalKey<FormState>();
+    TextEditingController mess = TextEditingController();
+    final ScrollController controller = ScrollController();
 
     void _scrollDown() {
-      _controller.animateTo(
-        _controller.position.maxScrollExtent,
+      controller.animateTo(
+        controller.position.maxScrollExtent,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 200),
       );
@@ -49,9 +45,9 @@ class ChatScreen extends StatelessWidget {
     }
     //this function will trigger 1 time when this page have done rendered, use to scroll down to bottom of listview of messages
     //AND fetch mess
-    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (ctrl.messages.isNotEmpty) {
-        _controller.jumpTo(_controller.position.maxScrollExtent);
+        controller.jumpTo(controller.position.maxScrollExtent);
       }
       var fetchRef = FirebaseFirestore.instance.collection("messages");
           fetchRef.where("roomUser", isEqualTo: roomUser)
@@ -64,10 +60,10 @@ class ChatScreen extends StatelessWidget {
             return Message_Orther(mess: element["data"]);
           }
         }).toList();
-        if (data.length != 0) {
+        if (data.isNotEmpty) {
           ctrl.updateMessages(data);
-          _mess.clear();
-          WidgetsBinding.instance!.addPostFrameCallback((_) {
+          mess.clear();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             _scrollDown();
           });
         }
@@ -116,10 +112,10 @@ class ChatScreen extends StatelessWidget {
           //mess space
           Expanded(child: Container(child: Obx(() {
             if (ctrl.messages.isEmpty) {
-              return SizedBox();
+              return const SizedBox();
             } else {
               return ListView(
-                controller: _controller,
+                controller: controller,
                 children: ctrl.messages.value
                     .map((element) => Container(
                           child: element,
@@ -128,23 +124,23 @@ class ChatScreen extends StatelessWidget {
               );
             }
           }))),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           //input space
           Container(
-            margin: EdgeInsets.only(bottom: 52),
+            margin: const EdgeInsets.only(bottom: 52),
             child: Form(
-              key: _chatkey,
+              key: chatkey,
               child: Row(
                 children: [
                   Expanded(
                     child: Container(
                       margin: const EdgeInsets.only(left: 26, right: 15),
                       child: TextFormField(
-                        controller: _mess,
+                        controller: mess,
                         decoration: InputDecoration(
-                          fillColor: Color(0xFFEFEFEF),
+                          fillColor: const Color(0xFFEFEFEF),
                           filled: true,
                           hintText: "Type a message to Expert ...",
                           hintStyle: const TextStyle(color: Color(0xFFBDBDBD)),
@@ -167,7 +163,7 @@ class ChatScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(right: 22),
+                      margin: const EdgeInsets.only(right: 22),
                       width: 56,
                       height: 56,
                       decoration: BoxDecoration(
@@ -175,11 +171,11 @@ class ChatScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(28)),
                       child: ElevatedButton(
                           onPressed: () async {
-                            if (_chatkey.currentState!.validate()) {
+                            if (chatkey.currentState!.validate()) {
                               await FirebaseFirestore.instance
                                   .collection("messages")
                                   .add({
-                                "data": _mess.text,
+                                "data": mess.text,
                                 "userOwn": nowUser,
                                 "roomUser": roomUser,
                                 "createdAt":
@@ -195,7 +191,7 @@ class ChatScreen extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0)),
                           ),
-                          child: Icon(Icons.send_rounded)))
+                          child: const Icon(Icons.send_rounded)))
                 ],
               ),
             ),

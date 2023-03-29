@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/core/values/app_text_style.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/input_label.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/new_password_dialog.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/text_field_confirm_password.dart';
@@ -43,15 +42,15 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
                 IconButton(
                   onPressed: () => Get.back(),
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   iconSize: 30,
-                  padding: EdgeInsets.only(right: double.infinity),
+                  padding: const EdgeInsets.only(right: double.infinity),
                 ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 Row(
                   children: [
                     Text(
@@ -64,7 +63,7 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 7),
+                const SizedBox(height: 7),
                 Row(
                   children: [
                     Text(
@@ -73,13 +72,13 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 49),
-                InputLabel(text: 'Create a new password'),
-                TextFieldNewPassword(),
-                SizedBox(height: 37),
-                InputLabel(text: 'Confirm new password'),
-                TextFieldConfirmPassWord(),
-                SizedBox(height: 29),
+                const SizedBox(height: 49),
+                const InputLabel(text: 'Create a new password'),
+                const TextFieldNewPassword(),
+                const SizedBox(height: 37),
+                const InputLabel(text: 'Confirm new password'),
+                const TextFieldConfirmPassWord(),
+                const SizedBox(height: 29),
                 Row(
                   children: [
                     Checkbox(
@@ -107,14 +106,14 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 100),
+                const SizedBox(height: 100),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return NewPassWordDialog();
+                          return const NewPassWordDialog();
                         },
                       );
                     },

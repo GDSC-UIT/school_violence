@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
@@ -9,7 +8,6 @@ import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/list_friend.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/name_card.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
@@ -46,7 +44,7 @@ class _ConnectPageState extends State<ConnectPage>
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      new Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         if (Get.isDialogOpen == false) {
           helpDialog(signInCtrl.userId.value);
@@ -71,7 +69,7 @@ class _ConnectPageState extends State<ConnectPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,7 +80,7 @@ class _ConnectPageState extends State<ConnectPage>
                           'assets/images/grey-avatar.png',
                           width: 28,
                         ),
-                        SizedBox(width: 22.5),
+                        const SizedBox(width: 22.5),
                         Text(
                           'Connect',
                           style: CustomTextStyle.h1(AppColors.black),
@@ -93,23 +91,25 @@ class _ConnectPageState extends State<ConnectPage>
                       onTap: () {
                         Get.toNamed(AppRoutes.findFriends);
                       },
-                      child: Icon(Icons.search, size: 30),
+                      child: const Icon(Icons.search, size: 30),
                     ),
                   ],
                 ),
-                SizedBox(height: 29),
-                Container(
-                  child: Image.asset('assets/images/connect_img.png',
-                      fit: BoxFit.contain),
+                const SizedBox(height: 29),
+                SizedBox(
                   width: 380,
                   height: 120,
+                  child: Image.asset('assets/images/connect_img.png',
+                      fit: BoxFit.contain),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   'Your friend',
                   style: CustomTextStyle.h2(AppColors.black),
                 ),
-                Container(
+                SizedBox(
+                  width: double.infinity,
+                  height: list.listFriend.length * 100,
                   child: ListView.builder(
                     itemCount: list.listFriend.length,
                     itemBuilder: (context, index) {
@@ -119,8 +119,6 @@ class _ConnectPageState extends State<ConnectPage>
                           avatarLink: list.listFriend[index].avatarLink);
                     },
                   ),
-                  width: double.infinity,
-                  height: list.listFriend.length * 100,
                 ),
               ],
             ),
