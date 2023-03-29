@@ -3,23 +3,44 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:school_violence_app/app/data/services/background_service.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'app/routes/app_pages.dart';
-import 'app/routes/app_routes.dart';
+import 'app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 int? isViewed;
 bool isLogged = false;
+bool isEmergency = false;
+String payload = "";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
+
+  final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+    isEmergency = true;
+  }
+
+  await initializeBackgroundService();
+
   await Firebase.initializeApp(
     name: 'School Violence',
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isViewed = prefs.getInt('intro');
@@ -74,25 +95,5 @@ void checkHelp(SignInController signInCtrl) async {
     signInCtrl.updateFriendId((snapEmergency.data()! as dynamic)['friendId']);
   } else {
     signInCtrl.updateFriendId([]);
-  }
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialRoute: isLogged
-          ? AppRoutes.home
-          : (isViewed != 0 ? AppRoutes.intro : AppRoutes.sign_in),
-      getPages: AppPages.pages,
-      debugShowCheckedModeBanner: false,
-    );
   }
 }
