@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.SND_SMS"/>
 
    <application
-        android:label="school_violence_app"
+        android:label="ProtectED"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
