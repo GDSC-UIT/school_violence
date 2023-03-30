@@ -8,6 +8,5 @@ class SignInBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<SignInController>(() => SignInController());
     Get.lazyPut<ConnectController>(() => ConnectController());
-    Get.lazyPut<NotificationsController>(() => NotificationsController());
   }
 }
