@@ -7,12 +7,14 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:school_violence_app/app/data/services/local-notification_service.dart';
 
+const api_key =
+    "AAAARaDbowA:APA91bH1e_XOTqKlvHwodmsEGZnJEKuaIlUaqIrmrhDtuTFqzBynMSxQWQNK4JTOJ62EueSZCRbr6Wg9yFRe7SSaGcFxJBs_qhBDZBB7xTB8WuFBtET76xsrxyGds59ZLtdPpAwk_jBS";
+
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 
   if (kDebugMode) {
     log("Handling a background message: ${message.messageId}");
-    log('Message data: ${message.data}');
     log('Message notification: ${message.notification?.title}');
     log('Message notification: ${message.notification?.body}');
   }
@@ -25,9 +27,10 @@ Future<void> sendPushMessage() async {
 
   try {
     await http.post(
-      Uri.parse('https://api.rnfirebase.io/messaging/send'),
+      Uri.parse('https://fcm.googleapis.com/fcm/send'),
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
+        'Authorization': 'key=$api_key',
       },
       body: constructFCMPayload(token),
     );
@@ -39,10 +42,8 @@ Future<void> sendPushMessage() async {
 
 String constructFCMPayload(String? token) {
   return jsonEncode({
-    'token': token,
-    'data': {
-      'court': 'A',
-    },
+    'to': token,
+    'priority': 'high',
     'notification': {
       'title': 'Emergency Alert',
       'body': 'Shooting at court A',

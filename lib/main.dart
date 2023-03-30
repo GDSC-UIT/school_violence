@@ -14,6 +14,7 @@ import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart'
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'app/data/services/local-notification_service.dart';
 import 'app/data/services/push-notification_service.dart';
 import 'firebase_options.dart';
 
@@ -70,26 +71,10 @@ Future<void> main() async {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     if (kDebugMode) {
       log('Handling a foreground message: ${message.messageId}');
-      log('Message data: ${message.data}');
       log('Message notification: ${message.notification?.title}');
       log('Message notification: ${message.notification?.body}');
     }
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.show(
-      888,
-      message.data['title'],
-      message.data['body'],
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'my_background',
-          'shooting sos channel',
-          icon: 'logo_protected',
-          priority: Priority.max,
-          ongoing: true,
-        ),
-      ),
-    );
+    LocalNotificationService.ins.showNotification(message, isBackground: false);
   });
 
   // auto login

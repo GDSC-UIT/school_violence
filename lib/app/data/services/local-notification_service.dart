@@ -15,7 +15,7 @@ class LocalNotificationService {
 
   late final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  void showNotification(RemoteMessage message) {
+  void showNotification(RemoteMessage message, {bool isBackground = true}) {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
     if (notification != null && android != null && !kIsWeb) {
@@ -23,13 +23,14 @@ class LocalNotificationService {
         notificationId,
         notification.title,
         notification.body,
-        const NotificationDetails(
+        NotificationDetails(
           android: AndroidNotificationDetails(
-            notificationChannelId,
+            isBackground ? notificationChannelId : '0',
             'shooting sos channel',
             icon: 'logo_protected',
             ongoing: true,
-            priority: Priority.max,
+            priority: Priority.high,
+            importance: Importance.max,
           ),
         ),
       );
