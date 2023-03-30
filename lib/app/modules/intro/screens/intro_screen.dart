@@ -17,37 +17,39 @@ class IntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              width: 320,
-              height: 180,
-            ),
-            picturesAndText(ctrl: ctrl),
-            const SizedBox(
-              width: 320,
-              height: 30,
-            ),
-            OnboardingIndicator(ctrl: ctrl),
-            const SizedBox(
-              width: 320,
-              height: 30,
-            ),
-            const Divider(
-              color: AppColors.grey,
-              thickness: 1.5,
-            ),
-            const SizedBox(
-              width: 320,
-              height: 20,
-            ),
-            const GetStartedButton(),
-            const SizedBox(
-              width: 320,
-              height: 20,
-            ),
-            const HaveAccountButton(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                width: 320,
+                height: 180,
+              ),
+              picturesAndText(ctrl: ctrl),
+              const SizedBox(
+                width: 320,
+                height: 30,
+              ),
+              OnboardingIndicator(ctrl: ctrl),
+              const SizedBox(
+                width: 320,
+                height: 30,
+              ),
+              const Divider(
+                color: AppColors.grey,
+                thickness: 1.5,
+              ),
+              const SizedBox(
+                width: 320,
+                height: 20,
+              ),
+              const GetStartedButton(),
+              const SizedBox(
+                width: 320,
+                height: 20,
+              ),
+              const HaveAccountButton(),
+            ],
+          ),
         ),
       ),
     );
