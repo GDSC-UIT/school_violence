@@ -9,6 +9,7 @@ import 'package:school_violence_app/app/modules/map/widgets/bottm_sheet_content.
 import 'package:school_violence_app/app/modules/map/widgets/current_location_icon.dart';
 import 'package:school_violence_app/app/modules/map/widgets/welcome_banner.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
+import '../../../../main.dart';
 import '../widgets/notification_button.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:background_sms/background_sms.dart';
@@ -63,7 +64,15 @@ class _HomeScreenState extends State<HomeScreen> {
     await FlutterPhoneDirectCaller.callNumber(number);
   }
 
-  _getPermission() async => await [Permission.sms].request();
+  Future<void> _getPermission() async {
+    await [Permission.sms].request();
+    if (isEmergency) {
+      loadData();
+      Get.bottomSheet(BottomSheetContent());
+      isEmergency = false;
+    }
+  }
+
   _isPermissionGranted() async => Permission.sms.status.isGranted;
   _sendSms(String phoneNumber, String message, {int? simSlot}) async {
     await BackgroundSms.sendMessage(
