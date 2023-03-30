@@ -6,18 +6,14 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:school_violence_app/app/data/services/local-notification_service.dart';
 
 import '../../routes/app_routes.dart';
 
-const notificationChannelId = 'my_foreground';
-const notificationId = 888;
-// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-//     FlutterLocalNotificationsPlugin();
-
 Future<void> initializeBackgroundService() async {
   final service = FlutterBackgroundService();
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  final flutterLocalNotificationsPlugin =
+      LocalNotificationService.ins.flutterLocalNotificationsPlugin;
 
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
     notificationChannelId,
@@ -56,8 +52,6 @@ Future<void> initializeBackgroundService() async {
 
 @pragma('vm:entry-point')
 void onStart(ServiceInstance service) {
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
   DartPluginRegistrant.ensureInitialized();
   if (service is AndroidServiceInstance) {
     service.on('setAsForeground').listen((event) {
@@ -75,19 +69,7 @@ void onStart(ServiceInstance service) {
   Timer.periodic(const Duration(seconds: 1), (timer) async {
     if (service is AndroidServiceInstance) {
       if (await service.isForegroundService()) {
-        flutterLocalNotificationsPlugin.show(
-          notificationId,
-          'School violence',
-          'School shooting sos ready',
-          const NotificationDetails(
-            android: AndroidNotificationDetails(
-              notificationChannelId,
-              'shooting sos channel',
-              icon: 'logo_protected',
-              ongoing: true,
-            ),
-          ),
-        );
+        LocalNotificationService.ins.showBackgroundNotification();
       }
     }
     log("background service is running");

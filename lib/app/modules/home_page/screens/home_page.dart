@@ -12,7 +12,7 @@ import 'package:school_violence_app/app/modules/home_page/widgets/name.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
-import '../../../../main.dart';
+import '../../../data/services/push-notification_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 32),
               GestureDetector(
                 onTap: () {
-                  Get.defaultDialog(title: payload);
+                  sendPushMessage();
                 },
                 child: Image.asset('assets/images/home_img.png',
                     width: 400, height: 170, fit: BoxFit.fill),
