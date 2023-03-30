@@ -14,7 +14,7 @@ void helpDialog(String userId) async {
   } else {
     friendId = [];
   }
-  if (friendId.isNotEmpty) {
+  if (friendId.isNotEmpty && Get.isDialogOpen == false) {
     //EmergencyDialog();
     Get.dialog(const EmergencyDialog());
     emergency.resetData(userId);
