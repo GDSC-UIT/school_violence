@@ -1,16 +1,20 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/data/services/auth_services.dart';
+import 'package:school_violence_app/app/data/services/connect.dart';
+import 'package:school_violence_app/app/data/services/emergency.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/customItem.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/profileNameCard.dart';
 import 'package:school_violence_app/app/modules/sign_in/screens/sign_in_screen.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -27,12 +31,31 @@ class _ProfilePageState extends State<ProfilePage>
   late TabController _tabController;
   final AuthServices _auth = AuthServices();
   final SignInController signInCtrl = Get.find<SignInController>();
+  final Connect _connect = Connect();
+  final Emergency _emergency = Emergency();
+  List _friends = [];
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  void getData() async {
+    DocumentSnapshot snap =
+        await _connect.connectCollection.doc(signInCtrl.userId.value).get();
+    if (snap.data() != null) {
+      _friends = (snap.data()! as dynamic)['friends'];
+    } else {
+      _friends = [];
+    }
+  }
+
+  void sendHelp() {
+    for (int i = 0; i < _friends.length; i++) {
+      _emergency.needHelp(signInCtrl.userId.value, _friends[i]);
+    }
   }
 
   // @override
@@ -59,7 +82,11 @@ class _ProfilePageState extends State<ProfilePage>
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            sendHelp();
+            Get.toNamed(AppRoutes.map);
+          },
+          child: Image.asset('assets/icons/map_icon.png'),
           backgroundColor: AppColors.primaryColor,
         ),
         body: Padding(

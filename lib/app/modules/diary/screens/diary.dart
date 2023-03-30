@@ -4,11 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/data/services/connect.dart';
+import 'package:school_violence_app/app/data/services/emergency.dart';
 
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/modules/diary/screens/chatscreen.dart';
 import 'package:school_violence_app/app/modules/diary/widgets/ChatList.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 import '../../../core/values/app_text_style.dart';
 import '../diary_controller.dart';
 import 'dart:math';
@@ -26,8 +29,11 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   late TabController _tabController;
   TextEditingController mess_controller = TextEditingController();
 
-  final SignInController ctrl = Get.find<SignInController>();
   final DiaryController ctrlDiary = Get.find<DiaryController>();
+  final SignInController signInCtrl = Get.find<SignInController>();
+  final Connect _connect = Connect();
+  final Emergency _emergency = Emergency();
+  List _friends = [];
 
   @override
   void initState() {
@@ -39,10 +45,26 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
     });
   }
 
+  void getData() async {
+    DocumentSnapshot snap =
+        await _connect.connectCollection.doc(signInCtrl.userId.value).get();
+    if (snap.data() != null) {
+      _friends = (snap.data()! as dynamic)['friends'];
+    } else {
+      _friends = [];
+    }
+  }
+
+  void sendHelp() {
+    for (int i = 0; i < _friends.length; i++) {
+      _emergency.needHelp(signInCtrl.userId.value, _friends[i]);
+    }
+  }
+
   Future<bool> isExpert() async {
     final user = await FirebaseFirestore.instance
         .collection("users")
-        .doc(ctrl.userId.value)
+        .doc(signInCtrl.userId.value)
         .get();
     return user.data()!['expert'];
   }
@@ -54,6 +76,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
   // }
   @override
   Widget build(BuildContext context) {
+    getData();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -62,7 +85,11 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            sendHelp();
+            Get.toNamed(AppRoutes.map);
+          },
+          child: Image.asset('assets/icons/map_icon.png'),
           backgroundColor: AppColors.primaryColor,
         ),
         body: Padding(
@@ -260,7 +287,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                           .collection("room")
                                                           .where("roomUser",
                                                               isEqualTo: [
-                                                        ctrl.userId.value,
+                                                        signInCtrl.userId.value,
                                                         expert[randomExpert].id
                                                       ]).get();
                                                   if (oldExpert.docs.isEmpty) {
@@ -271,7 +298,7 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                         .collection("room")
                                                         .add({
                                                       "roomUser": [
-                                                        ctrl.userId.value,
+                                                        signInCtrl.userId.value,
                                                         expert[randomExpert].id
                                                       ],
                                                     });
@@ -280,12 +307,13 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                               mess_controller
                                                                   .text,
                                                           roomUser: [
-                                                            ctrl.userId.value,
+                                                            signInCtrl
+                                                                .userId.value,
                                                             expert[randomExpert]
                                                                 .id
                                                           ],
-                                                          nowUser:
-                                                              ctrl.userId.value,
+                                                          nowUser: signInCtrl
+                                                              .userId.value,
                                                         ));
                                                   }
                                                 }
@@ -321,7 +349,8 @@ class _DiaryPageState extends State<DiaryPage> with TickerProviderStateMixin {
                                                         color: ctrlDiary
                                                                 .haveText.value
                                                             ? AppColors.white
-                                                            : const Color(0xFF898989),
+                                                            : const Color(
+                                                                0xFF898989),
                                                         fontSize: 16,
                                                         fontFamily:
                                                             'Montserrat',

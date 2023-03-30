@@ -142,49 +142,6 @@ class BottomSheetContent extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Text(
-              "Safety mode",
-              style: TextStyle(
-                color: AppColors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              child: Row(
-                children: [
-                  Radio(
-                    value: 1,
-                    groupValue: 1,
-                    onChanged: (value) {},
-                    activeColor: AppColors.primaryColor,
-                  ),
-                  const SizedBox(
-                    width: 2.0,
-                  ),
-                  const Text("Yes"),
-                  const SizedBox(
-                    width: 115,
-                  ),
-                  Radio(
-                    value: 0,
-                    groupValue: 1,
-                    onChanged: (value) {},
-                    activeColor: AppColors.primaryColor,
-                  ),
-                  const SizedBox(
-                    width: 2.0,
-                  ),
-                  const Text("No"),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
             Container(
               color: AppColors.grey,
               height: 1.0,
@@ -200,7 +157,8 @@ class BottomSheetContent extends StatelessWidget {
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
                   ),
-                ), backgroundColor: AppColors.primaryColor,
+                ),
+                backgroundColor: AppColors.primaryColor,
                 elevation: 0,
                 minimumSize: const Size(380, 50),
               ),
