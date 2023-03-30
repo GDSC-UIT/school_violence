@@ -12,6 +12,8 @@ import 'package:school_violence_app/app/modules/home_page/widgets/name.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
+import '../../../../main.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -97,8 +99,13 @@ class _HomePageState extends State<HomePage> {
 
               const Name(),
               const SizedBox(height: 32),
-              Image.asset('assets/images/home_img.png',
-                  width: 400, height: 170, fit: BoxFit.fill),
+              GestureDetector(
+                onTap: () {
+                  Get.defaultDialog(title: payload);
+                },
+                child: Image.asset('assets/images/home_img.png',
+                    width: 400, height: 170, fit: BoxFit.fill),
+              ),
             ],
           ),
         ),
