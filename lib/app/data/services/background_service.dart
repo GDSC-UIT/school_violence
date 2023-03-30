@@ -22,7 +22,7 @@ Future<void> initializeBackgroundService() async {
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
     notificationChannelId,
     'MY FOREGROUND SERVICE',
-    importance: Importance.high,
+    importance: Importance.low,
   );
 
   await flutterLocalNotificationsPlugin.initialize(
