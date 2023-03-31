@@ -24,7 +24,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   LocalNotificationService.ins.showNotification(message);
 }
 
-Future<void> sendPushMessage({String court = 'A'}) async {
+Future<void> sendPushMessage({required String court}) async {
   List<String> tokens = List.filled(0, "", growable: true);
 
   await FirebaseFirestore.instance.collection('users').get().then((value) {
