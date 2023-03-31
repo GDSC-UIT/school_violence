@@ -2,5 +2,5 @@ import 'package:school_violence_app/app/modules/map/widgets/bottom_sheet_content
 
 class HelpDetails {
   late String messageValue;
-  late TypeBullyEnum typeBully;
+  late TypeBully typeBully;
 }
