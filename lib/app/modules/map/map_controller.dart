@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui' as ui;
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
@@ -36,6 +38,20 @@ class MapController extends GetxController {
   //Markers set
   RxSet<Marker> markers = <Marker>{}.obs;
   RxSet<Polyline> polylines = <Polyline>{}.obs;
+
+  // RxList<LatLng> polylineCoordinates =
+  //     List.filled(4, const LatLng(0, 0), growable: true).obs;
+
+  RxList<LatLng> polylineCoordinates =
+      List.filled(4, const LatLng(0, 0), growable: true).obs;
+
+  late Rx<Polygon> polygon = Polygon(
+    polygonId: const PolygonId('court'),
+    fillColor: Colors.red,
+    strokeColor: Colors.red,
+    points: polylineCoordinates,
+    strokeWidth: 5,
+  ).obs;
 
   final Completer<GoogleMapController> googleMapController = Completer();
 
@@ -182,5 +198,36 @@ class MapController extends GetxController {
         c((lat2 - lat1) * p) / 2 +
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
+  }
+
+  Future<void> drawShootingCourt(String court) async {
+    polylineCoordinates.clear();
+
+    DocumentSnapshot uit = await FirebaseFirestore.instance
+        .collection('university')
+        .doc('UIT')
+        .get();
+    Map<String, dynamic> courtPoint = uit.get(court);
+    for (var item in courtPoint.values) {
+      polylineCoordinates.add(LatLng(item.latitude, item.longitude));
+    }
+    var temp = polylineCoordinates[0];
+    polylineCoordinates[0] = polylineCoordinates[1];
+    polylineCoordinates[1] = temp;
+    polygon.value = Polygon(
+      polygonId: const PolygonId('court'),
+      fillColor: Colors.red.withOpacity(0.5),
+      strokeColor: Colors.red.withOpacity(0.5),
+      points: polylineCoordinates,
+      strokeWidth: 5,
+    );
+    final GoogleMapController controller = await googleMapController.future;
+    await controller
+        .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: polylineCoordinates[0],
+      zoom: 17,
+    )));
+    polygon.refresh();
+    update();
   }
 }
