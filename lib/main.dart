@@ -21,6 +21,7 @@ import 'firebase_options.dart';
 int? isViewed;
 bool isLogged = false;
 bool isEmergency = false;
+late String deviceToken;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,10 +60,10 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
-  String? token = await messaging.getToken();
+  deviceToken = (await messaging.getToken())!;
 
   if (kDebugMode) {
-    log('Registration Token=$token');
+    log('Registration Token=$deviceToken');
   }
   if (kDebugMode) {
     log('Permission granted: ${settings.authorizationStatus}');
@@ -78,19 +79,6 @@ Future<void> main() async {
   });
 
   // auto login
-
-  // SaveToken
-
-  void SaveToken(String userId) async {
-    final CollectionReference tokenCollection =
-        FirebaseFirestore.instance.collection('tokens');
-    await tokenCollection.doc(userId).set(
-      {
-        'token': token,
-      },
-    );
-  }
-
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isViewed = prefs.getInt('intro');
   if (prefs.getString("email") != null) {
@@ -98,9 +86,17 @@ Future<void> main() async {
         .signInWithEmailAndPassword(
             email: prefs.getString("email")!,
             password: prefs.getString("password")!);
+
     if (result.user != null) {
       isLogged = true;
       final signInCtrl = Get.put(SignInController());
+      // update token
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(result.user!.uid)
+          .update({
+        'token': deviceToken,
+      });
       signInCtrl.updateUserId(result.user!.uid);
       getData(signInCtrl);
       Timer.periodic(
@@ -109,7 +105,6 @@ Future<void> main() async {
           checkHelp(signInCtrl);
         },
       );
-      SaveToken(signInCtrl.userId.value);
     }
   }
 
@@ -123,6 +118,7 @@ void getData(SignInController signInCtrl) async {
       .collection('users')
       .doc(signInCtrl.userId.value)
       .get();
+
   if (snapUsers.data() != null) {
     signInCtrl.updateUserName((snapUsers.data()! as dynamic)['userName']);
     signInCtrl.updateEmail((snapUsers.data()! as dynamic)['email']);
