@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../core/values/app_colors.dart';
 
-class bottomSheet extends StatelessWidget {
-  const bottomSheet({
+class BottomSheet extends StatelessWidget {
+  const BottomSheet({
     super.key,
   });
 
@@ -32,7 +32,7 @@ class bottomSheet extends StatelessWidget {
           child: Container(
             width: Get.width * 0.4,
             height: 4,
-            color: Colors.black45,
+            color: Colors.black26,
           ),
         ),
       ),

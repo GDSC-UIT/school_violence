@@ -60,6 +60,8 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   permission_handler: ^10.2.0
   background_sms: ^0.0.4
+  dio: ^5.1.1
+  google_maps_flutter_platform_interface: ^2.2.6
   flutter_background_service: ^2.4.6
   flutter_background_service_android: ^3.0.3
   flutter_local_notifications: ^13.0.0
@@ -91,6 +93,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/mapicons/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

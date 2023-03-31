@@ -11,17 +11,17 @@ class WelcomeBanner extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 40,
-            height: 40,
+            width: 100,
+            height: 100,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage('assets/images/location-pin.png'),
+                image: AssetImage('assets/images/avatar.jpg'),
               ),
             ),
           ),
           const SizedBox(
-            width: 15,
+            width: 5,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
