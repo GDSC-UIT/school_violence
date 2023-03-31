@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-
-import '../core/values/app_colors.dart';
 
 class ButtonCustom extends StatelessWidget {
   const ButtonCustom({
@@ -33,31 +29,29 @@ class ButtonCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: GestureDetector(
-        child: Container(
-          height: _heightButton,
-          width: _widthButton,
-          decoration: BoxDecoration(
-            color: _buttonColor,
-            borderRadius: BorderRadius.circular(30.0),
-            boxShadow: [
-              BoxShadow(
-                color: _buttonShadowColor,
-                spreadRadius: 1,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Center(
-            child: Text(
-              _textValue,
-              style: _textStyle,
-              textAlign: TextAlign.center,
+    return GestureDetector(
+      onTap: _callBack,
+      child: Container(
+        height: _heightButton,
+        width: _widthButton,
+        decoration: BoxDecoration(
+          color: _buttonColor,
+          borderRadius: BorderRadius.circular(30.0),
+          boxShadow: [
+            BoxShadow(
+              color: _buttonShadowColor,
+              spreadRadius: 1,
+              offset: const Offset(0, 3),
             ),
+          ],
+        ),
+        child: Center(
+          child: Text(
+            _textValue,
+            style: _textStyle,
+            textAlign: TextAlign.center,
           ),
         ),
-        onTap: _callBack,
       ),
     );
   }

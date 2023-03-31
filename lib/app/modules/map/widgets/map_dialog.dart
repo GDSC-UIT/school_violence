@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
-import 'package:school_violence_app/app/core/values/app_text_style.dart';
-import 'package:school_violence_app/app/global_widgets/button_custom.dart';
-import 'package:school_violence_app/app/modules/intro/widgets/indicator.dart';
-import 'package:school_violence_app/app/modules/map/map_controller.dart';
 import 'package:school_violence_app/app/modules/map/widgets/slider_page_guide.dart';
-import 'package:school_violence_app/app/modules/profile/widgets/customItem.dart';
-import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class MapDialog extends StatefulWidget {
   const MapDialog({super.key});
@@ -19,30 +12,30 @@ class MapDialog extends StatefulWidget {
 
 class _MapDialogState extends State<MapDialog> {
   int _currentPage = 0;
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
 
-  List<Widget> _pages = [
-    SliderPageGuide(
+  final List<Widget> _pages = [
+    const SliderPageGuide(
       title: 'STEP 1',
       description: 'Go to setting.',
       image: 'assets/images/grey-rectangle.png',
     ),
-    SliderPageGuide(
+    const SliderPageGuide(
       title: 'STEP 2',
       description: 'Go to setting.',
       image: 'assets/images/grey-rectangle.png',
     ),
-    SliderPageGuide(
+    const SliderPageGuide(
       title: 'STEP 3',
       description: 'Go to setting.',
       image: 'assets/images/grey-rectangle.png',
     ),
-    SliderPageGuide(
+    const SliderPageGuide(
       title: 'STEP 4',
       description: 'Go to setting.',
       image: 'assets/images/grey-rectangle.png',
     ),
-    SliderPageGuide(
+    const SliderPageGuide(
       title: 'STEP 5',
       description: 'Go to setting.',
       image: 'assets/images/grey-rectangle.png',
@@ -104,10 +97,10 @@ class _MapDialogState extends State<MapDialog> {
                       _pages.length,
                       (int index) {
                         return AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           height: 10,
                           width: (index == _currentPage) ? 30 : 10,
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                             horizontal: 5,
                             vertical: 30,
                           ),
@@ -140,12 +133,12 @@ class _MapDialogState extends State<MapDialog> {
                     InkWell(
                       onTap: () {
                         _controller.previousPage(
-                          duration: Duration(milliseconds: 800),
+                          duration: const Duration(milliseconds: 800),
                           curve: Curves.easeInOutQuint,
                         );
                       },
                       child: AnimatedContainer(
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 300,
                         ),
                         height: 60,
@@ -169,12 +162,12 @@ class _MapDialogState extends State<MapDialog> {
                     InkWell(
                       onTap: () {
                         _controller.nextPage(
-                          duration: Duration(milliseconds: 800),
+                          duration: const Duration(milliseconds: 800),
                           curve: Curves.easeInOutQuint,
                         );
                       },
                       child: AnimatedContainer(
-                        duration: Duration(
+                        duration: const Duration(
                           milliseconds: 300,
                         ),
                         height: 60,

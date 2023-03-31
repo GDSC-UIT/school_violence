@@ -22,7 +22,7 @@ class SliderPageGuide extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.fromLTRB(40.0, 0.0, 40.0, 30.0),
+          padding: const EdgeInsets.fromLTRB(40.0, 0.0, 40.0, 30.0),
           child: Image.asset(_image, width: 168, height: 159, fit: BoxFit.fill),
         ),
         Text(

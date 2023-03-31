@@ -50,24 +50,30 @@ class ChatScreen extends StatelessWidget {
         controller.jumpTo(controller.position.maxScrollExtent);
       }
       var fetchRef = FirebaseFirestore.instance.collection("messages");
-          fetchRef.where("roomUser", isEqualTo: roomUser)
-                  .orderBy("createdAt").snapshots().listen((event) {
-        List data = event.docs.map((element) {
-          if (element.data()["userOwn"] == nowUser) {
-            return Message_User(mess: element["data"]);
+      fetchRef
+          .where("roomUser", isEqualTo: roomUser)
+          .orderBy("createdAt")
+          .snapshots()
+          .listen(
+        (event) {
+          List data = event.docs.map((element) {
+            if (element.data()["userOwn"] == nowUser) {
+              return Message_User(mess: element["data"]);
+            }
+            if (element.data()["userOwn"] != nowUser) {
+              return Message_Orther(mess: element["data"]);
+            }
+          }).toList();
+          if (data.isNotEmpty) {
+            ctrl.updateMessages(data);
+            mess.clear();
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _scrollDown();
+            });
           }
-          if (element.data()["userOwn"] != nowUser) {
-            return Message_Orther(mess: element["data"]);
-          }
-        }).toList();
-        if (data.isNotEmpty) {
-          ctrl.updateMessages(data);
-          mess.clear();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _scrollDown();
-          });
-        }
-      }, onError: (error) => print("Listen failed: $error"),);
+        },
+        onError: (error) => print("Listen failed: $error"),
+      );
     });
     return Scaffold(
       appBar: AppBar(
@@ -89,7 +95,6 @@ class ChatScreen extends StatelessWidget {
               onPressed: () {
                 ctrl.updateMessages([]);
                 Get.toNamed(AppRoutes.diary);
-
               },
             );
           },
@@ -110,20 +115,20 @@ class ChatScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           //mess space
-          Expanded(child: Container(child: Obx(() {
+          Expanded(child: Obx(() {
             if (ctrl.messages.isEmpty) {
               return const SizedBox();
             } else {
               return ListView(
                 controller: controller,
-                children: ctrl.messages.value
+                children: ctrl.messages
                     .map((element) => Container(
                           child: element,
                         ))
                     .toList(),
               );
             }
-          }))),
+          })),
           const SizedBox(
             height: 20,
           ),

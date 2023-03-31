@@ -1,10 +1,9 @@
 import 'dart:math' show cos, sqrt, asin;
-import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 
-final String googleApiKey = 'AIzaSyDp9al2OngJ2669NU0cJOyRNm4eQP6sguA';
+const String googleApiKey = 'AIzaSyDp9al2OngJ2669NU0cJOyRNm4eQP6sguA';
 
 class PolylineService {
   Future<Polyline> drawPolyline(LatLng from, LatLng to) async {
@@ -16,9 +15,9 @@ class PolylineService {
         PointLatLng(from.latitude, from.longitude),
         PointLatLng(to.latitude, to.longitude));
 
-    result.points.forEach((PointLatLng point) {
+    for (var point in result.points) {
       polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-    });
+    }
     _calcDistance(polylineCoordinates);
     return Polyline(
       polylineId: PolylineId("polyline_id ${result.points.length}"),
