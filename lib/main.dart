@@ -22,6 +22,7 @@ int? isViewed;
 bool isLogged = false;
 bool isEmergency = false;
 late String deviceToken;
+String? shootingCourt;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,6 +77,9 @@ Future<void> main() async {
       log('Message notification: ${message.notification?.body}');
     }
     LocalNotificationService.ins.showNotification(message, isBackground: false);
+    isEmergency = true;
+    shootingCourt = message.notification?.body!
+        .substring(message.notification!.body!.length - 1);
   });
 
   // auto login
