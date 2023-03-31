@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -59,25 +58,6 @@ class SignInButton extends StatelessWidget {
     }
   }
 
-  // SaveToken
-
-  String _chars =
-      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  Random _rnd = Random();
-
-  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
-
-  void SaveToken(userId) async {
-    final CollectionReference tokenCollection =
-        FirebaseFirestore.instance.collection('tokens');
-    await tokenCollection.doc(userId).set(
-      {
-        'token': getRandomString(15),
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -99,7 +79,6 @@ class SignInButton extends StatelessWidget {
                 checkHelp();
               },
             );
-            SaveToken(signInCtrl.userId.value);
           }
         }
       },

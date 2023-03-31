@@ -78,6 +78,19 @@ Future<void> main() async {
   });
 
   // auto login
+
+  // SaveToken
+
+  void SaveToken(userId) async {
+    final CollectionReference tokenCollection =
+        FirebaseFirestore.instance.collection('tokens');
+    await tokenCollection.doc(userId).set(
+      {
+        'token': token,
+      },
+    );
+  }
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isViewed = prefs.getInt('intro');
   if (prefs.getString("email") != null) {
@@ -96,6 +109,7 @@ Future<void> main() async {
           checkHelp(signInCtrl);
         },
       );
+      SaveToken(signInCtrl.userId.value);
     }
   }
 
