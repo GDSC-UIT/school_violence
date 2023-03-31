@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/acceptButton.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 class NameCard extends StatelessWidget {
   NameCard({
@@ -16,15 +17,16 @@ class NameCard extends StatelessWidget {
         super(key: key);
 
   final _index;
-  Connect _connect = Connect();
+  final Connect _connect = Connect();
   final ConnectController connectCtrl = Get.find<ConnectController>();
+  final SignInController signInCtrl = Get.find<SignInController>();
   final NotificationsController notificationsController =
       NotificationsController();
 
-  Future<void> getData() async {
+  void getData() async {
     DocumentSnapshot snapConnect = await FirebaseFirestore.instance
         .collection('connect')
-        .doc(connectCtrl.userId.value)
+        .doc(signInCtrl.userId.value)
         .get();
     if (snapConnect.data() != null) {
       List friendRequest = (snapConnect.data()! as dynamic)['friendRequest'];
@@ -51,32 +53,20 @@ class NameCard extends StatelessWidget {
     return Obx(
       () => Card(
         child: ListTile(
-            leading: FlutterLogo(size: 56.0),
-            title: Text(
-              notificationsController.name.value,
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Montserrat',
-                color: AppColors.black,
-                decoration: TextDecoration.none,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            subtitle: Text(
-              notificationsController.school.value,
-              style: TextStyle(
-                fontSize: 10,
-                fontFamily: 'Montserrat',
-                color: AppColors.blur,
-                decoration: TextDecoration.none,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            trailing: AcceptButton(
-              userId: connectCtrl.userId.value,
-              friendId: notificationsController.friendId.value,
-            ) // AcceptButton() để call thằng còn lại
-            ),
+          leading: const FlutterLogo(size: 56.0),
+          title: Text(
+            notificationsController.name.value,
+            style: CustomTextStyle.h2(AppColors.black),
+          ),
+          subtitle: Text(
+            notificationsController.school.value,
+            style: CustomTextStyle.small_desc(AppColors.blur),
+          ),
+          trailing: AcceptButton(
+            userId: signInCtrl.userId.value,
+            friendId: notificationsController.friendId.value,
+          ), // AcceptButton() để call thằng còn lại
+        ),
       ),
     );
   }

@@ -1,11 +1,9 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
-import 'package:school_violence_app/app/modules/sign_up/sign_up_controller.dart';
 
 class DateOfBirthField extends StatelessWidget {
-  DateOfBirthField({
+  const DateOfBirthField({
     Key? key,
     required dateController,
   })  : _dateController = dateController,
@@ -18,8 +16,8 @@ class DateOfBirthField extends StatelessWidget {
     return TextFormField(
       controller: _dateController,
       decoration: const InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.transparent, width: 2.0),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.black, width: 1.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),

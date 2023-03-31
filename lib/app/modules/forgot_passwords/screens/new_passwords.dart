@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/input_label.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/new_password_dialog.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/widgets/text_field_confirm_password.dart';
@@ -42,29 +42,20 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
-                InkWell(
-                  onTap: () {
-                    Get.to(EmailPage());
-                  },
-                  child: Image.asset(
-                    'assets/images/left-small.png',
-                    width: 28,
-                  ),
+                IconButton(
+                  onPressed: () => Get.back(),
+                  icon: const Icon(Icons.arrow_back),
+                  iconSize: 30,
+                  padding: const EdgeInsets.only(right: double.infinity),
                 ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 Row(
                   children: [
                     Text(
                       'Create new password ',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                     Image.asset(
                       'assets/images/lock.png',
@@ -72,28 +63,22 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 7),
+                const SizedBox(height: 7),
                 Row(
                   children: [
                     Text(
-                      'Save the new password in a safe place, if you \n forget it then you have to do a forgot \n password again.',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        color: Color.fromRGBO(103, 103, 103, 1),
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      'Save the new password in a safe place, if you \nforget it then you have to do a forgot \n password again.',
+                      style: CustomTextStyle.desc(AppColors.desc),
                     ),
                   ],
                 ),
-                SizedBox(height: 49),
-                InputLabel(text: 'Create a new password'),
-                TextFieldNewPassword(),
-                SizedBox(height: 37),
-                InputLabel(text: 'Confirm new password'),
-                TextFieldConfirmPassWord(),
-                SizedBox(height: 29),
+                const SizedBox(height: 49),
+                const InputLabel(text: 'Create a new password'),
+                const TextFieldNewPassword(),
+                const SizedBox(height: 37),
+                const InputLabel(text: 'Confirm new password'),
+                const TextFieldConfirmPassWord(),
+                const SizedBox(height: 29),
                 Row(
                   children: [
                     Checkbox(
@@ -116,25 +101,19 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                       padding: const EdgeInsets.all(4),
                       child: Text(
                         'Remember me',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Montserrat',
-                          color: AppColors.black,
-                          decoration: TextDecoration.none,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: CustomTextStyle.desc(AppColors.black),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 100),
+                const SizedBox(height: 100),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return NewPassWordDialog();
+                          return const NewPassWordDialog();
                         },
                       );
                     },
@@ -149,12 +128,7 @@ class _NewPassWordPageState extends State<NewPassWordPage> {
                     child: Text(
                       'Continue',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.button(AppColors.white),
                     ),
                   ),
                 ),

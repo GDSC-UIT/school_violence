@@ -1,11 +1,17 @@
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
+import 'package:school_violence_app/app/data/services/connect.dart';
+import 'package:school_violence_app/app/data/services/emergency.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/list_friend.dart';
 import 'package:school_violence_app/app/modules/connect/widgets/name_card.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class ConnectPage extends StatefulWidget {
@@ -21,14 +27,34 @@ class _ConnectPageState extends State<ConnectPage>
   bool cmbscritta = false;
   late TextEditingController _controller;
   late TabController _tabController;
+  final SignInController signInCtrl = Get.find<SignInController>();
   List<String> products = ["BED", "SOFA", "CHAIR"];
   ListFriend list = ListFriend();
+  final Connect _connect = Connect();
+  final Emergency _emergency = Emergency();
+  List _friends = [];
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  void getData() async {
+    DocumentSnapshot snap =
+        await _connect.connectCollection.doc(signInCtrl.userId.value).get();
+    if (snap.data() != null) {
+      _friends = (snap.data()! as dynamic)['friends'];
+    } else {
+      _friends = [];
+    }
+  }
+
+  void sendHelp() {
+    for (int i = 0; i < _friends.length; i++) {
+      _emergency.needHelp(signInCtrl.userId.value, _friends[i]);
+    }
   }
 
   // @override
@@ -39,6 +65,14 @@ class _ConnectPageState extends State<ConnectPage>
 
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      const Duration(milliseconds: 100),
+      (timer) {
+        if (Get.isDialogOpen == false) {
+          helpDialog(signInCtrl.userId.value);
+        }
+      },
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -47,7 +81,11 @@ class _ConnectPageState extends State<ConnectPage>
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            sendHelp();
+            Get.toNamed(AppRoutes.map);
+          },
+          child: Image.asset('assets/icons/map_icon.png'),
           backgroundColor: AppColors.primaryColor,
         ),
         body: Padding(
@@ -57,7 +95,7 @@ class _ConnectPageState extends State<ConnectPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,16 +106,10 @@ class _ConnectPageState extends State<ConnectPage>
                           'assets/images/grey-avatar.png',
                           width: 28,
                         ),
-                        SizedBox(width: 22.5),
+                        const SizedBox(width: 22.5),
                         Text(
                           'Connect',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontFamily: 'Montserrat',
-                            color: AppColors.black,
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: CustomTextStyle.h1(AppColors.black),
                         ),
                       ],
                     ),
@@ -85,24 +117,25 @@ class _ConnectPageState extends State<ConnectPage>
                       onTap: () {
                         Get.toNamed(AppRoutes.findFriends);
                       },
-                      child: Icon(Icons.search, size: 30),
+                      child: const Icon(Icons.search, size: 30),
                     ),
                   ],
                 ),
-                SizedBox(height: 29),
-                Image.asset('assets/images/grey-rectangle.png'),
-                SizedBox(height: 16),
+                const SizedBox(height: 29),
+                SizedBox(
+                  width: 380,
+                  height: 120,
+                  child: Image.asset('assets/images/connect_img.png',
+                      fit: BoxFit.contain),
+                ),
+                const SizedBox(height: 16),
                 Text(
                   'Your friend',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'Montserrat',
-                    color: AppColors.black,
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: CustomTextStyle.h2(AppColors.black),
                 ),
-                Container(
+                SizedBox(
+                  width: double.infinity,
+                  height: list.listFriend.length * 100,
                   child: ListView.builder(
                     itemCount: list.listFriend.length,
                     itemBuilder: (context, index) {
@@ -112,8 +145,6 @@ class _ConnectPageState extends State<ConnectPage>
                           avatarLink: list.listFriend[index].avatarLink);
                     },
                   ),
-                  width: double.infinity,
-                  height: list.listFriend.length * 80,
                 ),
               ],
             ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
+import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class EmergencyDialog extends StatelessWidget {
   const EmergencyDialog({super.key});
@@ -11,40 +13,28 @@ class EmergencyDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
       child: Container(
-        constraints: BoxConstraints(maxHeight: 474),
+        constraints: const BoxConstraints(maxHeight: 474),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              SizedBox(height: 69),
+              const SizedBox(height: 69),
               Image.asset(
                 'assets/images/grey-square.png',
                 width: 160,
               ),
-              SizedBox(height: 17),
+              const SizedBox(height: 17),
               Text(
                 'Emergency notification',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'Montserrat',
-                  color: AppColors.primaryColor,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: CustomTextStyle.h1(AppColors.primaryColor),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Your friend need your help!!!',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                  color: AppColors.black,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: CustomTextStyle.desc(AppColors.desc),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 59),
+              const SizedBox(height: 59),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -64,16 +54,12 @@ class EmergencyDialog extends StatelessWidget {
                     child: Text(
                       'No',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.button(AppColors.primaryColor),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      Get.toNamed(AppRoutes.map);
                       // Get.to(EmailPage());
                     },
                     style: ElevatedButton.styleFrom(
@@ -87,12 +73,7 @@ class EmergencyDialog extends StatelessWidget {
                     child: Text(
                       'Yes',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 16,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.desc(AppColors.white),
                     ),
                   ),
                 ],

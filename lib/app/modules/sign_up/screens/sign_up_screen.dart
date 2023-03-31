@@ -28,7 +28,7 @@ class SignUpPage extends StatelessWidget {
             Wrap(
               children: [
                 BackButtonCustom(ctrl: ctrl),
-                SizedBox(width: 60),
+                const SizedBox(width: 60),
                 SizedBox(
                   height: 60,
                   width: 200,
@@ -40,11 +40,11 @@ class SignUpPage extends StatelessWidget {
                       padding: 0,
                       selectedColor: AppColors.primaryColor,
                       unselectedColor: AppColors.secondaryColor,
-                      roundedEdges: Radius.circular(10),
+                      roundedEdges: const Radius.circular(10),
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 683,
                   width: 400,
                   child: PageView.builder(

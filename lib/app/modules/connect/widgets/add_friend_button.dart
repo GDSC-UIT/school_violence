@@ -7,6 +7,7 @@ import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 
 class AddFriendButton extends StatelessWidget {
   AddFriendButton({
@@ -21,13 +22,14 @@ class AddFriendButton extends StatelessWidget {
   final ConnectController ctrl;
   final Connect _connect;
   final _index;
+  final SignInController signInCtrl = Get.find<SignInController>();
   final NotificationsController notificationsCtrl =
       Get.find<NotificationsController>();
 
   Future<void> getData() async {
     DocumentSnapshot snapConnect = await FirebaseFirestore.instance
         .collection('connect')
-        .doc(ctrl.userId.value)
+        .doc(signInCtrl.userId.value)
         .get();
     if (snapConnect.data() != null) {
       List friends = (snapConnect.data()! as dynamic)['friends'];
@@ -38,8 +40,8 @@ class AddFriendButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer temp = Timer.periodic(
-      new Duration(seconds: 1),
+    Timer.periodic(
+      const Duration(milliseconds: 100),
       (timer) {
         getData();
         if (notificationsCtrl.isFriend.value) {
@@ -53,21 +55,21 @@ class AddFriendButton extends StatelessWidget {
           onPressed: () {
             if (ctrl.isSent.value && !notificationsCtrl.isFriend.value) {
               _connect.sentRequest(
-                ctrl.userId.value,
+                signInCtrl.userId.value,
                 ctrl.searchResult[_index]['id'],
               );
               _connect.friendRequest(
-                ctrl.userId.value,
+                signInCtrl.userId.value,
                 ctrl.searchResult[_index]['id'],
               );
             } else if (!ctrl.isSent.value &&
                 !notificationsCtrl.isFriend.value) {
               _connect.unSentRequest(
-                ctrl.userId.value,
+                signInCtrl.userId.value,
                 ctrl.searchResult[_index]['id'],
               );
               _connect.unFriendRequest(
-                ctrl.userId.value,
+                signInCtrl.userId.value,
                 ctrl.searchResult[_index]['id'],
               );
             } else {}
@@ -90,15 +92,15 @@ class AddFriendButton extends StatelessWidget {
                   ),
                 ),
           child: (ctrl.isSent.value && !notificationsCtrl.isFriend.value)
-              ? Text('Add')
+              ? const Text('Add')
               : (!ctrl.isSent.value && !notificationsCtrl.isFriend.value)
-                  ? Text(
+                  ? const Text(
                       'Sent ✓',
                       style: TextStyle(
                         color: AppColors.primaryColor,
                       ),
                     )
-                  : Icon(Icons.child_friendly),
+                  : const Icon(Icons.person),
         );
       },
     );

@@ -1,9 +1,15 @@
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
+import 'package:school_violence_app/app/modules/connect/connect_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/notifications_controller.dart';
 import 'package:school_violence_app/app/modules/notifications/widgets/NameCard.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -17,16 +23,30 @@ class _NotificationsPageState extends State<NotificationsPage>
     with TickerProviderStateMixin {
   bool pressGeoON = false;
   bool cmbscritta = false;
+  final CollectionReference connectCollection =
+      FirebaseFirestore.instance.collection('connect');
+  List friendRequest = [];
   late TextEditingController _controller;
   late TabController _tabController;
   final NotificationsController notifycationsCtrl =
       Get.find<NotificationsController>();
-
+  final ConnectController connectCtrl = Get.find<ConnectController>();
+  final SignInController signInCtrl = Get.find<SignInController>();
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  void getData() async {
+    DocumentSnapshot snap =
+        await connectCollection.doc(signInCtrl.userId.value).get();
+    if (snap.data() != null) {
+      friendRequest = (snap.data()! as dynamic)['friendRequest'];
+    } else {
+      friendRequest = [];
+    }
   }
 
   // @override
@@ -37,6 +57,24 @@ class _NotificationsPageState extends State<NotificationsPage>
 
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      const Duration(milliseconds: 100),
+      (timer) {
+        List temp = notifycationsCtrl.friendRequest;
+        getData();
+        if (temp.length != friendRequest.length) {
+          notifycationsCtrl.updateFriendRequest(friendRequest);
+        }
+      },
+    );
+    Timer.periodic(
+      const Duration(milliseconds: 100),
+      (timer) {
+        if (Get.isDialogOpen == false) {
+          helpDialog(signInCtrl.userId.value);
+        }
+      },
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -47,7 +85,7 @@ class _NotificationsPageState extends State<NotificationsPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
                 Row(
                   children: [
@@ -60,22 +98,21 @@ class _NotificationsPageState extends State<NotificationsPage>
                         width: 28,
                       ),
                     ),
-                    SizedBox(width: 22.5),
+                    const SizedBox(width: 22.5),
                     Text(
                       'Notifications',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        color: AppColors.black,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: CustomTextStyle.h1(AppColors.black),
                     ),
                   ],
                 ),
-                SizedBox(height: 29),
-                Image.asset('assets/images/grey-rectangle.png'),
-                SizedBox(height: 16),
+                const SizedBox(height: 29),
+                SizedBox(
+                  width: 400,
+                  height: 126,
+                  child: Image.asset('assets/images/notification_img.png',
+                      fit: BoxFit.contain),
+                ),
+                const SizedBox(height: 16),
                 Container(
                   height: 0.1,
                   width: 378.5,
@@ -91,41 +128,33 @@ class _NotificationsPageState extends State<NotificationsPage>
                             color: AppColors.secondaryColor,
                             borderRadius: BorderRadius.circular(50)),
                         child: TabBar(
-                          unselectedLabelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                          unselectedLabelStyle:
+                              CustomTextStyle.button(AppColors.primaryColor),
                           indicator: BoxDecoration(
                             borderRadius:
                                 BorderRadius.circular(50), // Creates border
                             color: AppColors.primaryColor,
                           ),
-                          labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                          labelPadding: EdgeInsets.all(14),
+                          labelStyle: CustomTextStyle.button(AppColors.white),
+                          labelPadding: const EdgeInsets.all(14),
                           // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
                           unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
                           tabs: [
-                            Text('Diary'),
+                            const Text('Diary'),
                             Stack(
                               children: [
-                                Text('Friend'),
+                                const Text('Friend'),
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(60, 2, 0, 0),
+                                  margin: const EdgeInsets.fromLTRB(60, 2, 0, 0),
                                   width: 14,
                                   height: 14,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: AppColors
                                           .notificationBackgroundColor),
-                                  child: (Text(
+                                  child: (const Text(
                                     '1',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -142,7 +171,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                           ],
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         width: double.maxFinite,
                         height: 300,
                         child: TabBarView(
@@ -154,26 +183,16 @@ class _NotificationsPageState extends State<NotificationsPage>
                               itemBuilder: (_, index) {
                                 return Card(
                                   child: ListTile(
-                                    leading: FlutterLogo(size: 56.0),
+                                    leading: const FlutterLogo(size: 56.0),
                                     title: Text(
                                       'Chat',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontFamily: 'Montserrat',
-                                        color: AppColors.black,
-                                        decoration: TextDecoration.none,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                      style:
+                                          CustomTextStyle.h2(AppColors.black),
                                     ),
                                     subtitle: Text(
                                       'Today',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontFamily: 'Montserrat',
-                                        color: AppColors.blur,
-                                        decoration: TextDecoration.none,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                      style: CustomTextStyle.small_desc(
+                                          AppColors.blur),
                                     ),
                                   ),
                                 );
@@ -184,8 +203,8 @@ class _NotificationsPageState extends State<NotificationsPage>
                                 itemCount:
                                     notifycationsCtrl.friendRequest.length,
                                 scrollDirection: Axis.vertical,
-                                itemBuilder: (context, _index) {
-                                  return NameCard(index: _index);
+                                itemBuilder: (context, index) {
+                                  return NameCard(index: index);
                                 },
                               ),
                             )

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 
 class Button extends StatelessWidget {
   const Button({
@@ -30,12 +30,7 @@ class Button extends StatelessWidget {
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            color: AppColors.white,
-            fontSize: 16,
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w600,
-          ),
+          style: CustomTextStyle.button(AppColors.white),
         ),
       ),
     );

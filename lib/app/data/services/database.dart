@@ -19,6 +19,8 @@ class DatabaseService {
     String city,
     String school,
     bool expert,
+    double latitude,
+    double longtitude,
   ) async {
     return await usersCollection.doc(uid).set(
       {
@@ -34,6 +36,8 @@ class DatabaseService {
         'city': city,
         'school': school,
         'expert': expert,
+        'latitude': latitude,
+        'longtitude': longtitude,
       },
     );
   }

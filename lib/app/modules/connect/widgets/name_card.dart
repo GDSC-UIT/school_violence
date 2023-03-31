@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 
 class FriendCard extends StatelessWidget {
   final String name;
@@ -24,23 +25,11 @@ class FriendCard extends StatelessWidget {
         ),
         title: Text(
           name,
-          style: TextStyle(
-            fontSize: 20,
-            fontFamily: 'Montserrat',
-            color: AppColors.black,
-            decoration: TextDecoration.none,
-            fontWeight: FontWeight.w600,
-          ),
+          style: CustomTextStyle.h2(AppColors.black),
         ),
         subtitle: Text(
           phoneNumber,
-          style: TextStyle(
-            fontSize: 12,
-            fontFamily: 'Montserrat',
-            color: AppColors.blur,
-            decoration: TextDecoration.none,
-            fontWeight: FontWeight.w500,
-          ),
+          style: CustomTextStyle.small_desc(AppColors.desc),
         ),
       ),
     );

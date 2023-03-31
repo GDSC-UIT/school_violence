@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 
 // customize FormHelper package
 class FormHelper {
@@ -39,7 +41,7 @@ class FormHelper {
       var findValue = listData
           .where((item) => item[optionValue].toString() == value.toString());
 
-      if (findValue.length > 0) {
+      if (findValue.isNotEmpty) {
         value = findValue.first[optionValue].toString();
       } else {
         value = null;
@@ -76,11 +78,11 @@ class FormHelper {
                 color: hintColor,
               ),
               hintText: hintText,
-              enabledBorder: OutlineInputBorder(
+              enabledBorder: UnderlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
-                borderSide: BorderSide(
-                  color: borderColor,
-                  width: enabledBorderWidth,
+                borderSide: const BorderSide(
+                  color: AppColors.black,
+                  //width: enabledBorderWidth,
                 ),
               ),
               border: OutlineInputBorder(
@@ -100,15 +102,15 @@ class FormHelper {
               suffixIcon: suffixIcon,
               prefixIcon: showPrefixIcon
                   ? Padding(
-                      child: IconTheme(
-                        data: IconThemeData(color: prefixIconColor),
-                        child: prefixIcon!,
-                      ),
                       padding: EdgeInsets.only(
                         left: prefixIconPaddingLeft,
                         right: prefixIconPaddingRight,
                         top: prefixIconPaddingTop,
                         bottom: prefixIconPaddingBottom,
+                      ),
+                      child: IconTheme(
+                        data: IconThemeData(color: prefixIconColor),
+                        child: prefixIcon!,
                       ),
                     )
                   : null,
@@ -153,9 +155,9 @@ class FormHelper {
               (dynamic data) {
                 return DropdownMenuItem<String>(
                   value: data[optionValue].toString(),
-                  child: new Text(
+                  child: Text(
                     data[optionLabel],
-                    style: new TextStyle(color: Colors.black, fontSize: 20),
+                    style: CustomTextStyle.input(AppColors.black),
                   ),
                 );
               },

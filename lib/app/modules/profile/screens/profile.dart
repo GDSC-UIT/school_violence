@@ -1,13 +1,19 @@
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
+import 'package:school_violence_app/app/data/services/auth_services.dart';
+import 'package:school_violence_app/app/data/services/connect.dart';
+import 'package:school_violence_app/app/data/services/emergency.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
-import 'package:school_violence_app/app/modules/forgot_passwords/screens/email.dart';
-import 'package:school_violence_app/app/modules/notifications/widgets/acceptedButton.dart';
+import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/customItem.dart';
-import 'package:school_violence_app/app/modules/profile/widgets/editProfileButton.dart';
 import 'package:school_violence_app/app/modules/profile/widgets/profileNameCard.dart';
+import 'package:school_violence_app/app/modules/sign_in/screens/sign_in_screen.dart';
+import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -23,12 +29,33 @@ class _ProfilePageState extends State<ProfilePage>
   bool cmbscritta = false;
   late TextEditingController _controller;
   late TabController _tabController;
+  final AuthServices _auth = AuthServices();
+  final SignInController signInCtrl = Get.find<SignInController>();
+  final Connect _connect = Connect();
+  final Emergency _emergency = Emergency();
+  List _friends = [];
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  void getData() async {
+    DocumentSnapshot snap =
+        await _connect.connectCollection.doc(signInCtrl.userId.value).get();
+    if (snap.data() != null) {
+      _friends = (snap.data()! as dynamic)['friends'];
+    } else {
+      _friends = [];
+    }
+  }
+
+  void sendHelp() {
+    for (int i = 0; i < _friends.length; i++) {
+      _emergency.needHelp(signInCtrl.userId.value, _friends[i]);
+    }
   }
 
   // @override
@@ -39,6 +66,14 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    Timer.periodic(
+      const Duration(milliseconds: 100),
+      (timer) {
+        if (Get.isDialogOpen == false) {
+          helpDialog(signInCtrl.userId.value);
+        }
+      },
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -47,7 +82,11 @@ class _ProfilePageState extends State<ProfilePage>
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            sendHelp();
+            Get.toNamed(AppRoutes.map);
+          },
+          child: Image.asset('assets/icons/map_icon.png'),
           backgroundColor: AppColors.primaryColor,
         ),
         body: Padding(
@@ -57,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,23 +107,18 @@ class _ProfilePageState extends State<ProfilePage>
                           'assets/images/avatar.jpg', // Avatar
                           width: 48,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
                           'Profile',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontFamily: 'Montserrat',
-                            color: AppColors.black,
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: CustomTextStyle.h1(AppColors.black),
                         ),
                       ],
                     ),
                     InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoutes
-                            .sign_in); // Chỗ này nên bắn ra dialog confirm
+                        Get.offAll(
+                            SignInPage()); // Chỗ này nên bắn ra dialog confirm
+                        _auth.signOutWithEmailAndPassword();
                       },
                       child: Image.asset(
                         'assets/images/logout.png', // Logout
@@ -93,12 +127,17 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                   ],
                 ),
-                SizedBox(height: 29),
-                Image.asset('assets/images/grey-rectangle.png'),
-                SizedBox(height: 16),
-                ProfileNameCard(
+                const SizedBox(height: 29),
+                SizedBox(
+                  width: 400,
+                  height: 126,
+                  child: Image.asset('assets/images/profile_img.png',
+                      fit: BoxFit.contain),
+                ),
+                const SizedBox(height: 16),
+                const ProfileNameCard(
                     name: 'Cao Minh Quân', phoneNumber: '+84 123456789'),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 DefaultTabController(
                   length: 2,
                   child: Column(
@@ -108,32 +147,24 @@ class _ProfilePageState extends State<ProfilePage>
                             color: AppColors.secondaryColor,
                             borderRadius: BorderRadius.circular(50)),
                         child: TabBar(
-                          unselectedLabelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                          unselectedLabelStyle:
+                              CustomTextStyle.button(AppColors.primaryColor),
                           indicator: BoxDecoration(
                             borderRadius:
                                 BorderRadius.circular(50), // Creates border
                             color: AppColors.primaryColor,
                           ),
-                          labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                          labelPadding: EdgeInsets.all(14),
+                          labelStyle: CustomTextStyle.button(AppColors.white),
+                          labelPadding: const EdgeInsets.all(14),
                           // padding: EdgeInsets.fromLTRB(0, 18, 0, 0),
                           labelColor: AppColors.white,
                           unselectedLabelColor: AppColors.primaryColor,
                           controller: _tabController,
-                          tabs: [Text('Report'), Text('Diary')],
+                          tabs: const [Text('Report'), Text('Diary')],
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Container(
+                      const SizedBox(height: 20),
+                      SizedBox(
                         width: double.maxFinite,
                         height: 270,
                         child: TabBarView(
@@ -172,7 +203,7 @@ class _ProfilePageState extends State<ProfilePage>
                           ],
                         ),
                       ),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
@@ -186,12 +217,7 @@ class _ProfilePageState extends State<ProfilePage>
                         child: Text(
                           'Start',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 16,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: CustomTextStyle.button(AppColors.white),
                         ),
                       ),
                     ],

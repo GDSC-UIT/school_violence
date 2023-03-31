@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/modules/intro/intro_controller.dart';
 
 class picturesAndText extends StatelessWidget {
@@ -11,9 +13,9 @@ class picturesAndText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 400,
-      width: 300,
+    return SizedBox(
+      height: 450,
+      width: 330,
       child: PageView.builder(
         onPageChanged: (index) {
           ctrl.updateSelectedIndex(index);
@@ -22,22 +24,14 @@ class picturesAndText extends StatelessWidget {
         itemCount: 3,
         itemBuilder: (context, index) {
           return Column(
-            children: const [
+            children: [
               // need to replace this Text -> Pictures
-              Text(
-                'A',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 175),
-              ),
-              SizedBox(
-                height: 80,
-              ),
+              Image.asset('assets/images/signup_img.png',
+                  width: 292, height: 270, fit: BoxFit.fill),
+              const SizedBox(height: 40),
               Text(
                 'Connect & share with\nexpert whenever and\nwherever you want',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 25,
-                ),
+                style: CustomTextStyle.h1(AppColors.black),
                 textAlign: TextAlign.center,
               ),
             ],

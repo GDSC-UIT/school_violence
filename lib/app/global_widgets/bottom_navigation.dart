@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
+import 'package:school_violence_app/app/core/values/app_text_style.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -48,15 +49,17 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      selectedLabelStyle: CustomTextStyle.small_desc(AppColors.primaryColor),
+      unselectedLabelStyle: CustomTextStyle.small_desc(AppColors.black),
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home_rounded),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.menu_book_rounded),
-          label: 'Diary',
+          icon: Icon(Icons.message),
+          label: 'Chat',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.connect_without_contact),

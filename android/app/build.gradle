@@ -30,18 +30,20 @@ android {
     compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
-    // compileOptions {
-    //     sourceCompatibility JavaVersion.VERSION_1_8
-    //     targetCompatibility JavaVersion.VERSION_1_8
-    // }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     // kotlinOptions {
     //     jvmTarget = '1.8'
     // }
 
-    compileOptions {         
-        sourceCompatibility JavaVersion.VERSION_11         
-        targetCompatibility JavaVersion.VERSION_11     
-    }
+    // compileOptions {         
+    //     sourceCompatibility JavaVersion.VERSION_11         
+    //     targetCompatibility JavaVersion.VERSION_11     
+    // }
          
     kotlinOptions {         
         jvmTarget = '11'     
@@ -60,6 +62,8 @@ android {
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -79,4 +83,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation platform('com.google.firebase:firebase-bom:31.2.0')
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+    implementation 'androidx.window:window:1.0.0'
+    implementation 'androidx.window:window-java:1.0.0'
 }

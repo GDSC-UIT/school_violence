@@ -21,21 +21,21 @@ class PasswordField extends StatelessWidget {
       child: Obx(
         () => TextFormField(
           controller: _passwordController,
-          style: TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20),
           decoration: InputDecoration(
             suffixIcon: IconButton(
               onPressed: () {
                 ctrl.updateHidePassword();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.remove_red_eye,
                 size: 20,
               ),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.transparent, width: 2.0),
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.black, width: 1.0),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
             ),
           ),
