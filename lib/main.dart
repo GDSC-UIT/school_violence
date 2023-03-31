@@ -1,25 +1,96 @@
 import 'dart:async';
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:school_violence_app/app/data/services/background_service.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'app/routes/app_pages.dart';
-import 'app/routes/app_routes.dart';
+import 'app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'app/data/services/local-notification_service.dart';
+import 'app/data/services/push-notification_service.dart';
 import 'firebase_options.dart';
 
 int? isViewed;
 bool isLogged = false;
+bool isEmergency = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // get user permission
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
+
+  // initialize background notification
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+    isEmergency = true;
+  }
+  await initializeBackgroundService();
+
+  //initialize firebase
   await Firebase.initializeApp(
     name: 'School Violence',
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+
+  // initialize push notification
+  final messaging = FirebaseMessaging.instance;
+  final settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  String? token = await messaging.getToken();
+
+  if (kDebugMode) {
+    log('Registration Token=$token');
+  }
+  if (kDebugMode) {
+    log('Permission granted: ${settings.authorizationStatus}');
+  }
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (kDebugMode) {
+      log('Handling a foreground message: ${message.messageId}');
+      log('Message notification: ${message.notification?.title}');
+      log('Message notification: ${message.notification?.body}');
+    }
+    LocalNotificationService.ins.showNotification(message, isBackground: false);
+  });
+
+  // auto login
+
+  // SaveToken
+
+  void SaveToken(userId) async {
+    final CollectionReference tokenCollection =
+        FirebaseFirestore.instance.collection('tokens');
+    await tokenCollection.doc(userId).set(
+      {
+        'token': token,
+      },
+    );
+  }
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isViewed = prefs.getInt('intro');
   if (prefs.getString("email") != null) {
@@ -38,8 +109,11 @@ Future<void> main() async {
           checkHelp(signInCtrl);
         },
       );
+      SaveToken(signInCtrl.userId.value);
     }
   }
+
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   runApp(const MyApp());
 }
@@ -73,25 +147,5 @@ void checkHelp(SignInController signInCtrl) async {
     signInCtrl.updateFriendId((snapEmergency.data()! as dynamic)['friendId']);
   } else {
     signInCtrl.updateFriendId([]);
-  }
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialRoute: isLogged
-          ? AppRoutes.home
-          : (isViewed != 0 ? AppRoutes.sign_in : AppRoutes.sign_in),
-      getPages: AppPages.pages,
-      debugShowCheckedModeBanner: false,
-    );
   }
 }

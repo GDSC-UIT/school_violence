@@ -21,8 +21,6 @@ class SignInButton extends StatelessWidget {
 
   final AuthServices _auth = AuthServices();
   final SignInController signInCtrl;
-  final NotificationsController notifycationsCtrl =
-      Get.find<NotificationsController>();
   final GlobalKey<FormState> _formKey;
   final CollectionReference connectCollection =
       FirebaseFirestore.instance.collection('connect');
