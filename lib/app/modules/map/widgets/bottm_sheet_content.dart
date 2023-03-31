@@ -5,21 +5,33 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/values/app_colors.dart';
+import '../../../data/services/push-notification_service.dart';
 
 enum TypeBully { Violence, Shooting }
 
-class BottomSheetContent extends StatelessWidget {
-  BottomSheetContent({super.key});
+enum Court { A, B, C }
 
+class BottomSheetContent extends StatefulWidget {
+  const BottomSheetContent({super.key});
+
+  @override
+  State<BottomSheetContent> createState() => _BottomSheetContentState();
+}
+
+class _BottomSheetContentState extends State<BottomSheetContent> {
   final TextEditingController _messageController = TextEditingController();
-  final TypeBully _typeValue = TypeBully.Violence;
+
+  TypeBully _typeValue = TypeBully.Violence;
+  Court selectedCourt = Court.A;
 
   _callNumber(String number) async {
     await FlutterPhoneDirectCaller.callNumber(number);
   }
 
   _getPermission() async => await [Permission.sms].request();
+
   _isPermissionGranted() async => Permission.sms.status.isGranted;
+
   _sendSms(String phoneNumber, String message, {int? simSlot}) async {
     await BackgroundSms.sendMessage(
       phoneNumber: phoneNumber,
@@ -110,37 +122,126 @@ class BottomSheetContent extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Container(
-              child: Row(
-                children: [
-                  Radio(
-                    value: TypeBully.Violence,
-                    groupValue: _typeValue,
-                    onChanged: (typeBully) {},
-                    activeColor: AppColors.primaryColor,
-                  ),
-                  const SizedBox(
-                    width: 2.0,
-                  ),
-                  const Text("Violence"),
-                  const SizedBox(
-                    width: 80,
-                  ),
-                  Radio(
-                    value: TypeBully.Shooting,
-                    groupValue: _typeValue,
-                    onChanged: (typeBully) {},
-                    activeColor: AppColors.primaryColor,
-                  ),
-                  const SizedBox(
-                    width: 2.0,
-                  ),
-                  const Text("School Shooting"),
-                ],
-              ),
+            Row(
+              children: [
+                Radio(
+                  value: TypeBully.Violence,
+                  groupValue: _typeValue,
+                  onChanged: (typeBully) {
+                    setState(() {
+                      _typeValue = typeBully as TypeBully;
+                    });
+                  },
+                  activeColor: AppColors.primaryColor,
+                ),
+                const SizedBox(
+                  width: 2.0,
+                ),
+                const Text("Violence"),
+                const SizedBox(
+                  width: 80,
+                ),
+                Radio(
+                  value: TypeBully.Shooting,
+                  groupValue: _typeValue,
+                  onChanged: (typeBully) {
+                    setState(() {
+                      _typeValue = typeBully as TypeBully;
+                    });
+                  },
+                  activeColor: AppColors.primaryColor,
+                ),
+                const SizedBox(
+                  width: 2.0,
+                ),
+                const Text("School Shooting"),
+              ],
             ),
             const SizedBox(
               height: 20,
+            ),
+            Visibility(
+              visible: (_typeValue == TypeBully.Shooting) ? true : false,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Court",
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Radio(
+                              value: Court.A,
+                              groupValue: selectedCourt,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedCourt = value!;
+                                });
+                              },
+                              activeColor: AppColors.primaryColor,
+                            ),
+                            const SizedBox(
+                              width: 2.0,
+                            ),
+                            const Text("A"),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Radio(
+                              value: Court.B,
+                              groupValue: selectedCourt,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedCourt = value!;
+                                });
+                              },
+                              activeColor: AppColors.primaryColor,
+                            ),
+                            const SizedBox(
+                              width: 2.0,
+                            ),
+                            const Text("B"),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Radio(
+                              value: Court.C,
+                              groupValue: selectedCourt,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedCourt = value!;
+                                });
+                              },
+                              activeColor: AppColors.primaryColor,
+                            ),
+                            const SizedBox(
+                              width: 2.0,
+                            ),
+                            const Text("C"),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
             Container(
               color: AppColors.grey,
@@ -151,7 +252,9 @@ class BottomSheetContent extends StatelessWidget {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                sendPushMessage(court: selectedCourt.toString().substring(6));
+              },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(

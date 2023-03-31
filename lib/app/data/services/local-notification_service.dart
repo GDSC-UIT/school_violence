@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../../../main.dart';
 
 const notificationChannelId = 'my_background';
 const notificationId = 888;
@@ -15,11 +19,12 @@ class LocalNotificationService {
 
   late final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  void showNotification(RemoteMessage message, {bool isBackground = true}) {
+  Future<void> showNotification(RemoteMessage message,
+      {bool isBackground = true}) async {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
     if (notification != null && android != null && !kIsWeb) {
-      flutterLocalNotificationsPlugin.show(
+      await flutterLocalNotificationsPlugin.show(
         isBackground ? notificationId : 0,
         notification.title,
         notification.body,
@@ -35,6 +40,8 @@ class LocalNotificationService {
           ),
         ),
       );
+      isEmergency = true;
+      log("Payload: ${notification.body}");
     }
   }
 
