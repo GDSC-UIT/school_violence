@@ -58,7 +58,7 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
       physics: const BouncingScrollPhysics(),
       child: Container(
         width: Get.width,
-        height: Get.height * 0.5,
+        height: Get.height * 0.7,
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 10,
@@ -264,6 +264,8 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                 mapController.bottomSheetStatus.value = true;
                 if (_typeValue == TypeBully.Shooting) {
                   sendPushMessage(court: selectedCourt.toString().substring(6));
+                  mapController.drawShootingCourt(
+                      '${selectedCourt.toString().substring(6)}_Tower');
                 } else {
                   findClosestSafePlace();
                 }

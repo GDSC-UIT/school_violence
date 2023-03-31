@@ -37,8 +37,6 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
 
   // Set<Marker> _markersDupe = Set<Marker>();
 
-  List<LatLng> _latLng = [];
-
   late Marker endMarker;
 
   double distanceInMeters = 0.0;
@@ -56,7 +54,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
     return await Geolocator.getCurrentPosition();
   }
 
-  void loadData() {
+  void loadData() async {
     getUserCurrentLocation().then(
       (currentPosition) async {
         mapController.markers.add(
@@ -67,6 +65,8 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
             infoWindow: const InfoWindow(title: "Here!!!"),
           ),
         );
+        // mapController.polygon.points
+        //     .add(LatLng(currentPosition.latitude, currentPosition.longitude));
         CameraPosition cameraPosition = CameraPosition(
           target: LatLng(currentPosition.latitude, currentPosition.longitude),
           zoom: 17,
@@ -88,16 +88,6 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
         });
       },
     );
-  }
-
-  void _addEndMarker(LatLng position) {
-    setState(() {
-      endMarker = Marker(
-        markerId: const MarkerId('end'),
-        position: position,
-      );
-      _latLng.add(endMarker.position);
-    });
   }
 
   @override
@@ -134,6 +124,9 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
                   mapType: MapType.normal,
                   markers: Set<Marker>.of(mapController.markers),
                   polylines: Set<Polyline>.of(mapController.polylines),
+                  polygons: {
+                    mapController.polygon.value,
+                  },
                   zoomControlsEnabled: false,
                   circles: mapController.circles,
                 )),
@@ -144,10 +137,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
             left: 20,
             child: SizedBox(
               width: Get.width,
-              child: GestureDetector(
-                onTap: () => setState(() {}),
-                child: const WelcomeBanner(),
-              ),
+              child: const WelcomeBanner(),
             ),
           ),
           Obx(
@@ -162,9 +152,8 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
                             loadData();
                             print(mapController.polylines);
                           });
-                          _latLng = [];
-                          mapController.polylines.clear();
                           await Get.bottomSheet(const BottomSheetContent());
+
                           setState(() {});
                         },
                         child: const Align(
@@ -208,7 +197,6 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
                             mapController.markers.clear();
                             mapController.minDistance = 0.0;
                             mapController.allFavoritePlaces.clear();
-                            _latLng = [];
                             mapController.polylines.clear();
                             mapController.markerIdCounter = 1;
                             mapController.closeButton.value = false;
