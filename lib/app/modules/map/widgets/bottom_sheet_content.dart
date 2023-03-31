@@ -1,9 +1,15 @@
+import 'package:background_sms/background_sms.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
-import 'package:school_violence_app/app/modules/map/widgets/start_button.dart';
-import '../../../core/values/app_colors.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-enum TypeBullyEnum { violence, shooting }
+import '../../../core/values/app_colors.dart';
+import '../../../data/services/push-notification_service.dart';
+
+enum TypeBully { Violence, Shooting }
+
+enum Court { A, B, C }
 
 class BottomSheetContent extends StatefulWidget {
   const BottomSheetContent({super.key});
@@ -15,7 +21,30 @@ class BottomSheetContent extends StatefulWidget {
 class _BottomSheetContentState extends State<BottomSheetContent> {
   final TextEditingController _messageController = TextEditingController();
 
-  TypeBullyEnum? _typeBullyEnum;
+  TypeBully _typeValue = TypeBully.Violence;
+  Court selectedCourt = Court.A;
+
+  _callNumber(String number) async {
+    await FlutterPhoneDirectCaller.callNumber(number);
+  }
+
+  _getPermission() async => await [Permission.sms].request();
+
+  _isPermissionGranted() async => Permission.sms.status.isGranted;
+
+  _sendSms(String phoneNumber, String message, {int? simSlot}) async {
+    await BackgroundSms.sendMessage(
+      phoneNumber: phoneNumber,
+      message: message,
+      simSlot: simSlot,
+    ).then((SmsStatus status) {
+      if (status == "sent") {
+        print("sent");
+      } else {
+        print("failed");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,135 +69,179 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 4,
+              height: 10,
             ),
-            Center(
-              child: Container(
-                width: Get.width * 0.10,
-                height: 4,
-                color: Colors.black26,
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Center(
-                child: Icon(
-                  Icons.notification_important,
-                  color: AppColors.primaryColor,
-                  size: 64,
-                ),
-              ),
-            ),
-            Form(
-              child: Column(
-                children: [
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Message",
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    validator: null,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _messageController.text = newValue;
-                      });
-                    },
-                    initialValue: _messageController.text,
-                    decoration: InputDecoration(
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: AppColors.transparent,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide:
-                            const BorderSide(color: AppColors.primaryColor),
-                      ),
-                      hintStyle: const TextStyle(
-                        color: AppColors.primaryColor,
-                      ),
-                      label: const Text(
-                        "Type a message to report (optional)",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black45,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Type",
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: TypeBullyEnum.violence,
-                        groupValue: _typeBullyEnum,
-                        onChanged: (newTypeBully) {
-                          setState(() {
-                            _typeBullyEnum = newTypeBully;
-                          });
-                        },
-                        activeColor: AppColors.primaryColor,
-                      ),
-                      const SizedBox(
-                        width: 2.0,
-                      ),
-                      const Text("Violence"),
-                      const SizedBox(
-                        width: 80,
-                      ),
-                      Radio(
-                        value: TypeBullyEnum.shooting,
-                        groupValue: _typeBullyEnum,
-                        onChanged: (newTypeBully) {
-                          setState(() {
-                            _typeBullyEnum = newTypeBully;
-                          });
-                        },
-                        activeColor: AppColors.primaryColor,
-                      ),
-                      const SizedBox(
-                        width: 2.0,
-                      ),
-                      const Text("School Shooting"),
-                    ],
-                  ),
-                ],
+            const Text(
+              "Message",
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(
               height: 20,
+            ),
+            TextField(
+              controller: _messageController,
+              decoration: InputDecoration(
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: AppColors.transparent,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(color: AppColors.primaryColor),
+                ),
+                hintStyle: const TextStyle(
+                  color: AppColors.primaryColor,
+                ),
+                label: const Text(
+                  "Type a message to report (optional)",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black45,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              "Type",
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                Radio(
+                  value: TypeBully.Violence,
+                  groupValue: _typeValue,
+                  onChanged: (typeBully) {
+                    setState(() {
+                      _typeValue = typeBully as TypeBully;
+                    });
+                  },
+                  activeColor: AppColors.primaryColor,
+                ),
+                const SizedBox(
+                  width: 2.0,
+                ),
+                const Text("Violence"),
+                const SizedBox(
+                  width: 80,
+                ),
+                Radio(
+                  value: TypeBully.Shooting,
+                  groupValue: _typeValue,
+                  onChanged: (typeBully) {
+                    setState(() {
+                      _typeValue = typeBully as TypeBully;
+                    });
+                  },
+                  activeColor: AppColors.primaryColor,
+                ),
+                const SizedBox(
+                  width: 2.0,
+                ),
+                const Text("School Shooting"),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Visibility(
+              visible: (_typeValue == TypeBully.Shooting) ? true : false,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Court",
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Radio(
+                              value: Court.A,
+                              groupValue: selectedCourt,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedCourt = value!;
+                                });
+                              },
+                              activeColor: AppColors.primaryColor,
+                            ),
+                            const SizedBox(
+                              width: 2.0,
+                            ),
+                            const Text("A"),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Radio(
+                              value: Court.B,
+                              groupValue: selectedCourt,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedCourt = value!;
+                                });
+                              },
+                              activeColor: AppColors.primaryColor,
+                            ),
+                            const SizedBox(
+                              width: 2.0,
+                            ),
+                            const Text("B"),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Radio(
+                              value: Court.C,
+                              groupValue: selectedCourt,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedCourt = value!;
+                                });
+                              },
+                              activeColor: AppColors.primaryColor,
+                            ),
+                            const SizedBox(
+                              width: 2.0,
+                            ),
+                            const Text("C"),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
             Container(
               color: AppColors.grey,
@@ -178,66 +251,25 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
             const SizedBox(
               height: 20,
             ),
-            // ElevatedButton(
-            //   onPressed: () async {
-            //     Navigator.pop(context);
-            //     alertButton = false;
-            //     guideButton = false;
-            //     bottomSheetStatus = true;
-            //     if (_typeBullyEnum == TypeBullyEnum.violence) {
-            //       setState(() {
-            //         closeButton = true;
-            //         _setCircle(_currentPositon);
-            //       });
-            //       if (_debounce?.isActive ?? false) _debounce?.cancel();
-            //       _debounce = Timer(
-            //         Duration(seconds: 1),
-            //         () async {
-            //           var placesResult = await MapServices().getPlaceDetails(
-            //               _currentPositon, radiusValue.toInt());
-
-            //           List<dynamic> placesWithin =
-            //               placesResult['results'] as List;
-
-            //           allFavoritePlaces = placesWithin;
-
-            //           tokenKey = placesResult['next_page_token'] ?? 'none';
-
-            //           placesWithin.forEach((element) {
-            //             if (element['opening_hours'] != null) {
-            //               _setNearMarker(
-            //                 LatLng(
-            //                   element['geometry']['location']['lat'],
-            //                   element['geometry']['location']['lng'],
-            //                 ),
-            //                 element['name'],
-            //                 element['types'],
-            //                 element['business_status'] ?? 'not available',
-            //               );
-            //             }
-            //           });
-            //           // _markersDupe = _markers;
-            //         },
-            //       );
-            //     } else if (_typeBullyEnum == TypeBullyEnum.shooting) {
-            //       print('shooting');
-            //     }
-            //   },
-            //   style: ElevatedButton.styleFrom(
-            //     shape: const RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.all(
-            //         Radius.circular(30),
-            //       ),
-            //     ),
-            //     backgroundColor: AppColors.primaryColor,
-            //     elevation: 0,
-            //     minimumSize: const Size(380, 50),
-            //   ),
-            //   child: const Text(
-            //     "Start",
-            //     style: TextStyle(fontSize: 16),
-            //   ),
-            // ),
+            ElevatedButton(
+              onPressed: () {
+                sendPushMessage(court: selectedCourt.toString().substring(6));
+              },
+              style: ElevatedButton.styleFrom(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                backgroundColor: AppColors.primaryColor,
+                elevation: 0,
+                minimumSize: const Size(380, 50),
+              ),
+              child: const Text(
+                "Start",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
           ],
         ),
       ),

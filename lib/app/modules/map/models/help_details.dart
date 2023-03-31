@@ -1,4 +1,4 @@
-import 'package:school_violence_app/app/modules/map/widgets/bottom_sheet_content.dart';
+import 'package:school_violence_app/app/modules/map/screens/map_home_screen.dart';
 
 class HelpDetails {
   late String messageValue;
