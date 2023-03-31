@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:background_sms/background_sms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/values/app_colors.dart';
 import '../../../data/services/push-notification_service.dart';
+import '../map_controller.dart';
+import '../services/map_service.dart';
 
 enum TypeBully { Violence, Shooting }
 
@@ -20,6 +25,7 @@ class BottomSheetContent extends StatefulWidget {
 
 class _BottomSheetContentState extends State<BottomSheetContent> {
   final TextEditingController _messageController = TextEditingController();
+  final mapController = Get.find<MapController>();
 
   TypeBully _typeValue = TypeBully.Violence;
   Court selectedCourt = Court.A;
@@ -252,8 +258,16 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {
-                sendPushMessage(court: selectedCourt.toString().substring(6));
+              onPressed: () async {
+                mapController.alertButton.value = false;
+                mapController.guideButton.value = false;
+                mapController.bottomSheetStatus.value = true;
+                if (_typeValue == TypeBully.Shooting) {
+                  sendPushMessage(court: selectedCourt.toString().substring(6));
+                } else {
+                  findClosestSafePlace();
+                }
+                Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
@@ -273,6 +287,44 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> findClosestSafePlace() async {
+    setState(() {
+      mapController.closeButton.value = true;
+      mapController.setCircle(mapController.currentPositon);
+    });
+    if (mapController.debounce?.isActive ?? false) {
+      mapController.debounce?.cancel();
+    }
+    mapController.debounce = Timer(
+      const Duration(seconds: 1),
+      () async {
+        var placesResult = await MapServices().getPlaceDetails(
+            mapController.currentPositon, mapController.radiusValue.toInt());
+
+        List<dynamic> placesWithin = placesResult['results'] as List;
+
+        mapController.allFavoritePlaces.value = placesWithin;
+
+        mapController.tokenKey = placesResult['next_page_token'] ?? 'none';
+
+        for (var element in placesWithin) {
+          if (element['opening_hours'] != null) {
+            mapController.setNearMarker(
+              LatLng(
+                element['geometry']['location']['lat'],
+                element['geometry']['location']['lng'],
+              ),
+              element['name'],
+              element['types'],
+              element['business_status'] ?? 'not available',
+            );
+          }
+        }
+        // _markersDupe = _markers;
+      },
     );
   }
 }
