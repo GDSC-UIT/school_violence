@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:school_violence_app/app/data/services/local-notification_service.dart';
 
-const api_key =
+const apiKey =
     "AAAARaDbowA:APA91bH1e_XOTqKlvHwodmsEGZnJEKuaIlUaqIrmrhDtuTFqzBynMSxQWQNK4JTOJ62EueSZCRbr6Wg9yFRe7SSaGcFxJBs_qhBDZBB7xTB8WuFBtET76xsrxyGds59ZLtdPpAwk_jBS";
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -21,32 +21,39 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   LocalNotificationService.ins.showNotification(message);
 }
 
-Future<void> sendPushMessage() async {
-  String token =
-      'f6REY4q0QGeKB52Ne0YtGk:APA91bF2XF0kWfshTvo4_VniC-wBvlSsVg0MvAykl9VH4V4nBAwWjr2lt6fHGfqhs-6bgCtMTqzlPlB5fQUbqLerRCR4RqSPeNdVChSBrVMl2RNnRNm4Wp83aYcJi6KJdA0ygKT-jOhl';
+Future<void> sendPushMessage({String court = 'A'}) async {
+  List<String> tokens = [
+    'fJe8dRAORLaLqbOwY2XNfl:APA91bHydFohGkiGCG6WD8q3TA5XLSuuStZOuwkebI06Av--pD3LHPAhM9NdN-HFmpYsgukiaOx7vOG_93_ko2TB5_6aSys3DQfxDC-zted7fXMaDozTH7bkSPNt570AmvFbxjmsb9q0',
+    'euApEumQS1GTjfWyrrhE4X:APA91bEzvN9hYEuSK8laklRqz5DRATiVDOH5UvAAC-5cygEQxqEK8AyuB9_OMl-KMhu1ITiblPtdMdcKaLS97hAU5_KQgwFN4Ka6IbkTghU0WgizRgolENA9AMtqqeX62TtZR7-3rl9Z',
+  ];
 
   try {
-    await http.post(
-      Uri.parse('https://fcm.googleapis.com/fcm/send'),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'Authorization': 'key=$api_key',
-      },
-      body: constructFCMPayload(token),
-    );
-    log('FCM request for device sent!');
+    int count = 0;
+    for (String token in tokens) {
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'key=$apiKey',
+        },
+        body: constructFCMPayload(token, court),
+      );
+      count++;
+      log('FCM request for device sent $count!');
+    }
   } catch (e) {
     log(e.toString());
   }
 }
 
-String constructFCMPayload(String? token) {
+String constructFCMPayload(String? token, String court) {
   return jsonEncode({
     'to': token,
     'priority': 'high',
+    'importance': 'max',
     'notification': {
-      'title': 'Emergency Alert',
-      'body': 'Shooting at court A',
+      'title': 'Emergency Alert\n',
+      'body': 'Shooting at court $court\n',
     },
   });
 }
