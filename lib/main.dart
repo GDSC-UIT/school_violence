@@ -81,7 +81,7 @@ Future<void> main() async {
 
   // SaveToken
 
-  void SaveToken(userId) async {
+  void SaveToken(String userId) async {
     final CollectionReference tokenCollection =
         FirebaseFirestore.instance.collection('tokens');
     await tokenCollection.doc(userId).set(

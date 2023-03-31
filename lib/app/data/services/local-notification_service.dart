@@ -20,15 +20,16 @@ class LocalNotificationService {
     AndroidNotification? android = message.notification?.android;
     if (notification != null && android != null && !kIsWeb) {
       flutterLocalNotificationsPlugin.show(
-        notificationId,
+        isBackground ? notificationId : 0,
         notification.title,
         notification.body,
-        NotificationDetails(
+        const NotificationDetails(
           android: AndroidNotificationDetails(
-            isBackground ? notificationChannelId : '0',
+            // isBackground ? notificationChannelId : '0',
+            'your channel id',
             'shooting sos channel',
             icon: 'logo_protected',
-            ongoing: true,
+            // ongoing: true,
             priority: Priority.high,
             importance: Importance.max,
           ),
