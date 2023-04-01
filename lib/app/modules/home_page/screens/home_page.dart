@@ -38,6 +38,27 @@ class _HomePageState extends State<HomePage> {
     //   );
     // });
     // _controller = TextEditingController();
+    void getUserInfor(SignInController signInCtrl) async {
+      DocumentSnapshot snapUsers = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(signInCtrl.userId.value)
+          .get();
+      if (snapUsers.data() != null) {
+        signInCtrl.updateUserName((snapUsers.data()! as dynamic)['userName']);
+        signInCtrl.updateEmail((snapUsers.data()! as dynamic)['email']);
+        signInCtrl.updatePassword((snapUsers.data()! as dynamic)['password']);
+        signInCtrl.updateFullName((snapUsers.data()! as dynamic)['fullName']);
+        signInCtrl
+            .updateDateOfBirth((snapUsers.data()! as dynamic)['dateOfBirth']);
+        signInCtrl
+            .updatePhoneNumber((snapUsers.data()! as dynamic)['phoneNumber']);
+        signInCtrl.updateCountry((snapUsers.data()! as dynamic)['country']);
+        signInCtrl.updateProvince((snapUsers.data()! as dynamic)['province']);
+        signInCtrl.updateCity((snapUsers.data()! as dynamic)['city']);
+        signInCtrl.updateSchool((snapUsers.data()! as dynamic)['school']);
+        signInCtrl.updateExpert((snapUsers.data()! as dynamic)['expert']);
+      }
+    }
   }
 
   void getData() async {
@@ -95,7 +116,7 @@ class _HomePageState extends State<HomePage> {
               //
               const SizedBox(height: 35),
 
-              const Name(),
+              Name(),
               const SizedBox(height: 32),
               Image.asset('assets/images/home_img.png',
                   width: 400, height: 170, fit: BoxFit.fill),
