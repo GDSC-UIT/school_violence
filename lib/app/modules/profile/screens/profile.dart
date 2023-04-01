@@ -135,8 +135,10 @@ class _ProfilePageState extends State<ProfilePage>
                       fit: BoxFit.contain),
                 ),
                 const SizedBox(height: 16),
-                const ProfileNameCard(
-                    name: 'Cao Minh Quân', phoneNumber: '+84 123456789'),
+                ProfileNameCard(
+                  name: signInCtrl.fullName.value,
+                  phoneNumber: signInCtrl.phoneNumber.value,
+                ),
                 const SizedBox(height: 30),
                 DefaultTabController(
                   length: 2,
