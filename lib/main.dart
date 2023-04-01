@@ -23,6 +23,7 @@ bool isLogged = false;
 bool isEmergency = false;
 late String deviceToken;
 String? shootingCourt;
+String payload = "";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,8 @@ Future<void> main() async {
       await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
     isEmergency = true;
+    // payload =
+    //     notificationAppLaunchDetails!.notificationResponse!.payload.toString();
   }
   await initializeBackgroundService();
 
@@ -78,8 +81,8 @@ Future<void> main() async {
     }
     LocalNotificationService.ins.showNotification(message, isBackground: false);
     isEmergency = true;
-    shootingCourt = message.notification?.body!
-        .substring(message.notification!.body!.length - 1);
+    String temp = message.notification?.body!.toString() as String;
+    shootingCourt = "${temp[temp.length - 2]}_Tower";
   });
 
   // auto login

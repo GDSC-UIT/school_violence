@@ -2,6 +2,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import '../../../main.dart';
+
 const notificationChannelId = 'my_background';
 const notificationId = 888;
 
@@ -36,6 +38,9 @@ class LocalNotificationService {
           ),
         ),
       );
+      isEmergency = true;
+      String temp = message.notification?.body!.toString() as String;
+      shootingCourt = "${temp[temp.length - 2]}_Tower";
     }
   }
 
