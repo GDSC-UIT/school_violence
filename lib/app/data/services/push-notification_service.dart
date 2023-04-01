@@ -22,9 +22,6 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     log('Message notification: ${message.notification?.body}');
   }
   LocalNotificationService.ins.showNotification(message);
-  isEmergency = true;
-  shootingCourt = message.notification?.body!
-      .substring(message.notification!.body!.length - 1);
 }
 
 Future<void> sendPushMessage({required String court}) async {

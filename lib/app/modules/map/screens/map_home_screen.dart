@@ -76,7 +76,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
             LatLng(currentPosition.latitude, currentPosition.longitude);
         final GoogleMapController controller =
             await mapController.googleMapController.future;
-        controller
+        await controller
             .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
         setState(() {
           mapController.startMarker = Marker(
@@ -87,6 +87,10 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
             ),
           );
         });
+        if (isEmergency) {
+          mapController.drawShootingCourt(shootingCourt!);
+        }
+        setState(() {});
       },
     );
   }
@@ -95,25 +99,11 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
   void initState() {
     super.initState();
     // _getPermission();
-    if (isEmergency) {
-      if (shootingCourt != null) {
-        mapController.drawShootingCourt(shootingCourt!);
-      }
-    } else {
-      loadData();
-    }
+    loadData();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Timer.periodic(
-    //   new Duration(milliseconds: 100),
-    //   (timer) {
-    //     if (Get.isDialogOpen == false) {
-    //       helpDialog(signInCtrl.userId.value);
-    //     }
-    //   },
-    // );
     return Scaffold(
       body: Stack(
         children: [
@@ -125,6 +115,10 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
             child: Obx(() => GoogleMap(
                   onMapCreated: (GoogleMapController controller) {
                     mapController.googleMapController.complete(controller);
+                    if (isEmergency) {
+                      mapController.drawShootingCourt(shootingCourt!);
+                    }
+                    setState(() {});
                   },
                   initialCameraPosition: const CameraPosition(
                       target: LatLng(10.870565, 106.802795), zoom: 17),
@@ -142,9 +136,14 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
             top: 40,
             right: 20,
             left: 20,
-            child: SizedBox(
-              width: Get.width,
-              child: const WelcomeBanner(),
+            child: GestureDetector(
+              onTap: () {
+                Get.defaultDialog(title: payload);
+              },
+              child: SizedBox(
+                width: Get.width,
+                child: const WelcomeBanner(),
+              ),
             ),
           ),
           Obx(
@@ -200,6 +199,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
+                            // isEmergency = false;
                             mapController.circles.clear();
                             mapController.markers.clear();
                             mapController.minDistance = 0.0;

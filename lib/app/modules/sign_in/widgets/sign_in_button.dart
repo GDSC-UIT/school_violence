@@ -69,7 +69,10 @@ class SignInButton extends StatelessWidget {
             SharedPreferences prefs = await SharedPreferences.getInstance();
             prefs.setString('email', signInCtrl.emailController.text);
             prefs.setString('password', signInCtrl.passwordController.text);
+            // update token
+
             signInCtrl.updateUserId(result);
+
             getData();
             Timer.periodic(
               const Duration(milliseconds: 100),
