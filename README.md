@@ -27,7 +27,7 @@
 
 <p align="center">
   <a href="#introduction">Introduction</a> •
-  <a href="#installation">Installation</a> •
+  <a href="#get-started">Get Started</a> •
   <a href="#features">Features</a> •
   <a href="#usage">Usage</a> •
   <a href="#technologies">Technologies</a> •
@@ -62,7 +62,7 @@ We submit our solution in `GDSC SOLUTION CHALLENGE 2023` using Google technologi
   <br>
 </h4>
 
-<h2 id="installation">Installation⚙️</h2>
+<h2 id="get-started">Get Started⚙️</h2>
 1. Open a terminal on your machine. 
 2. Navigate to the directory where you want to clone the code.
 3. Run the following command to clone the code:
@@ -91,7 +91,24 @@ flutter run
 
 <h2 id="features">Features📦</h2>
 
+**`CONNECT`**
+
+**`CHAT WITH EXPERT`**
+<p align="center">
+  <p align="center">
+    <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="100">
+  </p>
+  <p align="center">
+    <img src="https://user-images.githubusercontent.com/90759146/229432299-5da6c7fc-9b12-4349-85c6-27781e93862f.png" alt="Chat - Step 2" width="100">
+  </p>
+</p>
+
+**`SOS`**
+
 <h2 id="usage">Usage📱</h2>
+
+**`UI`**
+
 
 <h2 id="technologies">Technologies🤖</h2>
 
