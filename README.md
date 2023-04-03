@@ -6,6 +6,8 @@
   <br>
 </h1>
 
+<h4 align="center">The ProtectED project aims at a highly sustainable goal of addressing the issue of school violence.</h4>
+
 ## Table of Contents
 ## Installation
 ## Usage
