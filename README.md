@@ -8,6 +8,21 @@
 
 <h4 align="center">The ProtectED project aims at a highly sustainable goal of addressing the issue of school violence.</h4>
 
+<p align="center">
+  <a href="https://flutter.dev">
+    <img src="https://img.shields.io/badge/flutter%20version-%3E%3D2.18.6-blue"
+         alt="Flutter">
+  </a>
+  <a href="https://firebase.google.com/">
+    <img src="https://img.shields.io/badge/firebase-%20-yellow"
+         alt="Firebase">
+  </a>
+  <a href="https://mapsplatform.google.com/">
+    <img src="https://img.shields.io/badge/google--map--platform-%20-green"
+         alt="Google Map Platform">
+  </a>
+</p>
+
 ## Table of Contents
 ## Installation
 ## Usage
