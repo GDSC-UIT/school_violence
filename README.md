@@ -48,6 +48,9 @@ ProtectED is a project aimed at `addressing` the issue of school violence, `mini
 
 <h2 id="technologies">Technologies🤖</h2>
 
+> Flutter, Firebase, and Google Map Platform are Google's technologies that allow us to realize the solution by creating a high-performance mobile application.
+
+With these technologies, we are extremely confident in developing our ideas:
 - ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 - ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 - ![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)
