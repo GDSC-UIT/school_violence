@@ -90,7 +90,7 @@ flutter run
 
 <h2 id="usage">Usage📱</h2>
 
-<h3>Features</h3>
+ProtectED has developed 2 main features to address the issue, including `Chat with Expert` and `SOS`. `SOS` has 2 modes, `Violence mode` is used in the case of regular school violence, and `School Shooting mode` is used in the case of more dangerous situations, such as school shootings.
 
 **`CHAT WITH EXPERT`**
 
@@ -115,8 +115,6 @@ flutter run
   <img src="https://user-images.githubusercontent.com/90759146/229439984-e48c31c3-2528-4a52-b8ca-2a046cf4a74a.png" alt="Help - Mode 2" width="200">
 </p>
 <p align="center">Mode 2</p>
-
-<h3>Minimal UI Flow</h3>
 
 <h2 id="technologies">Technologies🤖</h2>
 
