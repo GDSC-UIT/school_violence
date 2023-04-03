@@ -46,3 +46,8 @@
 <h2 id="#usage">Usage📱</h2>
 <h2 id="#technologies">Technologies🤖</h2>
 <h2 id="#contributor">Contributors🤝</h2>
+<a href="https://github.com/GDSC-UIT/school_violence/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=GDSC-UIT/school_violence" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
