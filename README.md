@@ -49,9 +49,7 @@ ProtectED is a project aimed at `addressing` the issue of school violence, `mini
 <h2 id="technologies">Technologies🤖</h2>
 
 <p align="center">
-  <a href="https://flutter.dev">
-    ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
-  </a>
+  ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
   <a href="https://firebase.google.com/">
     <img src="https://img.shields.io/badge/firebase-%20-yellow"
          alt="Firebase">
