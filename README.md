@@ -32,7 +32,7 @@
   <a href="#collaborators">Collaborators</a>
 </p>
 
-## Introduction
+## Introduction <h2>Introduction</h2>
 ### Sustainable Development Goals
 #### Goal 3 - Good Healthy and Well-being
 #### Goal 4 - Quality Education
