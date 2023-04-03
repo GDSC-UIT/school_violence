@@ -55,13 +55,13 @@ git clone https://github.com/GDSC-UIT/school_violence
 cd school_violence
 ```
 
-6. Next, you need to install any dependencies required by the project. To do this, run the following command:
+5. Next, you need to install any dependencies required by the project. To do this, run the following command:
 
 ```
 flutter pub get
 ```
 
-8. Finally, you can run the project using the following command and enjoy it!
+6. Finally, you can run the project using the following command and enjoy it!🎉🎉🎉
 
 ```
 flutter run
