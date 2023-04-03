@@ -32,10 +32,9 @@
   <a href="#collaborators">Collaborators</a>
 </p>
 
-## Table of Contents
+## Introduction
 ## Installation
-## Usage
 ## Features
-## Contributing
-## License
-## Contact
+## Usage
+## Technologies
+## Collaborators
