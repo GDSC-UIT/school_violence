@@ -40,15 +40,15 @@
 
 ProtectED is a project aimed at `addressing` the issue of school violence, `minimizing` all forms of violence, and `ensuring` the safety of students both physically and mentally.
 
-<h2 id="#installation">Installation⚙️</h2>
+<h2 id="installation">Installation⚙️</h2>
 
-<h2 id="#features">Features📦</h2>
+<h2 id="features">Features📦</h2>
 
-<h2 id="#usage">Usage📱</h2>
+<h2 id="usage">Usage📱</h2>
 
-<h2 id="#technologies">Technologies🤖</h2>
+<h2 id="technologies">Technologies🤖</h2>
 
-<h2 id="#contributor">Contributors🤝</h2>
+<h2 id="contributor">Contributors🤝</h2>
 <a href="https://github.com/GDSC-UIT/school_violence/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=GDSC-UIT/school_violence" />
 </a>
