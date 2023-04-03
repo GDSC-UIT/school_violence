@@ -41,15 +41,17 @@
 ProtectED is a project aimed at `addressing` the issue of school violence, `minimizing` all forms of violence, and `ensuring` the safety of students both physically and mentally.
 
 <h2 id="installation">Installation⚙️</h2>
-1. Open a terminal on your machine.
-4. Navigate to the directory where you want to clone the code.
-5. Run the following command to clone the code:
+1. Open a terminal on your machine. 
+2. Navigate to the directory where you want to clone the code.
+3. Run the following command to clone the code:
+
 ```powershell
 git clone https://github.com/GDSC-UIT/school_violence
 ```
-7. Once the code is cloned, navigate into the project directory using the following command:
-8. Next, you need to install any dependencies required by the project. To do this, run the following command:
-9. Finally, you can run the project using the following command and enjoy it!
+
+4. Once the code is cloned, navigate into the project directory using the following command:
+5. Next, you need to install any dependencies required by the project. To do this, run the following command:
+6. Finally, you can run the project using the following command and enjoy it!
 
 <h2 id="features">Features📦</h2>
 
