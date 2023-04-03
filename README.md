@@ -95,12 +95,8 @@ flutter run
 
 **`CHAT WITH EXPERT`**
 <p align="center">
-  <p align="center">
-    <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="100">
-  </p>
-  <p align="center">
-    <img src="https://user-images.githubusercontent.com/90759146/229432299-5da6c7fc-9b12-4349-85c6-27781e93862f.png" alt="Chat - Step 2" width="100">
-  </p>
+  <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="300">
+  <img src="https://user-images.githubusercontent.com/90759146/229432299-5da6c7fc-9b12-4349-85c6-27781e93862f.png" alt="Chat - Step 2" width="300">
 </p>
 
 **`SOS`**
