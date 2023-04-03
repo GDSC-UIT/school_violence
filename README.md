@@ -35,6 +35,7 @@
 </p>
 
 <h2 id="#introduction">Introduction👋</h2>
+>Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
 
 ### Sustainable Development Goals
 #### Goal 3 - Good Healthy and Well-being
