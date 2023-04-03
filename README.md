@@ -48,17 +48,7 @@ ProtectED is a project aimed at `addressing` the issue of school violence, `mini
 
 <h2 id="technologies">Technologies🤖</h2>
 
-<p align="center">
-  ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
-  <a href="https://firebase.google.com/">
-    <img src="https://img.shields.io/badge/firebase-%20-yellow"
-         alt="Firebase">
-  </a>
-  <a href="https://mapsplatform.google.com/">
-    <img src="https://img.shields.io/badge/google--map--platform-%20-green"
-         alt="Google Map Platform">
-  </a>
-</p>
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
 <h2 id="contributor">Contributors🤝</h2>
 <a href="https://github.com/GDSC-UIT/school_violence/graphs/contributors">
