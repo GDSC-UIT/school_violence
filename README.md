@@ -23,6 +23,15 @@
   </a>
 </p>
 
+<p align="center">
+  <a href="#introduction">Introduction</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#features">Features</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#technologies">Technologies</a> •
+  <a href="#collaborators">Collaborators</a>
+</p>
+
 ## Table of Contents
 ## Installation
 ## Usage
