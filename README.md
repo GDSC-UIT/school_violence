@@ -51,7 +51,8 @@ git clone https://github.com/GDSC-UIT/school_violence
 
 4. Once the code is cloned, navigate into the project directory using the following command:
 
-```cd school_violence
+```
+cd school_violence
 ```
 
 6. Next, you need to install any dependencies required by the project. To do this, run the following command:
