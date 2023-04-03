@@ -54,7 +54,7 @@ We submit our solution in `GDSC SOLUTION CHALLENGE 2023` using Google technologi
 
 <h4 align="center">
   <br>
-  <img src="https://user-images.githubusercontent.com/90759146/229427485-5399c241-ab16-4c10-8d55-7251afa0519a.jpg" alt="ProtectED" width="400">
+  <img src="https://user-images.githubusercontent.com/90759146/229427485-5399c241-ab16-4c10-8d55-7251afa0519a.jpg" alt="ProtectED" width="600">
   <br>
   <br>
   <p>🏫 <a href="https://www.youtube.com/">ProtectED - GDSC Solution Challenge 2023</a> 🏫</p> 
