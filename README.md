@@ -38,7 +38,7 @@
 
 > Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
 
-**`ProtectED`** <p> is a project aimed at addressing the issue of school violence, minimizing all forms of violence, and ensuring the safety of students both physically and mentally.</p>
+**`ProtectED`** is a project aimed at addressing the issue of school violence, minimizing all forms of violence, and ensuring the safety of students both physically and mentally.
 
 <h2 id="#installation">Installation⚙️</h2>
 
