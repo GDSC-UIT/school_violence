@@ -92,18 +92,9 @@ flutter run
 
 <h3>Features</h3>
 
-**`CONNECT`**
-
-> Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="200">
-  <img src="https://user-images.githubusercontent.com/90759146/229432299-5da6c7fc-9b12-4349-85c6-27781e93862f.png" alt="Chat - Step 2" width="200">
-</p>
-
 **`CHAT WITH EXPERT`**
 
-> Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
+> Experts (such as teachers at the user's school) provided very good perspectives and solutions to situations that were in line with reality.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="200">
@@ -112,12 +103,18 @@ flutter run
 
 **`SOS`**
 
-> Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
+> Provides many opportunities to self-rescue in dangerous school violence situations.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="200">
-  <img src="https://user-images.githubusercontent.com/90759146/229432299-5da6c7fc-9b12-4349-85c6-27781e93862f.png" alt="Chat - Step 2" width="200">
+  <img src="https://user-images.githubusercontent.com/90759146/229439594-23226e88-c931-4aa2-b062-481365890ea5.png" alt="Help - Mode 1" width="200">
+  <img src="https://user-images.githubusercontent.com/90759146/229439866-b82b32ea-afab-4a2c-ba2f-36e4c5ddb5e1.png" alt="Help - Mode 1" width="200">
 </p>
+<p align="center">Mode 1</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/90759146/229439959-fe490fed-a88e-49f1-83e2-a8aa5ff2bea7.png" alt="Help - Mode 2" width="200">
+  <img src="https://user-images.githubusercontent.com/90759146/229439984-e48c31c3-2528-4a52-b8ca-2a046cf4a74a.png" alt="Help - Mode 2" width="200">
+</p>
+<p align="center">Mode 2</p>
 
 <h3>Minimal UI Flow</h3>
 
