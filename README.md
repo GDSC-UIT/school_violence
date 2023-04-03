@@ -42,16 +42,26 @@ ProtectED is a project aimed at `addressing` the issue of school violence, `mini
 
 **`SUSTAINABLE DEVELOPMENT GOALS`**
 
-We submit our solution in `GOOGLE SOLUTION CHALLENGE 2023` using Google technologies, in accordance with 3️⃣ [United Nations 17 Sustainable Development Goals](https://developers.google.com/community/gdsc-solution-challenge/UN-goals)
-
-**`VIDEO`**
-<p>You can watch our solution on Youtube: <a href="https://www.youtube.com/">ProtectED</a></p>
+We submit our solution in `GDSC SOLUTION CHALLENGE 2023` using Google technologies, in accordance with 3️⃣ [United Nations 17 Sustainable Development Goals](https://developers.google.com/community/gdsc-solution-challenge/UN-goals)
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/90759146/229423927-dd77d940-3add-49c3-af2c-1907fe199baf.png" alt="Goal 3 - Good Healthy and Well-being" width="100">
   <img src="https://user-images.githubusercontent.com/90759146/229425267-9087b6d3-9db1-48df-a1ee-80ed5a881eb3.png" alt="Goal 4 - Quality Education" width="100">
   <img src="https://user-images.githubusercontent.com/90759146/229424031-e0db4855-739b-481c-bcad-3cb3a7d468b1.png" alt="Goal 16 - Peace, Justice and Strong Institutions" width="100"> 
 </p>
+
+**`VIDEO`**
+<p>You can watch our solution on Youtube: <a href="https://www.youtube.com/">ProtectED</a></p>
+
+<h4 align="center">
+  <br>
+  <img src="https://user-images.githubusercontent.com/90759146/229427485-5399c241-ab16-4c10-8d55-7251afa0519a.jpg" alt="ProtectED" width="">
+  <br>
+  <br>
+  🏫 ProtectED - GDSC Solution Challenge 2023 🏫
+  <br>
+  <br>
+</h4>
 
 <h2 id="installation">Installation⚙️</h2>
 1. Open a terminal on your machine. 
