@@ -31,7 +31,7 @@
   <a href="#features">Features</a> •
   <a href="#usage">Usage</a> •
   <a href="#technologies">Technologies</a> •
-  <a href="#collaborators">Collaborators</a>
+  <a href="#contributor">Contributors</a>
 </p>
 
 <h2 id="#introduction">Introduction👋</h2>
@@ -45,4 +45,4 @@
 <h2 id="#features">Features📦</h2>
 <h2 id="#usage">Usage📱</h2>
 <h2 id="#technologies">Technologies🤖</h2>
-<h2 id="#collaborators">Collaborators🤝</h2>
+<h2 id="#contributor">Contributors🤝</h2>
