@@ -33,6 +33,10 @@
 </p>
 
 ## Introduction
+### Sustainable Development Goals
+#### Goal 3 - Good Healthy and Well-being
+#### Goal 4 - Quality Education
+#### Goal 16 - Peace, Justice and Strong Institutions
 ## Installation
 ## Features
 ## Usage
