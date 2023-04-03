@@ -40,9 +40,12 @@
 
 ProtectED is a project aimed at `addressing` the issue of school violence, `minimizing` all forms of violence, and `ensuring` the safety of students both physically and mentally.
 
-**`SOLUTION IN ACTION`**
+**`SUSTAINABLE DEVELOPMENT GOALS`**
 
 We submit our solution in `GOOGLE SOLUTION CHALLENGE 2023` using Google technologies, in accordance with 3️⃣ [United Nations 17 Sustainable Development Goals](https://developers.google.com/community/gdsc-solution-challenge/UN-goals)
+
+**`VIDEO`**
+<p>You can watch our solution on Youtube: <a href="https://www.youtube.com/">ProtectED</a></p>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/90759146/229423927-dd77d940-3add-49c3-af2c-1907fe199baf.png" alt="Goal 3 - Good Healthy and Well-being" width="100">
