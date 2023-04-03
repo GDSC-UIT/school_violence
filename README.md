@@ -1,4 +1,4 @@
-# ProtectED
+# ProtectED 🛡️
 ## Table of Contents
 ## Installation
 ## Usage
