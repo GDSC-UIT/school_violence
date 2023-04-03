@@ -45,9 +45,9 @@ ProtectED is a project aimed at `addressing` the issue of school violence, `mini
 We submit our solution in `GOOGLE SOLUTION CHALLENGE 2023` using Google technologies, in accordance with 3️⃣ [United Nations 17 Sustainable Development Goals](https://developers.google.com/community/gdsc-solution-challenge/UN-goals)
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/90759146/229423927-dd77d940-3add-49c3-af2c-1907fe199baf.png" alt="ProtectED" width="200">
-  <img src="https://user-images.githubusercontent.com/90759146/229424017-0567be83-4d57-472b-9692-997e900abe8c.png" alt="ProtectED" width="200">
-  <img src="https://user-images.githubusercontent.com/90759146/229424031-e0db4855-739b-481c-bcad-3cb3a7d468b1.png" alt="ProtectED" width="200"> 
+  <img src="https://user-images.githubusercontent.com/90759146/229423927-dd77d940-3add-49c3-af2c-1907fe199baf.png" alt="Goal 3 - Good Healthy and Well-being" width="100">
+  <img src="https://user-images.githubusercontent.com/90759146/229425267-9087b6d3-9db1-48df-a1ee-80ed5a881eb3.png" alt="Goal 4 - Quality Education" width="100">
+  <img src="https://user-images.githubusercontent.com/90759146/229424031-e0db4855-739b-481c-bcad-3cb3a7d468b1.png" alt="Goal 16 - Peace, Justice and Strong Institutions" width="100"> 
 </p>
 
 <h2 id="installation">Installation⚙️</h2>
