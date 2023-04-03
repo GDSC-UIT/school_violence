@@ -38,7 +38,7 @@
 
 > Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
 
-<p>ProtectED is a solution that is implemented with the support of technology, building a healthy educational environment that fosters care and empathy between victims and perpetrators of school violence, as well as providing timely assistance when students are in danger both in and out of school to ensure the safety of users. </p>
+<p>ProtectED is a project aimed at addressing the issue of school violence, minimizing all forms of violence, and ensuring the safety of students both physically and mentally.</p>
 
 ### Sustainable Development Goals
 #### Goal 3 - Good Healthy and Well-being
