@@ -45,13 +45,26 @@ ProtectED is a project aimed at `addressing` the issue of school violence, `mini
 2. Navigate to the directory where you want to clone the code.
 3. Run the following command to clone the code:
 
-```powershell
+```
 git clone https://github.com/GDSC-UIT/school_violence
 ```
 
 4. Once the code is cloned, navigate into the project directory using the following command:
-5. Next, you need to install any dependencies required by the project. To do this, run the following command:
-6. Finally, you can run the project using the following command and enjoy it!
+
+```cd school_violence
+```
+
+6. Next, you need to install any dependencies required by the project. To do this, run the following command:
+
+```
+flutter pub get
+```
+
+8. Finally, you can run the project using the following command and enjoy it!
+
+```
+flutter run
+```
 
 <h2 id="features">Features📦</h2>
 
