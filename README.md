@@ -28,7 +28,6 @@
 <p align="center">
   <a href="#introduction">Introduction</a> •
   <a href="#get-started">Get Started</a> •
-  <a href="#features">Features</a> •
   <a href="#usage">Usage</a> •
   <a href="#technologies">Technologies</a> •
   <a href="#contributor">Contributors</a>
@@ -89,11 +88,22 @@ flutter pub get
 flutter run
 ```
 
-<h2 id="features">Features📦</h2>
+<h2 id="usage">Usage📱</h2>
+
+<h3>Features</h3>
 
 **`CONNECT`**
 
+> Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="200">
+  <img src="https://user-images.githubusercontent.com/90759146/229432299-5da6c7fc-9b12-4349-85c6-27781e93862f.png" alt="Chat - Step 2" width="200">
+</p>
+
 **`CHAT WITH EXPERT`**
+
+> Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="200">
@@ -102,10 +112,14 @@ flutter run
 
 **`SOS`**
 
-<h2 id="usage">Usage📱</h2>
+> Schools are supposed to be a place where quality education, integration, and safety are provided, in the best of circumstances, they will be a place that leads everyone to a promising future. However, schools are no longer truly safe, as they can be a place of bullying, sexual harassment, physical punishment, verbal abuse, and other forms of violence, including school shootings.
 
-**`UI`**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/90759146/229432287-c82347c7-80ff-4b0f-bc41-4bec7476c344.png" alt="Chat - Step 1" width="200">
+  <img src="https://user-images.githubusercontent.com/90759146/229432299-5da6c7fc-9b12-4349-85c6-27781e93862f.png" alt="Chat - Step 2" width="200">
+</p>
 
+<h3>Minimal UI Flow</h3>
 
 <h2 id="technologies">Technologies🤖</h2>
 
