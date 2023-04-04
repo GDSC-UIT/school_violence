@@ -207,13 +207,28 @@ class MapController extends GetxController {
         .collection('university')
         .doc('UIT')
         .get();
+    building = building.substring(3);
     Map<String, dynamic> buildingPoint = uit.get(building);
-    for (var item in buildingPoint.values) {
-      polylineCoordinates.add(LatLng(item.latitude, item.longitude));
+    if (building == "A_Tower" || building == "B_Tower") {
+      int totalPoint = 0;
+      if (building == "A_Tower") {
+        totalPoint = 30;
+      } else {
+        totalPoint = 12;
+      }
+      polylineCoordinates.value =
+          List.filled(totalPoint, const LatLng(0, 0), growable: true);
+      for (var i = 0; i < totalPoint; i++) {
+        String index = (i + 1).toString();
+        GeoPoint temp = buildingPoint[index];
+        polylineCoordinates[i] = LatLng(temp.latitude, temp.longitude);
+      }
+    } else {
+      for (var item in buildingPoint.values) {
+        polylineCoordinates.add(LatLng(item.latitude, item.longitude));
+      }
     }
-    var temp = polylineCoordinates[0];
-    polylineCoordinates[0] = polylineCoordinates[1];
-    polylineCoordinates[1] = temp;
+
     polygon.value = Polygon(
       polygonId: const PolygonId('building'),
       fillColor: Colors.red.withOpacity(0.5),
