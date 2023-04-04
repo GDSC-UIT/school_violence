@@ -142,7 +142,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
               },
               child: SizedBox(
                 width: Get.width,
-                child: const WelcomeBanner(),
+                child: WelcomeBanner(),
               ),
             ),
           ),
