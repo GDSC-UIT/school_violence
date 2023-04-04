@@ -172,7 +172,7 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Court",
+                    "Where (building)",
                     style: TextStyle(
                       color: AppColors.black,
                       fontSize: 20,
