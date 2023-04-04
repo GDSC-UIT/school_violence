@@ -20,9 +20,11 @@ class Bell extends StatelessWidget {
             //   'assets/images/bell.png',
             //   width: 28,
             // ),
-            const Icon(
+            Icon(
               Icons.notifications_none,
               size: 30,
+              weight: 200,
+              color: AppColors.black.withOpacity(0.6),
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(16, 16, 0, 0),

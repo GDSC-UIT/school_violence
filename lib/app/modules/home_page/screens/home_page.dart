@@ -10,6 +10,7 @@ import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
 import 'package:school_violence_app/app/modules/home_page/models/app_banner.dart';
 import 'package:school_violence_app/app/modules/home_page/models/school_club.dart';
+import 'package:school_violence_app/app/modules/home_page/screens/club_detail.dart';
 import 'package:school_violence_app/app/modules/home_page/widgets/name.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
@@ -282,43 +283,51 @@ class _HomePageState extends State<HomePage> {
                     viewportFraction: 0.3,
                   ),
                   itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 4.0,
-                      ),
-                      // decoration: BoxDecoration(
-                      //   borderRadius: BorderRadius.all(
-                      //     Radius.circular(60),
-                      //   ),
-                      //   // boxShadow: [
-                      //   //   BoxShadow(
-                      //   //     color: AppColors.primaryColor.withOpacity(0.5),
-                      //   //     spreadRadius: 2,
-                      //   //     blurRadius: 4,
-                      //   //   ),
-                      //   // ],
-                      //   color: AppColors.primaryColor,
-                      // ),
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.primaryColor,
-                        backgroundImage: NetworkImage(
-                          schoolClubList[index].thumbnailUrl,
+                    return InkWell(
+                      onTap: () {
+                        Get.toNamed(
+                          AppRoutes.club,
+                          arguments: schoolClubList[index],
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 4.0,
                         ),
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 120,
-                            ),
-                            Text(
-                              schoolClubList[index].title,
-                              style: const TextStyle(
-                                color: AppColors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.all(
+                        //     Radius.circular(60),
+                        //   ),
+                        //   // boxShadow: [
+                        //   //   BoxShadow(
+                        //   //     color: AppColors.primaryColor.withOpacity(0.5),
+                        //   //     spreadRadius: 2,
+                        //   //     blurRadius: 4,
+                        //   //   ),
+                        //   // ],
+                        //   color: AppColors.primaryColor,
+                        // ),
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.primaryColor,
+                          backgroundImage: NetworkImage(
+                            schoolClubList[index].avatarUrl,
+                          ),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 120,
                               ),
-                            ),
-                          ],
+                              Text(
+                                schoolClubList[index].standFor,
+                                style: const TextStyle(
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

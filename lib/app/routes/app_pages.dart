@@ -7,6 +7,8 @@ import 'package:school_violence_app/app/modules/diary/screens/diary.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/forgot_passwords_binding.dart';
 import 'package:school_violence_app/app/modules/forgot_passwords/screens/forgot_passwords.dart';
 import 'package:school_violence_app/app/modules/home_page/home_page_binding.dart';
+import 'package:school_violence_app/app/modules/home_page/screens/club_detail.dart';
+import 'package:school_violence_app/app/modules/home_page/screens/discover_screen.dart';
 import 'package:school_violence_app/app/modules/home_page/screens/home_page.dart';
 import 'package:school_violence_app/app/modules/intro/intro_binding.dart';
 import 'package:school_violence_app/app/modules/intro/screens/intro_screen.dart';
@@ -91,5 +93,15 @@ abstract class AppPages {
         page: () => const MyMap(),
         binding: MapBinding(),
         transition: Transition.noTransition),
+    GetPage(
+      name: AppRoutes.club,
+      page: () => const ClubDetailScreen(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: AppRoutes.discover,
+      page: () => const DiscoverDetailScreen(),
+      transition: Transition.noTransition,
+    )
   ];
 }
