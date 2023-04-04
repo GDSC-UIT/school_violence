@@ -209,24 +209,20 @@ class MapController extends GetxController {
         .get();
     building = building.substring(3);
     Map<String, dynamic> buildingPoint = uit.get(building);
-    if (building == "A_Tower" || building == "B_Tower") {
-      int totalPoint = 0;
-      if (building == "A_Tower") {
-        totalPoint = 30;
-      } else {
-        totalPoint = 12;
-      }
-      polylineCoordinates.value =
-          List.filled(totalPoint, const LatLng(0, 0), growable: true);
-      for (var i = 0; i < totalPoint; i++) {
-        String index = (i + 1).toString();
-        GeoPoint temp = buildingPoint[index];
-        polylineCoordinates[i] = LatLng(temp.latitude, temp.longitude);
-      }
+    int totalPoint = 0;
+    if (building == "A_Tower") {
+      totalPoint = 30;
+    } else if (building == "B_Tower") {
+      totalPoint = 12;
     } else {
-      for (var item in buildingPoint.values) {
-        polylineCoordinates.add(LatLng(item.latitude, item.longitude));
-      }
+      totalPoint = 26;
+    }
+    polylineCoordinates.value =
+        List.filled(totalPoint, const LatLng(0, 0), growable: true);
+    for (var i = 0; i < totalPoint; i++) {
+      String index = (i + 1).toString();
+      GeoPoint temp = buildingPoint[index];
+      polylineCoordinates[i] = LatLng(temp.latitude, temp.longitude);
     }
 
     polygon.value = Polygon(

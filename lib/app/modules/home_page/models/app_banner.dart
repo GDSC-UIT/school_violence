@@ -20,7 +20,7 @@ List<AppBanner> appBannerList = [
       'Vietnamnet'),
   AppBanner(
       3,
-      'SOCIETY School violence: International experience and Vietnam\’s new solutions',
+      'SOCIETY School violence: International experience and Vietnam’s new solutions',
       'https://cdnimgen.vietnamplus.vn/uploaded/kg1/2019_11_07/3_2.jpg',
       'Baolaodong'),
   AppBanner(

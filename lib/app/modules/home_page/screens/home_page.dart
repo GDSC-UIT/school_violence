@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Discover',
                     style: TextStyle(
                       fontSize: 22,
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                       print('Hello');
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Text(
                           'View all',
                           style: TextStyle(
@@ -186,14 +186,14 @@ class _HomePageState extends State<HomePage> {
                               color: AppColors.dontHaveAccount.withOpacity(0.1),
                               spreadRadius: 2,
                               blurRadius: 4,
-                              offset: Offset(0, 4),
+                              offset: const Offset(0, 4),
                             ),
                           ],
                         ),
                         child: Column(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(20.0),
                                 topRight: Radius.circular(20.0),
                               ),
@@ -207,12 +207,12 @@ class _HomePageState extends State<HomePage> {
                             Flexible(
                               child: Container(
                                 child: Padding(
-                                  padding: EdgeInsets.all(12.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Text(
                                     appBannerList[index].title,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: AppColors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                               alignment: Alignment.bottomCenter,
                               child: Text(
                                 appBannerList[index].author,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: AppColors.primaryColor,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -242,7 +242,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Clubs',
                     style: TextStyle(
                       fontSize: 22,
@@ -254,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                       print('Hello');
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Text(
                           'View all',
                           style: TextStyle(
@@ -275,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
 
-              Container(
+              SizedBox(
                 height: 150,
                 child: PageView.builder(
                   controller: PageController(
@@ -312,7 +312,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Text(
                               schoolClubList[index].title,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: AppColors.black,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,

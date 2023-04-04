@@ -20,7 +20,7 @@ class Bell extends StatelessWidget {
             //   'assets/images/bell.png',
             //   width: 28,
             // ),
-            Icon(
+            const Icon(
               Icons.notifications_none,
               size: 30,
             ),
