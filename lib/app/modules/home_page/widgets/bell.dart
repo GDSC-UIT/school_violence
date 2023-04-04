@@ -16,9 +16,13 @@ class Bell extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Stack(
           children: [
-            Image.asset(
-              'assets/images/bell.jpg',
-              width: 28,
+            // Image.asset(
+            //   'assets/images/bell.png',
+            //   width: 28,
+            // ),
+            Icon(
+              Icons.notifications_none,
+              size: 30,
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(16, 16, 0, 0),
