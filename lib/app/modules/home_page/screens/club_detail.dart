@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school_violence_app/app/modules/home_page/models/app_banner.dart';
 import 'package:school_violence_app/app/modules/home_page/models/school_club.dart';
+import 'package:school_violence_app/app/modules/home_page/models/social_status.dart';
+import 'package:school_violence_app/app/modules/home_page/widgets/image_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/values/app_colors.dart';
 import '../../../core/values/app_text_style.dart';
 
-class ClubDetailScreen extends StatelessWidget {
+class ClubDetailScreen extends StatefulWidget {
   const ClubDetailScreen({super.key});
 
+  @override
+  State<ClubDetailScreen> createState() => _ClubDetailScreenState();
+}
+
+class _ClubDetailScreenState extends State<ClubDetailScreen> {
+  final _controllerScroll = ScrollController();
   @override
   Widget build(BuildContext context) {
     final clubDetail = ModalRoute.of(context)!.settings.arguments as SchoolClub;
@@ -132,8 +141,9 @@ class ClubDetailScreen extends StatelessWidget {
               ),
               Text(
                 clubDetail.overview,
+                textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: AppColors.black.withOpacity(0.9),
+                  color: AppColors.black.withOpacity(0.8),
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -178,6 +188,72 @@ class ClubDetailScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              ListView.builder(
+                controller: _controllerScroll,
+                shrinkWrap: true,
+                itemCount: socialStatusList.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      launchUrl(Uri.parse(socialStatusList[index].linkStatus));
+                    },
+                    child: Row(
+                      children: [
+                        ImageContainer(
+                          width: 80,
+                          height: 80,
+                          margin:
+                              const EdgeInsets.fromLTRB(0, 10.0, 10.0, 10.0),
+                          borderRadius: 5,
+                          imageUrl: socialStatusList[index].avatarUrl,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                socialStatusList[index].title,
+                                maxLines: 2,
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(
+                                  color: AppColors.black.withOpacity(0.8),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.calendar_month_outlined,
+                                    size: 18,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    socialStatusList[index].time,
+                                  ),
+                                  const SizedBox(
+                                    width: 140,
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_circle_right,
+                                    size: 24,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
               ),
             ],
           ),
