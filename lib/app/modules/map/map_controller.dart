@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:school_violence_app/app/modules/map/screens/map_home_screen.dart';
 
+import '../../core/utils/utils.dart';
 import '../../core/values/app_colors.dart';
 
 class MapController extends GetxController {
@@ -235,8 +236,8 @@ class MapController extends GetxController {
     final GoogleMapController controller = await googleMapController.future;
     await controller
         .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-      target: polylineCoordinates[0],
-      zoom: 17,
+      target: getPolygonCenter(polylineCoordinates),
+      zoom: 19,
     )));
     polygon.refresh();
     update();
