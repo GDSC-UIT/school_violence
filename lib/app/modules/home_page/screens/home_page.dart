@@ -8,6 +8,8 @@ import 'package:school_violence_app/app/data/services/connect.dart';
 import 'package:school_violence_app/app/data/services/emergency.dart';
 import 'package:school_violence_app/app/global_widgets/bottom_navigation.dart';
 import 'package:school_violence_app/app/global_widgets/help_dialog.dart';
+import 'package:school_violence_app/app/modules/home_page/models/app_banner.dart';
+import 'package:school_violence_app/app/modules/home_page/models/school_club.dart';
 import 'package:school_violence_app/app/modules/home_page/widgets/name.dart';
 import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
@@ -114,12 +116,216 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //
-              const SizedBox(height: 35),
+              const SizedBox(height: 32),
 
               Name(),
-              const SizedBox(height: 32),
+              const SizedBox(height: 30),
               Image.asset('assets/images/home_img.png',
-                  width: 400, height: 170, fit: BoxFit.fill),
+                  width: 380, height: 160, fit: BoxFit.fill),
+              const SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Discover',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      print('Hello');
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          'View all',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_rounded,
+                          size: 18,
+                          weight: 500,
+                          color: AppColors.primaryColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              // const SizedBox(height: 32),
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 14.0,
+                ),
+                height: 240,
+                child: PageView.builder(
+                  controller: PageController(
+                    viewportFraction: 0.6,
+                  ),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        print('Hello');
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 5.0,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                          color: AppColors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.dontHaveAccount.withOpacity(0.1),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset: Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                topRight: Radius.circular(20.0),
+                              ),
+                              child: Image.network(
+                                appBannerList[index].thumbnailUrl,
+                                height: 130,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Flexible(
+                              child: Container(
+                                child: Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Text(
+                                    appBannerList[index].title,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                      color: AppColors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                appBannerList[index].author,
+                                style: TextStyle(
+                                  color: AppColors.primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  itemCount: appBannerList.length,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Clubs',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      print('Hello');
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          'View all',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_rounded,
+                          size: 18,
+                          weight: 500,
+                          color: AppColors.primaryColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              Container(
+                height: 150,
+                child: PageView.builder(
+                  controller: PageController(
+                    viewportFraction: 0.3,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 4.0,
+                      ),
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.all(
+                      //     Radius.circular(60),
+                      //   ),
+                      //   // boxShadow: [
+                      //   //   BoxShadow(
+                      //   //     color: AppColors.primaryColor.withOpacity(0.5),
+                      //   //     spreadRadius: 2,
+                      //   //     blurRadius: 4,
+                      //   //   ),
+                      //   // ],
+                      //   color: AppColors.primaryColor,
+                      // ),
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.primaryColor,
+                        backgroundImage: NetworkImage(
+                          schoolClubList[index].thumbnailUrl,
+                        ),
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 120,
+                            ),
+                            Text(
+                              schoolClubList[index].title,
+                              style: TextStyle(
+                                color: AppColors.black,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  itemCount: schoolClubList.length,
+                ),
+              ),
             ],
           ),
         ),
