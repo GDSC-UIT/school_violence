@@ -40,7 +40,7 @@ class LocalNotificationService {
       );
       isEmergency = true;
       String temp = message.notification?.body!.toString() as String;
-      shootingCourt = "${temp[temp.length - 2]}_Tower";
+      shootingBuilding = "${temp[temp.length - 2]}_Tower";
     }
   }
 

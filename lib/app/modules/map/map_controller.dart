@@ -46,7 +46,7 @@ class MapController extends GetxController {
       List.filled(4, const LatLng(0, 0), growable: true).obs;
 
   late Rx<Polygon> polygon = Polygon(
-    polygonId: const PolygonId('court'),
+    polygonId: const PolygonId('building'),
     fillColor: Colors.red,
     strokeColor: Colors.red,
     points: polylineCoordinates,
@@ -200,22 +200,22 @@ class MapController extends GetxController {
     return 12742 * asin(sqrt(a));
   }
 
-  Future<void> drawShootingCourt(String court) async {
+  Future<void> drawShootingBuilding(String building) async {
     polylineCoordinates.clear();
 
     DocumentSnapshot uit = await FirebaseFirestore.instance
         .collection('university')
         .doc('UIT')
         .get();
-    Map<String, dynamic> courtPoint = uit.get(court);
-    for (var item in courtPoint.values) {
+    Map<String, dynamic> buildingPoint = uit.get(building);
+    for (var item in buildingPoint.values) {
       polylineCoordinates.add(LatLng(item.latitude, item.longitude));
     }
     var temp = polylineCoordinates[0];
     polylineCoordinates[0] = polylineCoordinates[1];
     polylineCoordinates[1] = temp;
     polygon.value = Polygon(
-      polygonId: const PolygonId('court'),
+      polygonId: const PolygonId('building'),
       fillColor: Colors.red.withOpacity(0.5),
       strokeColor: Colors.red.withOpacity(0.5),
       points: polylineCoordinates,

@@ -88,7 +88,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
           );
         });
         if (isEmergency) {
-          mapController.drawShootingCourt(shootingCourt!);
+          mapController.drawShootingBuilding(shootingBuilding!);
         }
         setState(() {});
       },
@@ -116,7 +116,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
                   onMapCreated: (GoogleMapController controller) {
                     mapController.googleMapController.complete(controller);
                     if (isEmergency) {
-                      mapController.drawShootingCourt(shootingCourt!);
+                      mapController.drawShootingBuilding(shootingBuilding!);
                     }
                     setState(() {});
                   },
@@ -218,7 +218,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
                                   AppColors.primaryColor.withOpacity(0.2),
                             );
                             mapController.polygon.refresh();
-                            shootingCourt = null;
+                            shootingBuilding = null;
                           });
                         },
                         style: ElevatedButton.styleFrom(

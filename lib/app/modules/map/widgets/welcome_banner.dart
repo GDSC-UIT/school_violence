@@ -11,23 +11,23 @@ class WelcomeBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Container(
-            width: 100,
-            height: 100,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: AssetImage('assets/images/avatar.jpg'),
-              ),
+    return Row(
+      children: [
+        Container(
+          width: 70,
+          height: 70,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: AssetImage('assets/images/avatar.jpg'),
             ),
           ),
-          const SizedBox(
-            width: 5,
-          ),
-          Column(
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        Expanded(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               RichText(
@@ -53,12 +53,14 @@ class WelcomeBanner extends StatelessWidget {
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: AppColors.black,
+                  overflow: TextOverflow.ellipsis,
                 ),
+                maxLines: 2,
               )
             ],
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }

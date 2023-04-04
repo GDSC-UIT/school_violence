@@ -24,7 +24,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   LocalNotificationService.ins.showNotification(message);
 }
 
-Future<void> sendPushMessage({required String court}) async {
+Future<void> sendPushMessage({required String building}) async {
   List<String> tokens = List.filled(0, "", growable: true);
 
   await FirebaseFirestore.instance.collection('users').get().then((value) {
@@ -46,7 +46,7 @@ Future<void> sendPushMessage({required String court}) async {
           'Content-Type': 'application/json',
           'Authorization': 'key=$apiKey',
         },
-        body: constructFCMPayload(token, court),
+        body: constructFCMPayload(token, building),
       );
       count++;
       log('FCM request for device sent $count!');
@@ -56,14 +56,14 @@ Future<void> sendPushMessage({required String court}) async {
   }
 }
 
-String constructFCMPayload(String? token, String court) {
+String constructFCMPayload(String? token, String building) {
   return jsonEncode({
     'to': token,
     'priority': 'high',
     'importance': 'max',
     'notification': {
       'title': 'Emergency Alert\n',
-      'body': 'Shooting at court $court\n',
+      'body': 'Shooting at building $building\n',
     },
   });
 }

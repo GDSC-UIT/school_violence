@@ -14,7 +14,7 @@ import '../services/map_service.dart';
 
 enum TypeBully { Violence, Shooting }
 
-enum Court { A, B, C }
+enum Building { A, B, C }
 
 class BottomSheetContent extends StatefulWidget {
   const BottomSheetContent({super.key});
@@ -28,7 +28,7 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
   final mapController = Get.find<MapController>();
 
   TypeBully _typeValue = TypeBully.Violence;
-  Court selectedCourt = Court.A;
+  Building selectedBuilding = Building.A;
 
   _callNumber(String number) async {
     await FlutterPhoneDirectCaller.callNumber(number);
@@ -144,9 +144,7 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                   width: 2.0,
                 ),
                 const Text("Violence"),
-                const SizedBox(
-                  width: 80,
-                ),
+                const Spacer(),
                 Radio(
                   value: TypeBully.Shooting,
                   groupValue: _typeValue,
@@ -185,11 +183,11 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                         child: Row(
                           children: [
                             Radio(
-                              value: Court.A,
-                              groupValue: selectedCourt,
+                              value: Building.A,
+                              groupValue: selectedBuilding,
                               onChanged: (value) {
                                 setState(() {
-                                  selectedCourt = value!;
+                                  selectedBuilding = value!;
                                 });
                               },
                               activeColor: AppColors.primaryColor,
@@ -205,11 +203,11 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                         child: Row(
                           children: [
                             Radio(
-                              value: Court.B,
-                              groupValue: selectedCourt,
+                              value: Building.B,
+                              groupValue: selectedBuilding,
                               onChanged: (value) {
                                 setState(() {
-                                  selectedCourt = value!;
+                                  selectedBuilding = value!;
                                 });
                               },
                               activeColor: AppColors.primaryColor,
@@ -225,11 +223,11 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                         child: Row(
                           children: [
                             Radio(
-                              value: Court.C,
-                              groupValue: selectedCourt,
+                              value: Building.C,
+                              groupValue: selectedBuilding,
                               onChanged: (value) {
                                 setState(() {
-                                  selectedCourt = value!;
+                                  selectedBuilding = value!;
                                 });
                               },
                               activeColor: AppColors.primaryColor,
@@ -263,9 +261,10 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
                 mapController.guideButton.value = false;
                 mapController.bottomSheetStatus.value = true;
                 if (_typeValue == TypeBully.Shooting) {
-                  sendPushMessage(court: selectedCourt.toString().substring(6));
-                  mapController.drawShootingCourt(
-                      '${selectedCourt.toString().substring(6)}_Tower');
+                  sendPushMessage(
+                      building: selectedBuilding.toString().substring(6));
+                  mapController.drawShootingBuilding(
+                      '${selectedBuilding.toString().substring(6)}_Tower');
                 } else {
                   findClosestSafePlace();
                 }

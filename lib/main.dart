@@ -22,7 +22,7 @@ int? isViewed;
 bool isLogged = false;
 bool isEmergency = false;
 late String deviceToken;
-String? shootingCourt;
+String? shootingBuilding;
 String payload = "";
 
 Future<void> main() async {
@@ -82,7 +82,7 @@ Future<void> main() async {
     LocalNotificationService.ins.showNotification(message, isBackground: false);
     isEmergency = true;
     String temp = message.notification?.body!.toString() as String;
-    shootingCourt = "${temp[temp.length - 2]}_Tower";
+    shootingBuilding = "${temp[temp.length - 2]}_Tower";
   });
 
   // auto login
