@@ -1,11 +1,14 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:school_violence_app/app/core/values/app_colors.dart';
 import 'package:school_violence_app/app/data/services/database.dart';
 import 'package:school_violence_app/app/routes/app_routes.dart';
+
+import '../../../main.dart';
 
 class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -107,6 +110,12 @@ class AuthServices {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(result.user!.uid)
+          .update({
+        'token': deviceToken,
+      });
       Get.toNamed(AppRoutes.home);
       return user?.uid;
     } catch (e) {

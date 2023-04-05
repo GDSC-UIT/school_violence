@@ -26,4 +26,8 @@ abstract class AppRoutes {
   // map
   static const map = '/map';
   static const dairy = '/dairy';
+  // club
+  static const club = '/club';
+  // discover
+  static const discover = '/discover';
 }

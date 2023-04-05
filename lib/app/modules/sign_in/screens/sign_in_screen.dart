@@ -174,7 +174,7 @@ class SignInPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Dont have an account?',
+                                'Don\'t have an account?',
                                 style: CustomTextStyle.label(
                                     AppColors.dontHaveAccount),
                               ),

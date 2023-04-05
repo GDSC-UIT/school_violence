@@ -3,12 +3,12 @@ import 'package:school_violence_app/app/modules/connect/widgets/friend.dart';
 class ListFriend {
   List<Friend> listFriend = [
     Friend(
-        name: 'Friend',
+        name: 'Cao Minh Quan',
         avatarLink: 'assets/images/grey-avatar.png',
-        phoneNumber: '+84 123456789'),
+        phoneNumber: '+84 369681765'),
     Friend(
-        name: 'Friend 2',
-        avatarLink: 'assets/images/lock.png',
-        phoneNumber: '+84 1212356789'),
+        name: 'Tran Thanh Nhan',
+        avatarLink: 'assets/images/grey-avatar.png',
+        phoneNumber: '+84 903815120'),
   ];
 }

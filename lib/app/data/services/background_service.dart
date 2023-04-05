@@ -66,7 +66,7 @@ void onStart(ServiceInstance service) {
     service.stopSelf();
   });
 
-  Timer.periodic(const Duration(seconds: 1), (timer) async {
+  Timer.periodic(const Duration(seconds: 4), (timer) async {
     if (service is AndroidServiceInstance) {
       if (await service.isForegroundService()) {
         LocalNotificationService.ins.showBackgroundNotification();
