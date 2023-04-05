@@ -18,28 +18,28 @@ class _MapDialogState extends State<MapDialog> {
     const SliderPageGuide(
       title: 'STEP 1',
       description: 'Go to setting.',
-      image: 'assets/images/grey-rectangle.png',
+      image: 'assets/images/a.jpg',
     ),
     const SliderPageGuide(
       title: 'STEP 2',
-      description: 'Go to setting.',
-      image: 'assets/images/grey-rectangle.png',
+      description: 'Safety and emergency.',
+      image: 'assets/images/b.jpg',
     ),
     const SliderPageGuide(
       title: 'STEP 3',
-      description: 'Go to setting.',
-      image: 'assets/images/grey-rectangle.png',
+      description: 'Turn emergency on.',
+      image: 'assets/images/c.jpg',
     ),
-    const SliderPageGuide(
-      title: 'STEP 4',
-      description: 'Go to setting.',
-      image: 'assets/images/grey-rectangle.png',
-    ),
-    const SliderPageGuide(
-      title: 'STEP 5',
-      description: 'Go to setting.',
-      image: 'assets/images/grey-rectangle.png',
-    ),
+    // const SliderPageGuide(
+    //   title: 'STEP 4',
+    //   description: 'Go to setting.',
+    //   image: 'assets/images/grey-rectangle.png',
+    // ),
+    // const SliderPageGuide(
+    //   title: 'STEP 5',
+    //   description: 'Go to setting.',
+    //   image: 'assets/images/grey-rectangle.png',
+    // ),
   ];
 
   _onChanged(int index) {
