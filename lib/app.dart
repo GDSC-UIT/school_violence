@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school_violence_app/routes/app_pages.dart';
+import 'package:school_violence_app/routes/app_routes.dart';
 
-import 'app/routes/app_pages.dart';
-import 'app/routes/app_routes.dart';
 import 'main.dart';
 
 class MyApp extends StatefulWidget {
@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
           ? AppRoutes.map
           : isLogged
               ? AppRoutes.home
-              : (isViewed != 0 ? AppRoutes.intro : AppRoutes.sign_in),
+              : (isViewed != 0 ? AppRoutes.intro : AppRoutes.signIn),
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
     );

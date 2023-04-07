@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../core/values/app_colors.dart';
+import '../sign_up_controller.dart';
+
+class PasswordField extends StatelessWidget {
+  const PasswordField({
+    Key? key,
+    required this.ctrl,
+    required passwordController,
+  })  : _passwordController = passwordController,
+        super(key: key);
+
+  final SignUpController ctrl;
+
+  final TextEditingController _passwordController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => TextFormField(
+        controller: _passwordController,
+        style: const TextStyle(fontSize: 20),
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+            onPressed: () {
+              ctrl.updateHidePassword();
+            },
+            icon: const Icon(
+              Icons.remove_red_eye,
+              size: 20,
+            ),
+          ),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.black, width: 1.0),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
+          ),
+        ),
+        obscureText: ctrl.hide.value,
+        validator: (value) {
+          if (value.toString().length < 6) {
+            return 'Password should be longer or equal to 6 characters.';
+          }
+          return null;
+        },
+        onChanged: (val) {
+          // ctrl.updatePassword(val);
+        },
+      ),
+    );
+  }
+}

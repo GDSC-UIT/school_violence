@@ -1,0 +1,145 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../main.dart';
+import '../../core/values/app_colors.dart';
+import '../../routes/app_routes.dart';
+import 'database.dart';
+
+class AuthServices {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Google
+
+  final googleSignIn = GoogleSignIn();
+
+  Future googleLogIn() async {
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) return;
+  }
+
+  Future googleLogOut() async {
+    await _auth.signOut().then((value) => Get.toNamed(AppRoutes.intro));
+    await googleSignIn.signOut();
+  }
+
+  // Register
+
+  Future signUp(
+    String userName,
+    String email,
+    String password,
+    String fullName,
+    String dateOfBirth,
+    String phoneNumber,
+    String country,
+    String province,
+    String city,
+    String school,
+    bool expert,
+    double latitude,
+    double longtitude,
+  ) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      await DatabaseService(uid: user!.uid).updateUserData(
+        user.uid,
+        userName,
+        email,
+        password,
+        fullName,
+        dateOfBirth,
+        phoneNumber,
+        country,
+        province,
+        city,
+        school,
+        expert,
+        latitude,
+        longtitude,
+      );
+    } on FirebaseAuthException catch (e) {
+      String title = e.code.replaceAll(RegExp('-'), ' ').capitalize!;
+      String message = '';
+
+      if (e.code == 'weak-password') {
+        message = 'The password provided is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        message = ('The account already exists for that email.');
+      } else {
+        message = e.message.toString();
+      }
+      Get.snackbar(title, message,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppColors.primaryColor,
+          colorText: AppColors.white);
+    } catch (e) {
+      Get.snackbar('Error occured!', e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppColors.primaryColor,
+          colorText: AppColors.white);
+    }
+    //Get.offAll(() => AppRoutes.intro);
+  }
+
+  //Sign in
+
+  Future<String?> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(result.user!.uid)
+          .update({
+        'token': deviceToken,
+      });
+      Get.toNamed(AppRoutes.home);
+      return user?.uid;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  // Sign out
+
+  Future signOutWithEmailAndPassword() async {
+    _auth.signOut();
+  }
+
+  //Apple
+
+  // Future appleLogIn() async {
+  //   final appleIdCredential = await SignInWithApple.getAppleIDCredential(
+  //     scopes: [
+  //       AppleIDAuthorizationScopes.email,
+  //       AppleIDAuthorizationScopes.fullName,
+  //     ],
+  //   );
+
+  //   final oAuthProvider = OAuthProvider('apple.com');
+
+  //   final credential = oAuthProvider.credential(
+  //     idToken: appleIdCredential.identityToken,
+  //     accessToken: appleIdCredential.authorizationCode,
+  //   );
+
+  //   final User? user = (await _auth
+  //       .signInWithCredential(credential)
+  //       .then((value) => Get.offAll(HomePage())));
+  // }
+
+  // Future appleLogOut() async {
+  //   await _auth.signOut().then((value) => Get.toNamed(AppRoutes.intro));
+  //   await appleLogOut();
+  // }
+}

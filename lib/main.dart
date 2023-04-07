@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:school_violence_app/app/data/services/background_service.dart';
-import 'package:school_violence_app/app/modules/sign_in/sign_in_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'app/data/services/local-notification_service.dart';
-import 'app/data/services/push-notification_service.dart';
+import 'data/services/background_service.dart';
+import 'data/services/local_notification_service.dart';
+import 'data/services/push_notification_service.dart';
 import 'firebase_options.dart';
+import 'modules/sign_in/sign_in_controller.dart';
 
 int? isViewed;
 bool isLogged = false;

@@ -1,0 +1,147 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
+
+import '../../../core/values/app_colors.dart';
+import '../../../data/services/auth_services.dart';
+import '../../../routes/app_routes.dart';
+import '../sign_up_controller.dart';
+
+class SignUpButton extends StatelessWidget {
+  SignUpButton({
+    Key? key,
+    required formKey,
+    required fullNameController,
+    required dateController,
+    required phoneNumberController,
+    required country,
+    required province,
+    required city,
+    required school,
+  })  : _formKey = formKey,
+        super(key: key);
+
+  final SignUpController ctrl = Get.find<SignUpController>();
+  final AuthServices _auth = AuthServices();
+  final GlobalKey<FormState> _formKey;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () async {
+        if (_formKey.currentState!.validate()) {
+          String userName = ctrl.userNameController.text.trim();
+          String email = ctrl.emailController.text.trim();
+          String password = ctrl.passwordController.text.trim();
+          String fullName = ctrl.fullNameController.text.trim();
+          String dateOfBirth = ctrl.dateController.text.trim();
+          String phoneNumber = ctrl.phoneNumberController.text.trim();
+          String countryName = ctrl.countryName;
+          String provinceName = ctrl.provinceName;
+          String cityName = ctrl.cityName;
+          String schoolName = ctrl.schoolName;
+          await _auth.signUp(
+            userName,
+            email,
+            password,
+            fullName,
+            dateOfBirth,
+            phoneNumber,
+            countryName,
+            provinceName,
+            cityName,
+            schoolName,
+            false,
+            0,
+            0,
+          );
+          Get.dialog(
+            Center(
+              child: Container(
+                alignment: Alignment.center,
+                width: 341,
+                height: 474,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 168,
+                      height: 159,
+                      decoration: const BoxDecoration(
+                        color: AppColors.grey,
+                      ),
+                    ),
+
+                    //
+
+                    const SizedBox(height: 10),
+
+                    //
+
+                    const Text(
+                      'Successful!',
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 24,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+
+                    //
+
+                    const SizedBox(height: 10),
+
+                    //
+
+                    const Text(
+                      'Please wait  a moment, we are\npreparing for you...',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: 16,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+
+                    //
+
+                    const SizedBox(height: 50),
+
+                    //
+
+                    const SpinKitCircle(
+                      color: AppColors.primaryColor,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+          if (Get.isDialogOpen == true) {
+            await 2.seconds.delay();
+            Get.toNamed(AppRoutes.signIn);
+          }
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primaryColor,
+        shadowColor: AppColors.primaryColorShadow,
+        elevation: 5,
+        minimumSize: const Size(300, 40),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      ),
+      child: const Text(
+        'Sign Up',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: AppColors.white,
+          fontSize: 16,
+        ),
+      ),
+    );
+  }
+}
