@@ -126,8 +126,8 @@ With these technologies, we are extremely confident in developing our ideas:
 - ![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)
 
 <h2 id="contributor">Contributors🤝</h2>
-<a href="https://github.com/GDSC-UIT/school_violence/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=GDSC-UIT/school_violence" />
+<a href="https://github.com/cmwuaan/music-party-frontend/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cmwuaan/music-party-frontend" />
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
